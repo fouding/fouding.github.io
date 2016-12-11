@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://foudingzheng.info">
+  <title>Archives: 2015/8 | Fouding&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fouding's Blog">
+<meta property="og:url" content="http://foudingzheng.info/archives/2015/08/index.html">
+<meta property="og:site_name" content="Fouding's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fouding's Blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/avatar.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">foudingzh</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知道行德</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/mgmt">管理</a></li>
+	        
+				<li><a href="/tags/tech">技术</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">foudingzh</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">foudingzh</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知道行德</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/mgmt">管理</a></li>
+		        
+					<li><a href="/tags/tech">技术</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            
+  
+    <article id="post-docker-getting-feet-wet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/docker-getting-feet-wet/">Docker - Getting Feet Wet - Build the LAMP Stack</a>
+    </h1>
+  
+
+        <a href="/2015/08/docker-getting-feet-wet/" class="archive-article-date">
+  	<time datetime="2015-08-28T03:22:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-28</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Setup-Docker-with-Vagrant"><a href="#Setup-Docker-with-Vagrant" class="headerlink" title="Setup Docker with Vagrant"></a>Setup Docker with <a href="https://www.vagrantup.com/" target="_blank" rel="external">Vagrant</a></h2><p>Get the vagrant-based docker env from <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root" target="_blank" rel="external">DockerRoot Vagrant Box</a>, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8.1). The direct download address is <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box</a>).</p>
+<p>P.S. Some mini linux disto: <a href="http://tinycorelinux.net/" target="_blank" rel="external">Tiny Core Linux</a>(on which boot2docker is based), <a href="http://www.yoctoproject.org/" target="_blank" rel="external">yoctoproject</a>, <a href="http://www.busybox.net/" target="_blank" rel="external">BusyBox</a>, <a href="http://buildroot.uclibc.org/" target="_blank" rel="external">Buildroot</a>.</p>
+<h2 id="Data-Only-Container-Container-as-Volumn-Pattern"><a href="#Data-Only-Container-Container-as-Volumn-Pattern" class="headerlink" title="Data-Only Container (Container-as-Volumn Pattern)"></a>Data-Only Container (Container-as-Volumn Pattern)</h2><p><a href="http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html" target="_blank" rel="external">Tiny Docker Pieces, Loosely Joined</a>:</p>
+<blockquote>
+<p>Since I’ve spelled it out in such exhaustive detail, this may all seem like much ado about nothing…but, now that I finally grok the idea, I can see how data-only containers are so useful.</p>
+<ul>
+<li>It’s the simplest way to share data among multiple containers.</li>
+<li>It makes it easy to upgrade the application (or process) that operates on the data. For example, say we wanted to generate PDF files in addition to HTML files. All we need to do to accomplish that is to create an updated pandoc-convert Docker image.</li>
+<li>Adding additional processes that operate on the data is equally easy. What if you wanted to push the HTML files to an Amazon S3, in addition to serving them locally? Just create a new s3sync Docker image.</li>
+</ul>
+</blockquote>
+<h2 id="Build-the-LAMP-Stack"><a href="#Build-the-LAMP-Stack" class="headerlink" title="Build the LAMP Stack"></a>Build the LAMP Stack</h2><h3 id="1-mysql-data-container"><a href="#1-mysql-data-container" class="headerlink" title="1. mysql data container"></a>1. mysql data container</h3><p>Build mysql-data image and run (as container):</p>
+<pre><code>docker run --name cont-db-data mariadb echo &quot;Data-only container for mariadb&quot;
+</code></pre><p>Note: not need to expose volume (<code>-v /var/lib/mysql</code>), see <a href="http://container-solutions.com/understanding-volumes-docker/" target="_blank" rel="external">http://container-solutions.com/understanding-volumes-docker/</a> for explaination.</p>
+<p>To maint:</p>
+<pre><code>SHX=&quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
+docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
+</code></pre><p>Note: the <code>$SHX</code> here initializes the bash shell with <code>--rcfile</code> option (set the <code>PS1</code> shell variable and <code>ll</code> alias).</p>
+<p>Or build with Dockerfile:</p>
+<pre><code>cat &gt;&gt; $APPROOOT/dockerfiles/dbdata/Dockerfile &lt;&lt;EOF
+FROM stackbrew/busybox:latest
+MAINTAINER fouding zheng &lt;fouding.zheng@gmail.com&gt;
+
+VOLUME /var/lib/mysql
+CMD [&quot;true&quot;]
+EOF
+# KEY: volume is /var/lib/mysql, NOT arbitrary path!
+
+sudo docker build -t fouding/docker-mysql-data $APPROOOT/dockerfiles/dbdata
+sudo docker run --name cont-db-data fouding/docker-mysql-data true
+</code></pre><h3 id="2-cont-app-data-container"><a href="#2-cont-app-data-container" class="headerlink" title="2. cont-app-data container"></a>2. cont-app-data container</h3><pre><code>HTMLROOT=/usr/share/nginx/html
+docker run --name cont-app-data -v $HTMLROOT stackbrew/busybox:latest echo &quot;app data-only container&quot;
+</code></pre><p>To maint the cont-app-data:</p>
+<pre><code>docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it fouding/richarvey-nginx-php:addXdebug bash -c &quot;$SHX&quot;
+docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it stackbrew/busybox:latest /bin/sh
+</code></pre><p>Note: not <code>docker exec -it cont-app-data bash -c &quot;$SHX&quot;</code>, as the cont is not in running state.<br>Then:</p>
+<pre><code>cp -r /app/iWshop /usr/share/nginx/html/
+</code></pre><h3 id="3-db-mariadb-mysql-container"><a href="#3-db-mariadb-mysql-container" class="headerlink" title="3. db: mariadb(mysql) container"></a>3. db: mariadb(mysql) container</h3><pre><code>docker run --name cont-mariadb --volumes-from cont-db-data -e MYSQL_USER=iwshop -e MYSQL_PASSWORD=1wsh0p -e MYSQL_DATABASE=iwshop -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb
+</code></pre><p>To maint:</p>
+<pre><code>docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
+</code></pre><p>OR</p>
+<pre><code>docker run --rm --link cont-mariadb -it mariadb bash -c &quot;$SHX&quot;
+</code></pre><p>If “TERM environment variable not set” error: <a href="https://github.com/dockerfile/mariadb/issues/3" target="_blank" rel="external">https://github.com/dockerfile/mariadb/issues/3</a> :</p>
+<blockquote>
+<p><code>docker exec -it mariadb bash</code><br><code>mysql</code><br>produces the following error message: TERM environment variable not set.</p>
+<p>Unsure why since <code>echo $TERM</code> returns <code>dumb</code> and issuing <code>export TERM=dumb</code> resolves issue.</p>
+<p>If the environment variable is explicitly issued in the dockerfile, the error message never appears, i.e. adding <code>ENV TERM dumb</code></p>
+</blockquote>
+<h3 id="4-web"><a href="#4-web" class="headerlink" title="4. web"></a>4. web</h3><p>nginx-php-fpm container:</p>
+<pre><code>docker run --name cont-webserver -p 8000:80 --volumes-from cont-app-data --link cont-mariadb:mariadb -d fouding/richarvey-nginx-php
+</code></pre><p>To maint:</p>
+<pre><code>docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;$SHX&quot;
+docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
+</code></pre><h3 id="5-test"><a href="#5-test" class="headerlink" title="5. test"></a>5. test</h3><p>Create a simple php file:</p>
+<pre><code>cat &gt;&gt; ~/app/php/index.php &lt;&lt; EOF
+&lt;?php
+    echo test php;
+    phpinfo();
+?&gt;
+EOF
+</code></pre><p>Open in browser: <a href="http://localhost:8000/" target="_blank" rel="external">http://localhost:8000</a>, or use cmdline: <code>curl -i http://localhost:8000</code>.</p>
+<h3 id="6-access"><a href="#6-access" class="headerlink" title="6. access"></a>6. access</h3><pre><code>docker exec -it cont-webserver bash
+</code></pre><h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><ul>
+<li>consider using the small phusion/baseimage image instead of the huge “ubuntu:14:04” image.</li>
+</ul>
+<h2 id="Docker-Usage-Summary"><a href="#Docker-Usage-Summary" class="headerlink" title="Docker Usage Summary"></a>Docker Usage Summary</h2><h3 id="2-ways-to-communicate-b-w-2-containers"><a href="#2-ways-to-communicate-b-w-2-containers" class="headerlink" title="2 ways to communicate b/w 2 containers:"></a>2 ways to communicate b/w 2 containers:</h3><ul>
+<li>Via volumes: <code>cont-mariadb --volumes-from cont-db-data</code></li>
+</ul>
+<p>then the server can access the FILES in the dataCont => use as DATA STORAGE.</p>
+<ul>
+<li>Via container linking: <code>cont-webserver: --link cont-mariadb:mariadb</code></li>
+</ul>
+<p>then the server can ping/connect to the dataCont => use as mysql server.<br>KEY: dataCont: <code>-v guestVolume</code> to expose the vol, and server side: <code>--volume-from dataCont</code> [RI: not need to specify the volume here, which has been predefined by the <code>docker run -v /guestVolume dataCont</code>. The vol is: dataCont:guestVolume ]</p>
+<h3 id="2-types"><a href="#2-types" class="headerlink" title="2 types:"></a>2 types:</h3><ul>
+<li><code>docker run -d imgName</code></li>
+<li><code>docker run -ti imgName bash</code></li>
+</ul>
+<h3 id="2-ways-to-start-a-container"><a href="#2-ways-to-start-a-container" class="headerlink" title="2 ways to start a container:"></a>2 ways to start a container:</h3><ul>
+<li><code>docker run -i -t imgName cmd</code></li>
+<li><code>docker run -d imgName</code> [no cmd appended]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/best-practice/">best practice</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lamp/">lamp</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/docker-getting-feet-wet/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-build-dev-env-with-vagrant" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/build-dev-env-with-vagrant/">pomodoro 番茄工作法</a>
+    </h1>
+  
+
+        <a href="/2015/08/build-dev-env-with-vagrant/" class="archive-article-date">
+  	<time datetime="2015-08-20T08:23:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-20</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
+<li>One of the most useful senario with Vagrant is to setup a network of serveral computing nodes to mimic a distributed system. Or even better, use <a href="https://www.docker.com/" target="_blank" rel="external">Docker</a>.</li>
+</ul>
+<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><h3 id="Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”"><a href="#Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”" class="headerlink" title="Download offline file for instable network, esp. in case u r behind the “greatwall”:"></a>Download offline file for instable network, esp. in case u r behind the “greatwall”:</h3><p>Search the box in <a href="https://atlas.hashicorp.com/" target="_blank" rel="external">https://atlas.hashicorp.com/</a> for box name, version, then follow the format</p>
+<pre><code>https://atlas.hashicorp.com/puppetlabs/boxes/&lt;boxName&gt;/versions/&lt;version&gt;/providers/virtualbox.box
+</code></pre><p>to construct the downloading url. e.g. <a href="https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box</a></p>
+<h3 id="Change-the-Storage-Location"><a href="#Change-the-Storage-Location" class="headerlink" title="Change the Storage Location"></a>Change the Storage Location</h3><ul>
+<li>Press <code>Win+R</code> and type <code>systempropertiesadvanced</code> to bring up the “System Properties” dialog, click “Environment Variables…” button, and in the “User vairalbes for $USER” section, add a variable named <code>VAGRANT_HOME</code>, whose value is <code>D:\your\vagrant\working\path</code>.</li>
+</ul>
+<p>Or use the command line:</p>
+<pre><code>SETX VAGRANT_HOME &quot;D:\your\vagrant\working\path&quot;
+</code></pre><ul>
+<li>Change VirtualBox storage location: Open Virtalbox and navigate to <code>File &gt; Preference&gt; General: Default Machine Folder</code>: change to target location.</li>
+</ul>
+<h2 id="Setup-Vagrant-Virtual-Machine"><a href="#Setup-Vagrant-Virtual-Machine" class="headerlink" title="Setup Vagrant Virtual Machine"></a>Setup Vagrant Virtual Machine</h2><p>Execute below commands in <a href="http://cmder.net/" target="_blank" rel="external">cmder</a>/cmd.exe:</p>
+<pre><code>echo check vagrant_home: %vagrant_home%
+set BN=boot2docker-virtualbox
+set BOXPATH=D:\tools\vagrant-boxes\boot2docker-virtualbox.box
+cd /d D:\HashiCorp\Vagrant\myvagrantfile
+mkdir %BN%
+cd %BN%
+vagrant box add %BN% %BOXPATH%
+vagrant box list
+vagrant init %BN%
+</code></pre><p>And issue command <code>vagrant up &amp;&amp; vagrant ssh</code> to startup and connect to the vagrant vm and install the dev tools manually, then key in <code>vagrant package --output my-dev.box</code> to export the whole box as a file which can then be shared b/w team members to setup the same dev env quickly.<br>(If you are using <a href="http://cmder.net/" target="_blank" rel="external">cmder</a> full version, the <code>ssh</code> command is right in your hands, so simply type <code>vagrant ssh</code> to connect to the vagrant box; otherwise, use a ssh client, say Putty, MobaXterm.)</p>
+<p>Or edit the <code>Vagrantfile</code> file to setup the dev env in script.</p>
+<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><p>If both host-only network and shared folder are enabled in Vagrantfile:</p>
+<pre><code>config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.15&quot;
+config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
+</code></pre><p>The host-only network is accessible, but the synced_folder cannot be found! (I don’t know whether this bug is in Vagrant, or reproducible only in my machine)</p>
+<p>Solution: create the <code>/host_e</code> directionary, then mount the drive in <code>~/.bashrc</code> file manually:</p>
+<pre><code>echo &apos;sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) host_e /host_e&apos; &gt;&gt; ~/.bashrc
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev/">dev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vagrant/">vagrant</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/build-dev-env-with-vagrant/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-pomodoro" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/pomodoro/">Pomodoro 番茄工作法</a>
+    </h1>
+  
+
+        <a href="/2015/08/pomodoro/" class="archive-article-date">
+  	<time datetime="2015-08-04T23:42:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-05</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><ul>
+<li>app: <a href="https://itunes.apple.com/us/app/pomodoro-pomodoro-technique/id850080769" target="_blank" rel="external">Pomodoro</a> by Zheng Fu: a simple yet sufficient pomodoro tool.</li>
+<li>begin of day: move activity from <em>Activity Inventory Sheet</em> to <em>Todo Today sheet</em>;</li>
+<li>end of day: review</li>
+<li>when finished a pomo: tag, cross finined task</li>
+<li>4 pomo: longer rest (15-30min)</li>
+<li>if interrupted: mark “`”</li>
+</ul>
+<h2 id="原则："><a href="#原则：" class="headerlink" title="原则："></a>原则：</h2><ul>
+<li>尽早开始： 烂的开始是完成的一半</li>
+<li>预留突发事情的时间</li>
+<li>拆分：1z：各份真题，各份预测题</li>
+<li>前有计划，后有总结</li>
+<li>舍得：把做完的划掉；把用完的web/app关掉</li>
+<li>一张图抓住时间管理的关键理念</li>
+<li>清空脑袋</li>
+</ul>
+<h2 id="详细说明："><a href="#详细说明：" class="headerlink" title="详细说明："></a>详细说明：</h2><p>一、5样工具 </p>
+<ol>
+<li>番茄计时器</li>
+<li>铅笔和橡皮</li>
+<li>今日待办清单（to do today），包括一部分留给计划外的待办事件</li>
+<li>活动清单（Activity Inventory）</li>
+<li>记录单</li>
+</ol>
+<p>二、方法和步骤 </p>
+<ol>
+<li>把想要做的事情都记录在活动清单上，活动清单就像一个累积待办事项的仓库 </li>
+<li>每天早上从活动清单中挑选今天想做的事情抄入今日待办清单，按重要性排序并估测大致需要的番茄数 </li>
+<li>在今日待办清单上选出最重要的一件 </li>
+<li>开始一个番茄时间，倒计时25分钟，专注于你的工作，直到铃声响起 </li>
+<li>尽量保护你的番茄时间别被打断，如果有新想法或外部干扰，先记录下来，留到铃响之后处理 </li>
+<li>每个番茄时间结束后休息3-5分钟，4个番茄时间算一轮结束后休息15-30分钟 </li>
+<li>已经做完的事及时划掉 </li>
+<li>一天结束后在记录单中记录自己完成的番茄数，被打断的次数等等信息 </li>
+<li>将计划外且没完成的工作记回活动清单 </li>
+<li>分析和思考看看是否有需要改进 </li>
+</ol>
+<p>Ref:</p>
+<ul>
+<li><a href="http://www.douban.com/group/topic/28655523/" target="_blank" rel="external">番茄工作法学习笔记</a></li>
+<li><a href="http://www.pureweber.com/article/gtd-introduction/" target="_blank" rel="external">什么是GTD？（GTD是关于什么的?）</a></li>
+<li><a href="http://www.gtdlife.com/2014/3636/one-pic-time-management/" target="_blank" rel="external">一张图抓住时间管理的关键理念</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gtd/">gtd</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/pomodoro/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 foudingzh
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: false,
+		isArchive: true,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">troubleshooting</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.quora.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Quora</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stackoverflow.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stackoverflow</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>github</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.zhihu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.oschina.net" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>开源中国</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.infoq.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>InfoQ</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Hello, I&#39;m Fouding based in Xiamen, China. &lt;br&gt;This is my blog about life, career and technologies.</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

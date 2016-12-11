@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://foudingzheng.info">
+  <title>Fouding&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fouding's Blog">
+<meta property="og:url" content="http://foudingzheng.info/page/2/index.html">
+<meta property="og:site_name" content="Fouding's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fouding's Blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/avatar.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">foudingzh</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知道行德</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/mgmt">管理</a></li>
+	        
+				<li><a href="/tags/tech">技术</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">foudingzh</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">foudingzh</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知道行德</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/mgmt">管理</a></li>
+		        
+					<li><a href="/tags/tech">技术</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            
+  
+    <article id="post-nginx-conf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/nginx-conf/">Nginx Configuration</a>
+    </h1>
+  
+
+        <a href="/2015/02/nginx-conf/" class="archive-article-date">
+  	<time datetime="2015-02-12T06:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-02-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Part-of-configurations-in-nginx-conf"><a href="#Part-of-configurations-in-nginx-conf" class="headerlink" title="Part of configurations in nginx.conf"></a>Part of configurations in nginx.conf</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">	# Enable GZip compression</div><div class="line">	gzip                on;</div><div class="line">	gzip_http_version   1.1;</div><div class="line">	gzip_min_length     1000;</div><div class="line">	gzip_buffers        16 8k;</div><div class="line">	gzip_disable        &quot;MSIE [1-6] \.&quot;;</div><div class="line">	gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain</div><div class="line">	gzip_vary           on;</div><div class="line"></div><div class="line">	# Set proxy cache path</div><div class="line">	proxy_cache_path /var/nginx/cache keys_zone=one:10m;</div><div class="line"></div><div class="line">	upstream tomcat_cluster &#123;</div><div class="line">		ip_hash;</div><div class="line">		server ws1:12130;</div><div class="line">		server ws2:12130;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	server &#123;</div><div class="line">		listen       80;</div><div class="line">		server_name  localhost;</div><div class="line">		</div><div class="line">		location /portal/static/ &#123;</div><div class="line">			root D:/anyfish_web/nginx/;</div><div class="line">			expires 30d;</div><div class="line">			proxy_cache_valid 200 1d;</div><div class="line">			proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		location /manager &#123;</div><div class="line">			allow 192.168.1.1/24;</div><div class="line">			allow 127.0.0.1;</div><div class="line">			deny all;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		location / &#123;</div><div class="line">			proxy_pass http://tomcat_cluster;</div><div class="line">			proxy_http_version 1.1;</div><div class="line">			proxy_set_header Upgrade $http_upgrade;</div><div class="line">			proxy_set_header Connection &quot;upgrade&quot;;</div><div class="line">			proxy_set_header Host $host:$server_port;</div><div class="line"></div><div class="line">			proxy_set_header  X-Real-IP  $remote_addr;</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="GZip-compression"><a href="#GZip-compression" class="headerlink" title="GZip compression"></a>GZip compression</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">gzip                on;</div><div class="line">gzip_http_version   1.1;</div><div class="line">gzip_min_length     1000;</div><div class="line">gzip_buffers        16 8k;</div><div class="line">gzip_disable        &quot;MSIE [1-6] \.&quot;;</div><div class="line">gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain</div><div class="line">gzip_vary           on;</div></pre></td></tr></table></figure>
+<h3 id="Session-persistence"><a href="#Session-persistence" class="headerlink" title="Session persistence"></a>Session persistence</h3><p>Set <code>ip_hash</code> for session persistence.</p>
+<h3 id="Serving-static-content"><a href="#Serving-static-content" class="headerlink" title="Serving static content"></a>Serving static content</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">location /portal/static/ &#123;</div><div class="line">	root D:/anyfish_web/nginx/;</div><div class="line">	expires 30d;</div><div class="line">	proxy_cache_valid 200 1d;</div><div class="line">	proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Change the <code>root</code> for URL starting with “/portal/static/“, letting it the serve the request with local static files.</p>
+<h3 id="Server-cluster-rack"><a href="#Server-cluster-rack" class="headerlink" title="Server cluster/rack"></a>Server cluster/rack</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">upstream tomcat_cluster &#123;</div><div class="line">	ip_hash;</div><div class="line">	server ws1:12130;</div><div class="line">	server ws2:12130;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">	location / &#123;</div><div class="line">		proxy_pass http://tomcat_cluster;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>upstream</code> is used for proxying requests to other servers.</p>
+<h3 id="Conf-for-websocket"><a href="#Conf-for-websocket" class="headerlink" title="Conf for websocket:"></a>Conf for websocket:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proxy_http_version 1.1;</div><div class="line">proxy_set_header Upgrade $http_upgrade;</div><div class="line">proxy_set_header Connection &quot;upgrade&quot;;</div></pre></td></tr></table></figure>
+<p>The first line tells Nginx to use HTTP/1.1 when communicating to the Node backend, which is required for WebSockets. The next two tell Nginx to respond to the Upgrade request which is initiated over HTTP by the browser when it wants to use a WebSocket.</p>
+<h3 id="If-the-listening-port-is-not-80"><a href="#If-the-listening-port-is-not-80" class="headerlink" title="If the listening port is not 80:"></a>If the listening port is not 80:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Host $host:$server_port;</div></pre></td></tr></table></figure>
+<p>Note the <code>$server_port</code> part shoud be present. Without it, the redirection will jump to $host:80, rather than the specified port!</p>
+<h3 id="Restrict-access-to-the-management-pages-by-IP"><a href="#Restrict-access-to-the-management-pages-by-IP" class="headerlink" title="Restrict access to the management pages by IP:"></a>Restrict access to the management pages by IP:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">location /manager &#123;</div><div class="line">	allow 192.168.1.1/24;</div><div class="line">	allow 127.0.0.1;</div><div class="line">	deny all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Virtual-Host"><a href="#Virtual-Host" class="headerlink" title="Virtual Host"></a>Virtual Host</h3><p>Each <code>server</code> block represent the one virtual host with its own <code>server_name</code>. Each server blocks looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">	listen       80;</div><div class="line">	server_name  blog.server1.com;</div><div class="line"></div><div class="line">	location / &#123;</div><div class="line">		proxy_pass http://127.0.0.1:8282;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>here each <code>server</code> blocks bind (listen) the port 80, and this server block is only resonds when the <code>server_name</code> value (here blog.server1.com) is matched the HTTP header <code>Host</code> field</p>
+<h3 id="location-syntax"><a href="#location-syntax" class="headerlink" title="location syntax"></a><code>location</code> syntax</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>Here,</p>
+<pre><code>&quot;~&quot; - case sensitive matching
+&quot;~*&quot; - case insensitive matching
+&quot;=&quot; - forces a literal match between the request URI and the location parameter.
+</code></pre><h3 id="Scripting"><a href="#Scripting" class="headerlink" title="Scripting"></a>Scripting</h3><p>Check the great presentation here <a href="http://agentzh.org/misc/slides/nginx-conf-scripting" target="_blank" rel="external">Introduction to nginx.conf scripting</a>.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/02/nginx-conf/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-webapp-attack-and-prevention" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/webapp-attack-and-prevention/">[转]常见的Web应用漏洞及其解决方法</a>
+    </h1>
+  
+
+        <a href="/2015/02/webapp-attack-and-prevention/" class="archive-article-date">
+  	<time datetime="2015-02-11T03:23:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-02-11</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 <a href="http://42.120.19.157/%E4%BA%94%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84web%E5%BA%94%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_blank" rel="external">五个常见的Web应用漏洞及其解决方法</a> 提到了几种常见的 Web 攻击方式及防范。</p>
+<h2 id="常见的Web应用漏洞及其解决方法"><a href="#常见的Web应用漏洞及其解决方法" class="headerlink" title="常见的Web应用漏洞及其解决方法"></a>常见的Web应用漏洞及其解决方法</h2><p>开放Web应用安全项目(OWASP)很快会发布今年的10大Web应用安全漏洞清单。这个清单与去年并没有太大差别，这表明负责应用设计与开发的人仍然没能解决以前那些显而易见的错误。许多最常见的Web应用漏洞仍然广泛存在，许多恶意软件搜索和攻击这些漏洞，连黑客新手都能轻松做到。<br>本文介绍了5个最常见的Web应用漏洞，以及企业该如何修复初级问题，对抗那些针对这些漏洞的攻击。</p>
+<h3 id="注入攻击和跨站脚本攻击"><a href="#注入攻击和跨站脚本攻击" class="headerlink" title="注入攻击和跨站脚本攻击"></a>注入攻击和跨站脚本攻击</h3><p>Web应用主要有2种最常见的严重缺陷。首先是各种形式的注入攻击，其中包括SQL、操作系统、电子邮件和LDAP注入，它们的攻击方式都是在发给应用的命令或查询中夹带恶意数据。别有用心的数据可以让应用执行一些恶意命令或访问未授权数据。如果网站使用用户数据生成SQL查询，而不检查用户数据的合法性，那么攻击者就可能执行SQL注入。这样攻击者就可以直接向数据库提交恶意SQL查询和传输命令。举例来说，索尼的PlayStation数据库就曾经遭遇过SQL注入攻击，并植入未授权代码。</p>
+<p>跨站脚本(XSS)攻击会将客户端脚本代码(如JavaScript)注入到Web应用的输出中，从而攻击应用的用户。只要访问受攻击的输出或页面，浏览器就会执行代码，让攻击者劫持用户会话，将用户重定向到一个恶意站点或者破坏网页显示效果。XSS攻击很可能出现在动态生成的页面内容中，通常应用会接受用户提供的数据而没有正确验证或转码。<br>为了防御注入攻击和XSS攻击，应用程序应该配置为假定所有数据——无论是来自表单、URL、Cookie或应用的数据库，都是不可信来源。要检查所有处理用户提供数据的代码，保证它是有效的。验证函数需要清理所有可能有恶意作用的字符或字符串，然后再将它传给脚本和数据库。要检查输入数据的类型、长度、格式和范围。开发者应该使用现有的安全控制库，如OWASP的企业安全API或微软的反跨站脚本攻击库，而不要自行编写验证代码。此外，一定要检查所有从客户端接受的值，进行过滤和编码，然后再传回给用户。</p>
+<h3 id="身份验证和会话管理被攻破"><a href="#身份验证和会话管理被攻破" class="headerlink" title="身份验证和会话管理被攻破"></a>身份验证和会话管理被攻破</h3><p>Web应用程序必须处理用户验证，并建立会话跟踪每一个用户请求，因为HTTP本身不具备这个功能。除非任何时候所有的身份验证信息和会话身份标识都进行加密，保证不受其他缺陷(如XSS)的攻击，否则攻击者就有可能劫持一个激活的会话，伪装成某个用户的身份。如果一个攻击者发现某个原始用户未注销的会话(路过攻击)，那么所有帐号管理功能和事务都必须重新验证，即使用户有一个有效的会话ID。此外，在重要的事务中还应该考虑使用双因子身份验证。</p>
+<p>为了发现身份验证和会话管理问题，企业要以执行代码检查和渗透测试。开发者可以使用自动化代码和漏洞扫描程序，发现潜在的安全问题。有一些地方通常需要特别注意，其中包括会话身份标识的处理方式和用户修改用户身份信息的方法。如果没有预算购买商业版本，那么也可以使用许多开源和简化版本软件，它们可以发现一些需要更仔细检查的代码或进程。</p>
+<h3 id="不安全的直接对象引用"><a href="#不安全的直接对象引用" class="headerlink" title="不安全的直接对象引用"></a>不安全的直接对象引用</h3><p>这是应用设计不当引起的另一个缺陷，它的根源是错误地假定用户总是会遵循应用程序的规则。例如，如果用户的帐号ID显示在页面的URL或隐藏域中，恶意用户可能会猜测其他用户的ID，然后再次提交请求访问他们的数据，特别是当ID值是可以猜测的时候。防止这种漏洞的最佳方法是使用随机、不可猜测的ID、文件名和对象名，而且不要暴露对象的真实名称。常见的错误暴露数据的位置是URL和超链接、隐藏表单域、ASP.NET的未保护视图状态、直接列表框、JavaScript代码和客户端对象(如Java Applet)。每次访问敏感文件或内容时，都要验证访问数据的用户已获得授权。</p>
+<h3 id="安全性配置不当"><a href="#安全性配置不当" class="headerlink" title="安全性配置不当"></a>安全性配置不当</h3><p>支持Web应用程序的基础架构包含各种各样的设备和软件——服务器、防火墙、数据库、操作系统和应用软件。所有这些元素都必须正确配置和保证安全，应用程序只是运行在最低权限配置上，但是许多系统本身还不够安全。系统管理不当的一个主要原因是Web应用程序管理人员和基础架构支持人员从未接受过必要的培训。</p>
+<p>为执行日常网络应用管理的人员提供足够的培训和资源，这是在开发过程中所有阶段保证安全性和保密性的重要条件。最后，要为Web应用程序安排一个渗透测试，处理所有敏感数据。这是一种主动评估应用抵抗攻击能力的方法，可以在受到攻击前发现系统漏洞。</p>
+<hr>
+<p>下篇： <a href="/2015/03/nginx-modsecurity-installation/">nginx 安装 modSecurity</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/modSecurity/">modSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/waf/">waf</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/02/webapp-attack-and-prevention/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-team-management" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/team-management/">Team Management</a>
+    </h1>
+  
+
+        <a href="/2015/02/team-management/" class="archive-article-date">
+  	<time datetime="2015-02-06T14:05:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-02-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="情绪与效率"><a href="#情绪与效率" class="headerlink" title="情绪与效率"></a>情绪与效率</h2><p>这在 <a href="http://www.infoq.com/cn/articles/mood-and-efficiency-of-the-technical-team?utm_source=infoq&amp;utm_medium=popular_widget&amp;utm_content=article&amp;utm_campaign=popular_content_list" target="_blank" rel="external">技术团队的情绪与效率</a> 中已经讲得很好了：</p>
+<blockquote>
+<ul>
+<li>在 GTD（Get Things Done）中对此有阐述『压力不是来自于任务本身，而是任务在大脑中的堵塞，带来的焦虑和心理的抵触』。当一件任务还没有完成时，持续到来的新任务会带来很大的心理压力，意志不够强大时，很容易导致执行力崩溃，进入一种任务怎么做都做不完的绝望状态。</li>
+</ul>
+<ul>
+<li><p>一个健康的团队需要维持开发的节奏，具体操作可以是 每1-2周为一个周期，进行大的项目规划，研发任务占用时间最好不高于80%，之后每个人能有休息/自我充电的时间，在下个周期开始时，团队又能进入满体力值的状态。<br>情绪的影响因素很多，简单列举几个很常见的：</p>
+<ol>
+<li>研发节奏过于紧凑：在上一节中提到当开发的情绪体力持续透支时，会有恶劣的情绪问题。 这个在开发团队中并不少见。当开发节奏太过紧凑，团队不注意休整时，团队很容易负面情绪弥漫，而情绪一旦形成印象，便不会那么好消散。</li>
+<li>薪酬倒挂：这个也是大家诟病 HR/Leader的重要原因，当一个团队薪酬内部增长太乏力时，内部人员会有流出，团队需要再招聘新人，而市场上平均待遇已经和之前不同，所以新招来的人员待遇往往也会水涨船高。 这个是很致命而且不好消解的。HR 太过节约成本，往往会对团队有致命的伤害。</li>
+<li>与 Leader 理念/习惯 不合。</li>
+<li>工作内容安排不当，太困难或太简单，或者与职业发展规划不符。</li>
+<li>纯粹发泄。</li>
+<li>……</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<p>去年的主要问题在于公司里的加班情况过于严重，导致中后期的效率不高，总体工作完成量跟正常上班时间做的差不多，甚或更少。幸好管理层也有意识到这个问题，着手制定规范一些的流程。规范与近期效果是相对矛盾的，但为了后期的维护及长期的团队管理，取一个平衡点。开发流程可依实际情况引入敏捷开发模式。</p>
+<h2 id="坚持做的与不足之处"><a href="#坚持做的与不足之处" class="headerlink" title="坚持做的与不足之处"></a>坚持做的与不足之处</h2><p>坚持做下来的：</p>
+<ul>
+<li>组里即时通讯群中的技术、生活分享</li>
+<li>与各个组员私交不错，所以工作好开展。</li>
+<li>GTD： 现使用 <a href="http://abstractspoon.pbwiki.com" target="_blank" rel="external">ToDoList</a> （官网需要翻墙才能访问 -_-! 不过国内各大下载站都可以下载得到）做个人时间管理；团队里用 <a href="http://www.redmine.org/" target="_blank" rel="external">redmine</a> 做 Bug Tracking, Task assignment, Knowledge Management 等。<ul>
+<li>之前在 CentOS 中装 redmine，依赖的包比较多，安装过程并不顺序，现在用的是 <a href="https://bitnami.com/stack/redmine" target="_blank" rel="external">bitnami</a> 的版本。</li>
+</ul>
+</li>
+</ul>
+<p>几点做得不好的：</p>
+<ul>
+<li>之前在上海、苏州公司时，一两周有一次会有分享会议，技术的、生活的，甚至音乐、哲学方面的。现在几乎没有。虽说任务较重，但时间总是挤出来的。</li>
+<li></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mgmt/">mgmt</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/02/team-management/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-use-which-foss" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/use-which-foss/">Which FOSS To Use</a>
+    </h1>
+  
+
+        <a href="/2015/02/use-which-foss/" class="archive-article-date">
+  	<time datetime="2015-02-04T13:32:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-02-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于开源软件"><a href="#关于开源软件" class="headerlink" title="关于开源软件"></a>关于开源软件</h2><p><a href="http://rdc.gleasy.com/%e5%bc%80%e6%ba%90%e4%b9%8b%e6%ae%87.html" target="_blank" rel="external">开源之殇</a> 中提到</p>
+<blockquote>
+<p>使用开源有风险<br>前提：这里的开源产品，特指业务关联度高的中间件产品（比如分布式文件系统，消息队列中间件，即时通讯服务器，任务调度中间件，检索系统等）。<br>最大的风险来自两方面：</p>
+<ol>
+<li>使用过程中发现后续需求不满足</li>
+<li>线上遇到BUG或者问题</li>
+<li>使用过程中发现后续需求不满足</li>
+</ol>
+<p>选择开源要谨慎<br>基本使用开源中间件的公司在产品做到一定规模一定会遇到上面提到的风险和问题，大多数公司的选择也是一样，推倒重来，重新开发适合自己的中间件。比如淘宝，比如新浪，比如TWITER。相同的功能大家做了又做，不是炫耀自己有多牛，而是逼不得己。<br>但并不是所有的开源都是洪水猛兽似的，通用性工具类的，特别是经过了大公司长时间验证过的通用性工具，是可以选用的，比如MYSQL, ZOOKEEPER, NGINX, HAPROXY, OPENFIRE, SOLR, KEEPALIVED, LIBEVENT, MINA, NETTY, TOMCAT, APACHE, LUCENE, REDIS, MONGODB, MEMCACHED 等等等等，是可以放心去选用的，前提是要对这些产品的配置和优化有充分的理解。</p>
+</blockquote>
+<h2 id="使用的开源软件"><a href="#使用的开源软件" class="headerlink" title="使用的开源软件"></a>使用的开源软件</h2><ul>
+<li>NGiNX + Tomcat 作为 web server</li>
+<li>Spring, SpringMVC</li>
+<li>Zookeeper 来做注册服务中心的管理者</li>
+<li>Netty 与 Mina 师出同源，但前者的网络性能更佳、API接口更规范</li>
+<li>简单的队列系统使用 Redis</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/architecture/">architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/foss/">foss</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/02/use-which-foss/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-vim-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/vim-tips/">Vim Tips</a>
+    </h1>
+  
+
+        <a href="/2015/01/vim-tips/" class="archive-article-date">
+  	<time datetime="2015-01-15T08:24:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-15</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>平时在 Windows 上使用 gVim 来编辑文本。将一些常用的技巧记录下来。</p>
+<h2 id="VIM-tips"><a href="#VIM-tips" class="headerlink" title="VIM tips"></a>VIM tips</h2><h3 id="常用指令-快捷键"><a href="#常用指令-快捷键" class="headerlink" title="常用指令/快捷键"></a>常用指令/快捷键</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 光标移动</div><div class="line">gg, G, H, M, L, 8j, fc</div><div class="line">Ctrl+F, Ctrl+B, Ctrl+D, Ctrl+U</div><div class="line">Ctrl+O</div><div class="line"></div><div class="line"># </div><div class="line"></div><div class="line"># tab 标签栏的移动: 跳到下一个tab, 上一个tab, 第三个tab:</div><div class="line">gt, gT, 3gt</div><div class="line"></div><div class="line"># 查看打开的所有 buffer:</div><div class="line">:ls</div><div class="line"># 跳到前一个，后一个，第3个buffer:</div><div class="line">:bp, :bn, ：b3</div></pre></td></tr></table></figure>
+<h3 id="删除文件中的-M-字符"><a href="#删除文件中的-M-字符" class="headerlink" title="删除文件中的 ^M 字符"></a>删除文件中的 ^M 字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/^M$//g</div></pre></td></tr></table></figure>
+<p>注：^M的输入：兼容模式下，要用 Ctrl+Q Ctrl+M / 标准模式下，则为 Ctrl+V Ctrl+M</p>
+<h3 id="删除偶数行"><a href="#删除偶数行" class="headerlink" title="删除偶数行"></a>删除偶数行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:g/^/+1 d</div></pre></td></tr></table></figure>
+<h3 id="删除纯数字行"><a href="#删除纯数字行" class="headerlink" title="删除纯数字行"></a>删除纯数字行</h3><p>当从网页上拷页代码时，若其代码插件不完善，将行号也拷贝下来了，一个行号一行。此时，可进入命令模式，用 <code>Shift+v</code> 及 <code>&lt;num&gt;j</code>, <code>ctrl+d</code> 选中该代码段，再按<code>:</code>，则最下方的状态栏出现 <code>:&#39;&lt;,&#39;&gt;</code>，输入指令：<code>g/^\d*$/d</code>，即执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:&apos;&lt;,&apos;&gt;g/^\d*$/d</div></pre></td></tr></table></figure>
+<p>则会将只有行号的行删除。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/01/vim-tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Troubleshooting-SpringMVC-hang-on-startup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">Troubleshooting: SpringMVC Hang on Startup</a>
+    </h1>
+  
+
+        <a href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/" class="archive-article-date">
+  	<time datetime="2015-01-14T08:31:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-14</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p>The webapp hang at:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO: Initializing Spring root WebApplicationContext</div></pre></td></tr></table></figure></p>
+<p>when startup.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Enable logging for Spring in logback.xml to check the startup process:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logging/">logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/">troubleshooting</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-java-code-snippets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/java-code-snippets/">Java Code Snippets</a>
+    </h1>
+  
+
+        <a href="/2014/11/java-code-snippets/" class="archive-article-date">
+  	<time datetime="2014-11-07T06:19:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-07</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toHexString</span><span class="params">(<span class="keyword">byte</span>[] array)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> javax.xml.bind.DatatypeConverter.printHexBinary(array);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> * insert code as you would anywhere else</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
+<p>An Example from a java.awt.Event method javadoc:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;</div><div class="line"> *    int offmask = CTRL_DOWN_MASK;</div><div class="line"> *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) &#123;</div><div class="line"> *        ...</div><div class="line"> *    &#125;</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
+<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, K&gt; <span class="function">Map&lt;K, String&gt; <span class="title">getFieldDescriptions</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">	Map&lt;K, String&gt; map = <span class="keyword">new</span> HashMap&lt;K,String&gt;();</div><div class="line">	<span class="keyword">for</span> (Field f : clazz.getDeclaredFields()) &#123;</div><div class="line">		<span class="keyword">int</span> mod = f.getModifiers();</div><div class="line">		<span class="keyword">if</span> (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">				K fld = (K) f.get(<span class="keyword">null</span>);</div><div class="line">				</div><div class="line">				Integer st = <span class="keyword">null</span>;</div><div class="line">				<span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Integer) &#123;</div><div class="line">					st = (Integer) fld;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Short) &#123;</div><div class="line">					st = (<span class="keyword">int</span>) (<span class="keyword">short</span>) (Short) fld;</div><div class="line">				&#125;</div><div class="line">				map.put(fld, String.format(<span class="string">"0x%04X, %s"</span>, st&amp;<span class="number">0xFFFFFFFF</span>, f.getName()));</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">				<span class="comment">/* ignore */</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> map;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Check-if-AJAX-request"><a href="#Check-if-AJAX-request" class="headerlink" title="Check if AJAX request"></a>Check if AJAX request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isAjax</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"XMLHttpRequest"</span>.equalsIgnoreCase(request.getHeader(<span class="string">"X-Requested-With"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Check-if-POST-request"><a href="#Check-if-POST-request" class="headerlink" title="Check if POST request"></a>Check if POST request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPost</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"POST"</span>.equals(request.getMethod());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Get-web-root"><a href="#Get-web-root" class="headerlink" title="Get web root"></a>Get web root</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getWebRootPath</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> HttpUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath().split(<span class="string">"WEB-INF/"</span>)[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx"><a href="#Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx" class="headerlink" title="Get client ip, event if the server is behind a proxy server (e.g. nginx)"></a>Get client ip, event if the server is behind a proxy server (e.g. nginx)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span> </span>&#123;     </div><div class="line">	String ip = request.getHeader(<span class="string">"x-forwarded-for"</span>);     </div><div class="line">	<span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip))&#123;</div><div class="line">		ip = request.getHeader(<span class="string">"Proxy-Client-IP"</span>);     </div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>);</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getRemoteAddr();     </div><div class="line">	&#125;    </div><div class="line">	<span class="keyword">return</span> ip; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Get-all-net-interfaces’-IP"><a href="#Get-all-net-interfaces’-IP" class="headerlink" title="Get all net interfaces’ IP"></a>Get all net interfaces’ IP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">getAllLocalIPs</span><span class="params">()</span> </span>&#123;</div><div class="line">	List&lt;String&gt; ipLst = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		Enumeration&lt;NetworkInterface&gt; e = NetworkInterface.getNetworkInterfaces();</div><div class="line">		<span class="keyword">while</span> (e.hasMoreElements()) &#123;</div><div class="line">			NetworkInterface n = (NetworkInterface) e.nextElement();</div><div class="line">			Enumeration&lt;InetAddress&gt; ee = n.getInetAddresses();</div><div class="line">			<span class="keyword">while</span> (ee.hasMoreElements()) &#123;</div><div class="line">				InetAddress i = (InetAddress) ee.nextElement();</div><div class="line">				ipLst.add(i.getHostAddress());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">if</span> (ipLst.size() == <span class="number">0</span>) &#123;</div><div class="line">			ipLst.add(LOCALHOST);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ipLst;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Set-bits-of-a-long-variable"><a href="#Set-bits-of-a-long-variable" class="headerlink" title="Set bits of a long variable"></a>Set bits of a <code>long</code> variable</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">setBits</span><span class="params">(<span class="keyword">long</span> num, <span class="keyword">long</span> val, <span class="keyword">int</span> offset, <span class="keyword">int</span> len)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> shift = Long.SIZE-offset-len;</div><div class="line">	<span class="keyword">if</span> (len &gt; <span class="number">1</span> || val == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">long</span> ones = ((<span class="number">1L</span> &lt;&lt; len) - <span class="number">1</span>) &lt;&lt; shift; <span class="comment">//[] 1L</span></div><div class="line">		<span class="keyword">return</span> ((num &amp; ~ones) | (val &lt;&lt; shift));</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> (<span class="keyword">long</span>) (num | (<span class="number">1</span> &lt;&lt; shift));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-snippet/">code snippet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/java-code-snippets/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-tomcat-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/tomcat-tips/">Tomcat Tips</a>
+    </h1>
+  
+
+        <a href="/2014/11/tomcat-tips/" class="archive-article-date">
+  	<time datetime="2014-11-03T09:25:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-03</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Some tips for Tomcat7.</p>
+<h2 id="Move-the-constant-lib-as-external-libs"><a href="#Move-the-constant-lib-as-external-libs" class="headerlink" title="Move the constant lib as external libs:"></a>Move the constant lib as external libs:</h2><ul>
+<li>Step 1: Copy the lib to somewhere else, e.g. <code>${catalina.home}/anyfish-lib</code></li>
+<li>Step 2: Eclipse: Properties for app &gt; Deployment Assembly &gt; Remove ‘Maven Dependencies’</li>
+<li>Step 3: Add following config in <tomcathome>/conf/context.xml: <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Loader</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.loader.VirtualWebappLoader"</span> <span class="attr">virtualClasspath</span>=<span class="string">"$&#123;catalina.home&#125;/anyfish-lib/*.jar"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</tomcathome></li>
+</ul>
+<p>So the final packaged .war file size is reduced dramatically!</p>
+<p>To achive Step 2 in maven, edit the pom.xml file:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Note the <code>&lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;</code> config above (Don’t package the common spring, logging libaries etc into .war file; keep only mylib.jar).</p>
+<h2 id="Deploy-new-version-w-o-shutting-down-tomcat"><a href="#Deploy-new-version-w-o-shutting-down-tomcat" class="headerlink" title="Deploy new version w/o shutting down tomcat"></a>Deploy new version w/o shutting down tomcat</h2><p>To deploy a new version of webapp without shutting down tomcat, use parallel deployment in tomcat7, refer to <a href="/2014/09/parallel-deploy-script/">tomcat parallel deploy</a>.</p>
+<p>Note the <code>&lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;</code> config above.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/tomcat-tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 foudingzh
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">troubleshooting</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.quora.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Quora</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stackoverflow.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stackoverflow</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>github</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.zhihu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.oschina.net" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>开源中国</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.infoq.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>InfoQ</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Hello, I&#39;m Fouding based in Xiamen, China. &lt;br&gt;This is my blog about life, career and technologies.</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

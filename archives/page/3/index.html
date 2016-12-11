@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://foudingzheng.info">
+  <title>Archives | Fouding&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fouding's Blog">
+<meta property="og:url" content="http://foudingzheng.info/archives/page/3/index.html">
+<meta property="og:site_name" content="Fouding's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fouding's Blog">
+  
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/avatar.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">foudingzh</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知道行德</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/mgmt">管理</a></li>
+	        
+				<li><a href="/tags/tech">技术</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">foudingzh</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">foudingzh</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知道行德</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/mgmt">管理</a></li>
+		        
+					<li><a href="/tags/tech">技术</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            
+  
+    <article id="post-maven-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/maven-tips/">Maven Tips</a>
+    </h1>
+  
+
+        <a href="/2014/10/maven-tips/" class="archive-article-date">
+  	<time datetime="2014-10-11T07:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-10-11</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用国内的镜像地址"><a href="#使用国内的镜像地址" class="headerlink" title="使用国内的镜像地址"></a>使用国内的镜像地址</h2><p>mavn 中央库默认的下载地址在国外，下载速度不稳定。<a href="http://www.oschina.net/" target="_blank" rel="external">开源中国</a>做了国内镜像，参考<a href="http://maven.oschina.net/static/help.html" target="_blank" rel="external">其帮助文档</a>配置其为中央库：</p>
+<p>备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-osc<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus OSC<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.4<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span><span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span><span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span> local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>local private enxus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上配置，</p>
+<ul>
+<li>在生成的 war 包名字的后面加上打包时间；</li>
+<li><em>不</em> 将公共的 spring, json 的相关 jar 包打到最终 war 包中，只保留自己的、经常会变化的 mylib-1.0.0-SNAPSHOT，参见<a href="/2014/11/tomcat-tips/">Tomcat Tips</a>。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/10/maven-tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-parallel-deploy-script" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/parallel-deploy-script/">Tomcat 并行部署</a>
+    </h1>
+  
+
+        <a href="/2014/09/parallel-deploy-script/" class="archive-article-date">
+  	<time datetime="2014-09-22T04:53:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-09-22</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景知识：-tomcat的并行部署"><a href="#背景知识：-tomcat的并行部署" class="headerlink" title="背景知识： tomcat的并行部署"></a>背景知识： tomcat的并行部署</h2><p>部署新版本时，一般要先停掉旧的应用，复制新应用后，再启动tomcat，这就造成中间有一段时间 tomcat 是无法对外服务的。</p>
+<p>从Tomcat 7.0.23+开始，可以在不关闭 Tomcat 的情况下同时部署相同context path的多个不同版本的web应用。war包的命名格式形如context.war, context##2.war,context##3.war。</p>
+<p>当用户访问 <a href="http://[url]/context" target="_blank" rel="external">http://[url]/context</a> 时，规则如下:</p>
+<ul>
+<li>如果当前请求没有session信息，则使用最新的war应用版本</li>
+<li>如果当前请求有session，使用session对应的war应用版本</li>
+<li>如果当前请求有session信息，却找不到相应的war应用版本，则使用最新的war应用版本（context##3.war）</li>
+</ul>
+<h2 id="实现并行部署"><a href="#实现并行部署" class="headerlink" title="实现并行部署"></a>实现并行部署</h2><ol>
+<li>pom.xml 中配置生成的 war 包加时间戳：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在项目根目录下执行命令</p>
+<pre><code>mvn package
+</code></pre><p>生成 war 包，如 portal##20140922.war。</p>
+<p>2. 部署</p>
+<p>将 war 包上传到/anyfish_web/war/warHub 下后，执行部署脚本 parallelDeploy.sh （脚本内容见下）</p>
+<h2 id="部署脚本"><a href="#部署脚本" class="headerlink" title="部署脚本"></a>部署脚本</h2><p>并行部署脚本 parallelDeploy.sh 的功能：搜寻指定目录下最新的 war 包，然后依 Tomcat 格式，在 $TOMCAT_HOME/conf/Catalina/localhost 创建配置文件（如 portal##20140922.xml），以使 Tomcat 感知并部署此 web 工程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># conf</span></div><div class="line">ctx=portal</div><div class="line">warFolder=/anyfish_web/war/warHub</div><div class="line">deployFolder=/anyfish_web/war</div><div class="line">confFolder=/Tomcat/conf/Catalina/localhost</div><div class="line"></div><div class="line"><span class="comment"># ---</span></div><div class="line">latestWarFile=$(basename `ls -tr <span class="variable">$warFolder</span>/*.war | tail -n 1`)</div><div class="line"><span class="built_in">echo</span> --- latestWarFile: <span class="variable">$latestWarFile</span></div><div class="line">cp <span class="variable">$warFolder</span>/<span class="variable">$latestWarFile</span> <span class="variable">$deployFolder</span>/</div><div class="line">confFile=$(<span class="built_in">echo</span> <span class="variable">$latestWarFile</span> | sed <span class="string">'s/.*\#\#\(.*\)\.war/\1/'</span>)</div><div class="line">ctxXml=<span class="variable">$confFolder</span>/<span class="variable">$ctx</span><span class="comment">##$confFile.xml</span></div><div class="line"></div><div class="line"><span class="comment"># generate context conf file for tomcat to deploy</span></div><div class="line"><span class="built_in">echo</span> --- ctxXml: <span class="variable">$ctxXml</span></div><div class="line">ctxCont=<span class="string">'&lt;Context displayName="'</span><span class="variable">$ctx</span><span class="string">'" docBase="/anyfish_web/war/'</span><span class="variable">$latestWarFile</span><span class="string">'" reloadable="true" /&gt;'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$ctxCont</span> &gt; <span class="variable">$ctxXml</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/">deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/script/">script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/09/parallel-deploy-script/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-change-shell-prompt-color" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/change-shell-prompt-color/">Change Shell Prompt Color</a>
+    </h1>
+  
+
+        <a href="/2014/09/change-shell-prompt-color/" class="archive-article-date">
+  	<time datetime="2014-09-19T11:53:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-09-19</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Normal user: vi ~/.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;33m[\t \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
+<p>Root user (set as red #):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;31m[\t  \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
+<p>References:</p>
+<ul>
+<li><a href="http://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/" target="_blank" rel="external">Change The Color of My Shell Prompt Under Linux or UNIX</a></li>
+<li><a href="http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html" target="_blank" rel="external">Bash Prompt Escape Sequences</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/09/change-shell-prompt-color/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-recognizing-session-timeout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/recognizing-session-timeout/">Recognizing Session Timeout</a>
+    </h1>
+  
+
+        <a href="/2014/09/recognizing-session-timeout/" class="archive-article-date">
+  	<time datetime="2014-09-07T07:13:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-09-07</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>You need to implement the <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpSessionListener.html" target="_blank" rel="external"><code>HttpSessionListener</code></a> interface. It receives notification events when session is created, or destroyed. In particular, its method <code>sessionDestroyed(HttpSessionEvent se)</code> gets called when the session is destroyed, which happens after timeout period has finished / session was invalidated. You can get the information stored in the session via <code>HttpSessionEvent#getSession()</code> call, and later do any arrangements that are necessary with the session. Also, be sure to register your session listener in <code>web.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>FQN of your sessin listener implementation<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>If you ultimately want to distinguish between invalidation and session timeout you could use the following line in your listener:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> now = <span class="keyword">new</span> java.util.Date().getTime();</div><div class="line"><span class="keyword">boolean</span> timeout = (now - session.getLastAccessedTime()) &gt;= ((<span class="keyword">long</span>)session.getMaxInactiveInterval() * <span class="number">1000L</span>);</div></pre></td></tr></table></figure></p>
+<p>Reference:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/15223841/recognizing-session-timeout" target="_blank" rel="external">stackoverflow</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/09/recognizing-session-timeout/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-use-encrypted-password-property-in-spring-properties-file" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/use-encrypted-password-property-in-spring-properties-file/">Use Encrypted Password Property in Spring Properties File</a>
+    </h1>
+  
+
+        <a href="/2014/08/use-encrypted-password-property-in-spring-properties-file/" class="archive-article-date">
+  	<time datetime="2014-08-23T06:08:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-08-23</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Add dependencies in pom.xml:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jasypt<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jasypt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jasypt<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jasypt-spring31<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Config applicationContextm.xml:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"textEncryptor"</span> <span class="attr">class</span>=<span class="string">"org.jasypt.util.text.BasicTextEncryptor"</span> <span class="attr">p:password</span>=<span class="string">"ur-pa55w0rd"</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">profile</span>=<span class="string">"development"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- &lt;context:property-placeholder ignore-resource-not-found="true"</span></div><div class="line">		location="classpath*:/application.properties,</div><div class="line">         			  classpath*:/application.development.properties"</div><div class="line">         	file-encoding="utf-8" /&gt; --&gt;</div><div class="line">       <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer"</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"textEncryptor"</span> /&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath*:/application.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath*:/application.development.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>P.S. Below snippet is not working. Wonder why.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer"</span></span></div><div class="line">            <span class="attr">p:locations</span>=<span class="string">"classpath*:/application.properties,</span></div><div class="line">        			  classpath*:/application.development.properties" <span class="attr">c:textEncryptor-ref</span>=<span class="string">"textEncryptor"</span> /&gt;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/encryption/">encryption</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/08/use-encrypted-password-property-in-spring-properties-file/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-run-a-program-as-adminitrator-via-the-command-line" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/run-a-program-as-adminitrator-via-the-command-line/">Run a Program as Adminitrator via The Command Line</a>
+    </h1>
+  
+
+        <a href="/2014/08/run-a-program-as-adminitrator-via-the-command-line/" class="archive-article-date">
+  	<time datetime="2014-08-12T07:23:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-08-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Create a *.vbs script file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Set objShell = CreateObject(&quot;Shell.Application&quot;)</div><div class="line">prog = &quot;c:/path/to/the/executable.exe&quot;</div><div class="line">args = &quot;&quot;</div><div class="line">objShell.ShellExecute prog, args, &quot;&quot;, &quot;runas&quot;</div></pre></td></tr></table></figure></p>
+<p>Then run it from command line, or via <a href="http://www.launchy.net/" target="_blank" rel="external">Launchy</a>.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/">cmd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/win/">win</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/08/run-a-program-as-adminitrator-via-the-command-line/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Verifying-Which-Ports-Are-Listening" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/Verifying-Which-Ports-Are-Listening/">Verifying Which Ports Are Listening</a>
+    </h1>
+  
+
+        <a href="/2014/07/Verifying-Which-Ports-Are-Listening/" class="archive-article-date">
+  	<time datetime="2014-07-12T08:10:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nmap -sT -O localhost</div><div class="line">netstat -tuplen</div></pre></td></tr></table></figure>
+<hr>
+<p>Troubleshooting:</p>
+<p>This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834. To check if the port is associated with the official list of known services, type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/services | grep 834</div></pre></td></tr></table></figure>
+<p>===&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -anp | grep 834</div></pre></td></tr></table></figure>
+<p>The command returns the following output:</p>
+<pre><code>tcp   0    0 0.0.0.0:834    0.0.0.0:*   LISTEN   653/ypbind
+</code></pre><p>===&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i | grep 834</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/port/">port</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/">troubleshooting</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/07/Verifying-Which-Ports-Are-Listening/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-import-file-to-sqlite-script" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/05/import-file-to-sqlite-script/">Import File to sqlite script</a>
+    </h1>
+  
+
+        <a href="/2014/05/import-file-to-sqlite-script/" class="archive-article-date">
+  	<time datetime="2014-05-04T01:18:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-05-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写的一个 Python 的练手的小工具。<br>已有一个单词的数据表，其中有单词、音标、意思、发音，发音的音频文件放在一个目录下，文件名为[word].mp3。现要将这些音频文件导入表中；使用 Tkinter 做 GUI 界面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3 <span class="keyword">as</span> lite</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> pdb</div><div class="line"><span class="keyword">import</span> tkMessageBox</div><div class="line"></div><div class="line"><span class="keyword">import</span> Tkinter <span class="keyword">as</span> tk</div><div class="line"><span class="keyword">import</span> ttk</div><div class="line"><span class="keyword">import</span> tkFileDialog</div><div class="line"><span class="keyword">from</span> Tkinter <span class="keyword">import</span> Tk, Text, Entry, OptionMenu, BOTH, W, N, E, S, StringVar</div><div class="line"><span class="keyword">from</span> ttk <span class="keyword">import</span> Frame, Button, Label, Style</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'sqlite version: %s'</span> % lite.version</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readFile</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        fin = open(filePath, <span class="string">"rb"</span>)</div><div class="line">        <span class="keyword">return</span> fin.read()</div><div class="line"></div><div class="line">    <span class="keyword">except</span> IOError, e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Error %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</div><div class="line">        sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        <span class="keyword">if</span> fin:</div><div class="line">            fin.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqliteUtil</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sqliteFile)</span>:</span></div><div class="line">        self.conn = lite.connect(sqliteFile)</div><div class="line">        self.cur = self.conn.cursor()</div><div class="line">                </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fetchall</span><span class="params">(self, sqlStmt)</span>:</span></div><div class="line">        self.cur.execute(sqlStmt)</div><div class="line">        <span class="keyword">return</span> self.cur.fetchall()</div><div class="line">                </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fetchone</span><span class="params">(self, sqlStmt)</span>:</span></div><div class="line">        self.cur.execute(sqlStmt)</div><div class="line">        <span class="keyword">return</span> self.cur.fetchone()</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setBinData</span><span class="params">(self, tableName, binColumnName, filePath, whereClause)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            data = readFile(filePath)</div><div class="line">            binData = lite.Binary(data)</div><div class="line">            sql = <span class="string">'UPDATE %s SET %s=? WHERE %s'</span> % (tableName, binColumnName, whereClause)</div><div class="line">            <span class="keyword">print</span> sql</div><div class="line">            self.cur.execute(sql, (binData,) )</div><div class="line">            <span class="keyword">print</span> <span class="string">'Affected rows using sqlite.Binary(): %d'</span> % self.cur.rowcount</div><div class="line">            self.cur.execute(sql, [buffer(data)])</div><div class="line">            <span class="keyword">print</span> <span class="string">'Affected rows using buffer(): %d'</span> % self.cur.rowcount</div><div class="line">            self.conn.commit()</div><div class="line"></div><div class="line">        <span class="keyword">except</span> lite.Error, e:</div><div class="line">            <span class="keyword">if</span> self.conn:</div><div class="line">                self.conn.rollback()</div><div class="line"></div><div class="line">            <span class="keyword">print</span> <span class="string">"Error %s:"</span> % e.args[<span class="number">0</span>]</div><div class="line">            sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">        <span class="comment">#finally:</span></div><div class="line">            <span class="comment">#if conn:</span></div><div class="line">                <span class="comment">#conn.close()</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordFrame</span><span class="params">(Frame)</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent)</span>:</span></div><div class="line">        Frame.__init__(self, parent)</div><div class="line">        self.parent = parent</div><div class="line">        self.initUI()</div><div class="line">        self.sqliteUtil = <span class="keyword">None</span></div><div class="line">        </div><div class="line"><span class="meta">    @staticmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">refreshOptionMenu</span><span class="params">(om, oldVarChoice, newChoices)</span>:</span></div><div class="line">        <span class="comment"># Reset var and delete all old options</span></div><div class="line">        oldVarChoice.set(<span class="string">''</span>)</div><div class="line">        <span class="comment">#oldVarChoice.set(newChoices[0])</span></div><div class="line">        om[<span class="string">'menu'</span>].delete(<span class="number">0</span>, <span class="string">'end'</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Insert list of new options (tk._setit hooks them up to var)</span></div><div class="line">        <span class="keyword">for</span> choice <span class="keyword">in</span> newChoices:</div><div class="line">            om[<span class="string">'menu'</span>].add_command(label=choice, command=tk._setit(oldVarChoice, choice))</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">browseSqlite</span><span class="params">(self)</span>:</span></div><div class="line">        ftypes = [(<span class="string">'Sqlite files'</span>, <span class="string">'*.sqlite'</span>), (<span class="string">'All files'</span>, <span class="string">'*'</span>)]</div><div class="line">        dlg = tkFileDialog.Open(self, filetypes=ftypes)</div><div class="line">        sqliteFile = dlg.show()</div><div class="line"></div><div class="line">        <span class="keyword">if</span> sqliteFile != <span class="string">''</span>:</div><div class="line">            self.varFilename.set(sqliteFile)</div><div class="line">            </div><div class="line">            self.sqliteUtil = SqliteUtil(sqliteFile)</div><div class="line">            tables = self.sqliteUtil.fetchall(<span class="string">"SELECT name FROM sqlite_master WHERE type='table'"</span>)</div><div class="line">            <span class="comment">#self.varTable.set(tuple(map(lambda x: x[0], tables)))</span></div><div class="line">            self.refreshOptionMenu(self.omTables, self.varTable, map(<span class="keyword">lambda</span> x: x[<span class="number">0</span>], tables))</div><div class="line">            </div><div class="line">            <span class="comment"># fetch the cols</span></div><div class="line">            cols = self.sqliteUtil.fetchall(<span class="string">'PRAGMA table_info(%s)'</span> % (tables[<span class="number">0</span>]))</div><div class="line">            self.refreshOptionMenu(self.omCols, self.varCol, map(<span class="keyword">lambda</span> x: x[<span class="number">1</span>], cols))</div><div class="line"></div><div class="line">            <span class="comment"># pdb.set_trace()</span></div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></div><div class="line">        self.parent.title(<span class="string">"导入音频数据"</span>)</div><div class="line">        self.style = ttk.Style()</div><div class="line">        self.style.theme_use(<span class="string">"default"</span>)</div><div class="line">        self.pack(fill=BOTH, expand=<span class="number">1</span>)</div><div class="line">        self.centerWindow()</div><div class="line"></div><div class="line">        <span class="comment"># self.columnconfigure(1, weight=1)</span></div><div class="line"></div><div class="line">        <span class="comment"># row 0: file selection</span></div><div class="line">        panelFileSelection = Frame(self)</div><div class="line">        Label(panelFileSelection, text=<span class="string">"sqlite文件:"</span>).pack(side=<span class="string">"left"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">False</span>)</div><div class="line">        self.varFilename=StringVar()</div><div class="line">        self.txtFileName = Entry(panelFileSelection, textvariable=self.varFilename, width=<span class="number">60</span>)</div><div class="line">        self.txtFileName.pack(side=<span class="string">"left"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">        btnBrowse = Button(panelFileSelection, text=<span class="string">"..."</span>, command=self.browseSqlite)</div><div class="line">        <span class="comment">#btnBrowser.grid(row=0, column=4, pady=4)</span></div><div class="line">        btnBrowse.pack(side=<span class="string">"right"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">False</span>)</div><div class="line">        </div><div class="line">        panelFileSelection.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, columnspan=<span class="number">4</span>, sticky=<span class="string">"we"</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Row 1: word table/audio column name</span></div><div class="line">        self.varTable = StringVar(self)</div><div class="line">        Label(self, text=<span class="string">"表名:"</span>).grid(row=<span class="number">1</span>, sticky=W, padx=<span class="number">5</span>, pady=<span class="number">4</span>)</div><div class="line">        self.omTables = OptionMenu(self, self.varTable, <span class="string">''</span>)</div><div class="line">        self.omTables.grid(row=<span class="number">1</span>, column=<span class="number">1</span>, sticky=E+W)</div><div class="line">        self.omTables[<span class="string">'menu'</span>].bind(<span class="string">"&lt;Unmap&gt;"</span>, self.onSelectTable)</div><div class="line">        </div><div class="line">        self.varCol = StringVar(self)</div><div class="line">        Label(self, text=<span class="string">"列名:"</span>).grid(row=<span class="number">1</span>, column=<span class="number">2</span>, sticky=E, padx=<span class="number">5</span>, pady=<span class="number">4</span>)</div><div class="line">        self.omCols = OptionMenu(self, self.varCol, <span class="string">''</span>)</div><div class="line">        self.omCols.grid(row=<span class="number">1</span>, column=<span class="number">3</span>, sticky=E+W)</div><div class="line"></div><div class="line">        <span class="comment"># Row 3: close/import buttons</span></div><div class="line">        btnImport = Button(self, text=<span class="string">"导入"</span>, command=self.importAudios)</div><div class="line">        btnImport.grid(row=<span class="number">2</span>, column=<span class="number">2</span>, padx=<span class="number">5</span>, pady=<span class="number">5</span>)</div><div class="line">        </div><div class="line">        btnClose = Button(self, text=<span class="string">"关闭"</span>, command=self.quit)</div><div class="line">        btnClose.grid(row=<span class="number">2</span>, column=<span class="number">1</span>, padx=<span class="number">5</span>, pady=<span class="number">5</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">quit</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'in quit()'</span></div><div class="line">        <span class="keyword">print</span> self.sqliteUtil</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (self.sqliteUtil <span class="keyword">is</span> <span class="keyword">None</span>) <span class="keyword">and</span> <span class="keyword">not</span> (self.sqliteUtil.conn <span class="keyword">is</span> <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">print</span> <span class="string">'to close conn'</span></div><div class="line">            self.sqliteUtil.conn.close()</div><div class="line">        <span class="keyword">print</span> <span class="string">'to exit()'</span></div><div class="line">        sys.exit(<span class="number">0</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">importAudios</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># tkMessageBox.showinfo("col: ", self.varCol.get())</span></div><div class="line">        </div><div class="line">	<span class="comment"># use loop here</span></div><div class="line">        audioFile = <span class="string">'C:/Users/fouding/Desktop/fetion_received_files/a bas.mp3'</span></div><div class="line">        self.sqliteUtil.setBinData(self.varTable.get(), self.varCol.get(), audioFile, <span class="string">"word='think'"</span>)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">onSelectTable</span><span class="params">(self, val)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'onSelectTable'</span></div><div class="line">        sender = val.widget</div><div class="line">        tblName = sender.get(sender.curselection())</div><div class="line">        </div><div class="line">        <span class="comment"># fetch the cols</span></div><div class="line">        cols = self.sqliteUtil.fetchall(<span class="string">'PRAGMA table_info(%s)'</span> % (tblName))</div><div class="line">        self.refreshOptionMenu(self.omCols, self.varCol, map(<span class="keyword">lambda</span> x: x[<span class="number">1</span>], cols))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">centerWindow</span><span class="params">(self)</span>:</span></div><div class="line">        w = <span class="number">500</span></div><div class="line">        h = <span class="number">200</span></div><div class="line">        </div><div class="line">        sw = self.parent.winfo_screenwidth()</div><div class="line">        sh = self.parent.winfo_screenheight()</div><div class="line"></div><div class="line">        x = (sw - w) / <span class="number">2</span></div><div class="line">        y = (sh - h) / <span class="number">2</span></div><div class="line"></div><div class="line">        self.parent.geometry(<span class="string">'%dx%d+%d+%d'</span> % (w, h, x, y))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    root = tk.Tk()</div><div class="line">    app = WordFrame(root)</div><div class="line">    root.mainloop()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/script/">script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/05/import-file-to-sqlite-script/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">Next &raquo;</a>
+    </nav>
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 foudingzh
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: false,
+		isArchive: true,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">troubleshooting</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.quora.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Quora</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stackoverflow.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stackoverflow</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>github</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.zhihu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.oschina.net" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>开源中国</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.infoq.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>InfoQ</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Hello, I&#39;m Fouding based in Xiamen, China. &lt;br&gt;This is my blog about life, career and technologies.</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
