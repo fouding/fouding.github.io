@@ -8,19 +8,16 @@
   <link rel="dns-prefetch" href="http://foudingzheng.info">
   <title>Linux Utilities | Fouding&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="networkcurlPost a file:1curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
-curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot">
+  <meta name="description" content="networkcurlPOST json data:1curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;&amp;#123;&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot;password&amp;quot;:&amp;quot;xyz&amp;quot;&amp;#125;&amp;apos; http://foo.com/api/lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Utilities">
 <meta property="og:url" content="http://foudingzheng.info/2015/03/linux-utilities/index.html">
 <meta property="og:site_name" content="Fouding's Blog">
-<meta property="og:description" content="networkcurlPost a file:1curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
-curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot">
-<meta property="og:updated_time" content="2015-03-09T07:56:50.000Z">
+<meta property="og:description" content="networkcurlPOST json data:1curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;&amp;#123;&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot;password&amp;quot;:&amp;quot;xyz&amp;quot;&amp;#125;&amp;apos; http://foo.com/api/lo">
+<meta property="og:updated_time" content="2016-12-11T14:28:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Utilities">
-<meta name="twitter:description" content="networkcurlPost a file:1curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
-curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot">
+<meta name="twitter:description" content="networkcurlPOST json data:1curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;&amp;#123;&amp;quot;username&amp;quot;:&amp;quot;xyz&amp;quot;,&amp;quot;password&amp;quot;:&amp;quot;xyz&amp;quot;&amp;#125;&amp;apos; http://foo.com/api/lo">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
   
@@ -162,9 +159,9 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
-<pre><code>curl -H &quot;Content-Type: application/json&quot; -d &apos;{&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;}&apos; http://foo.com/api/login
-</code></pre><p>For windows, single quotes around json did not work and I ended up escaping double quotes.<br>    curl -X POST -H “Content-Type: application/json” -d “{ \”key1\”: \”value1\” }” <a href="http://foo.com/api/method" target="_blank" rel="external">http://foo.com/api/method</a></p>
+        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Content-Type: application/json&quot; -d &apos;&#123;&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;&#125;&apos; http://foo.com/api/login</div></pre></td></tr></table></figure></p>
+<p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
+<p>For windows, single quotes around json did not work and I ended up escaping double quotes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123; \&quot;key1\&quot;: \&quot;value1\&quot; &#125;&quot; http://foo.com/api/method</div></pre></td></tr></table></figure></p>
 <h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
 
       
@@ -281,27 +278,11 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vagrant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
+                <a href="javascript:void(0)">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -317,7 +298,19 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">shell</a>
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -333,15 +326,47 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -353,14 +378,6 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">tomcat</a>
               </li>
              
@@ -369,11 +386,11 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
+                <a href="javascript:void(0)">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
+                <a href="javascript:void(0)">gtd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -393,31 +410,15 @@ curl -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;apos;{&amp;qu
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
               </li>
             
             <div class="clearfix"></div>

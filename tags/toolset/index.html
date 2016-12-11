@@ -6,24 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://foudingzheng.info">
-  <title>Maven Tips | Fouding&#39;s Blog</title>
+  <title>Tag: toolset | Fouding&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用国内的镜像地址mavn 中央库默认的下载地址在国外，下载速度不稳定。开源中国做了国内镜像，参考其帮助文档配置其为中央库：
-备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：
-12345678910111213141516171819202122232425262728293031323334353637&amp;lt;mirrors&amp;gt;	&amp;lt;!-- http">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Maven Tips">
-<meta property="og:url" content="http://foudingzheng.info/2014/10/maven-tips/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fouding's Blog">
+<meta property="og:url" content="http://foudingzheng.info/tags/toolset/index.html">
 <meta property="og:site_name" content="Fouding's Blog">
-<meta property="og:description" content="使用国内的镜像地址mavn 中央库默认的下载地址在国外，下载速度不稳定。开源中国做了国内镜像，参考其帮助文档配置其为中央库：
-备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：
-12345678910111213141516171819202122232425262728293031323334353637&amp;lt;mirrors&amp;gt;	&amp;lt;!-- http">
-<meta property="og:updated_time" content="2015-03-09T07:49:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Maven Tips">
-<meta name="twitter:description" content="使用国内的镜像地址mavn 中央库默认的下载地址在国外，下载速度不稳定。开源中国做了国内镜像，参考其帮助文档配置其为中央库：
-备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：
-12345678910111213141516171819202122232425262728293031323334353637&amp;lt;mirrors&amp;gt;	&amp;lt;!-- http">
+<meta name="twitter:title" content="Fouding's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
   
@@ -147,32 +137,162 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-maven-tips" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-pm-summary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Maven Tips
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/pm-summary/">研发与技术管理小结</a>
     </h1>
   
 
-        <a href="/2014/10/maven-tips/" class="archive-article-date">
-  	<time datetime="2014-10-11T07:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-10-11</time>
+        <a href="/2016/03/pm-summary/" class="archive-article-date">
+  	<time datetime="2016-03-28T02:20:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-28</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="使用国内的镜像地址"><a href="#使用国内的镜像地址" class="headerlink" title="使用国内的镜像地址"></a>使用国内的镜像地址</h2><p>mavn 中央库默认的下载地址在国外，下载速度不稳定。<a href="http://www.oschina.net/" target="_blank" rel="external">开源中国</a>做了国内镜像，参考<a href="http://maven.oschina.net/static/help.html" target="_blank" rel="external">其帮助文档</a>配置其为中央库：</p>
-<p>备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-osc<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus OSC<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.4<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span><span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span><span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span> local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>local private enxus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>以上配置，</p>
+        <p>创业公司研发部较少有纯管理性的职位，一般要身兼核心模块框架开发和团队管理的职责。这就要求负责人有较深的技术背景，上马能写核心模块，下马能指导成员遇到的遇到难题，建立起技术上的威信；管理上刚柔并济，让人心服。</p>
+<p>在创业公司负责了几年的技术研发和管理，有自己的一点小心得，会陆续放在博客上来。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Infosys 学到的要点： <em>methodologies</em>, <em>process</em>, <em>code standard/checklist</em>。</p>
+<p>先说说贯穿于整个工作中的“团队建设”、“任务排期”、“文档协作”和“绩效考核”。</p>
+<h3 id="团队建设"><a href="#团队建设" class="headerlink" title="团队建设"></a>团队建设</h3><p>公司，尤其是创业公司，最重要的是人，包括市场部人员、研发部人员和后勤人员等。<br>要保持团队，尤其是核心成员的稳定性，不仅在待遇上处于业界中上水平，还须在团队氛围和技能提升上让成员觉得这是一个好的队伍，值得一起共事。</p>
+<p>定位：服务于研发团队，给一线团队创造一个良好的工作环境。在内，创造令人愉快的环境和氛围；公司内，协调好与市场、后勤等其他部门的关系，包括为团队向公司争取应得的利益。</p>
 <ul>
-<li>在生成的 war 包名字的后面加上打包时间；</li>
-<li><em>不</em> 将公共的 spring, json 的相关 jar 包打到最终 war 包中，只保留自己的、经常会变化的 mylib-1.0.0-SNAPSHOT，参见<a href="/2014/11/tomcat-tips/">Tomcat Tips</a>。</li>
+<li>团队氛围：开放、互助</li>
+<li>技术提升：构建内部的技术 wiki 并建立技术分享机制</li>
+<li>管理能力提升，同时建立起人才梯队</li>
+<li>团队活动<ul>
+<li>饭后大家一起散步聊天（是真的散步-_-），是很好的方式</li>
+<li>公司里没健身场地和器材，就在公司附近的健身场订了长期的羽毛球场地，每周三下班后一起去打球</li>
+<li>一月一次的聚餐</li>
+<li>提议中的家属日（尚未执行）</li>
+</ul>
+</li>
+</ul>
+<h3 id="任务排期"><a href="#任务排期" class="headerlink" title="任务排期"></a>任务排期</h3><p>排期：预估开发周期，制定项目开发进度，分解任务，分配任务。</p>
+<ul>
+<li>方法：WBS</li>
+<li>工具：看板模式，如 Worktile；</li>
+<li>开发周期的预估很大程序上取决于负责人以前的经验。</li>
+<li>分配任务时需分配到具体负责人，要有优先级、检查项、deadline。</li>
+<li>了解每人性格、技术特点，从而匹配相关任务，并使其逐步提升。</li>
+</ul>
+<h3 id="文档协作"><a href="#文档协作" class="headerlink" title="文档协作"></a>文档协作</h3><p>创业公司不会按传统的研发流程按步就班地进行，更多强调的是快速开发。不仅非研发人员（老板，市场部等）不关注研发过程中的文档，连研发人员也很多对文档写作有排斥心理，认为写好代码，程序能跑就好了。<br>的确，传统方式中的文档太多了，而且写了以后也不一定有人去看。<br>但敏捷开发强调的是快速试错、快速迭代，而非简单粗暴，<em>对比传统开发模型虽然并不强调文档，但并不代表不需要</em>。对于一个项目，从开始就需要需求文档、产品原型文档、项目进度文档等等，而到了研发这一步，在系统实现、写代码之前最好的就是先”想”再做，而”想”的一种比较好的输出形式就是文档。对于一个软件系统，一般来说需要写的文档有以下几种：</p>
+<ul>
+<li>系统业务流程文档：描述系统业务逻辑的文档，能清晰的说明真个业务的流程。</li>
+<li>系统架构设计文档：对整个系统的架构的描述，需要包含系统的各个关键组成模块以及相关的各个关键技术点等。</li>
+<li>系统功能模块概要设计/详细设计文档：对于某一个模块的流程、逻辑的描述。</li>
+<li>数据DDL/DML文档: 与系统相关的数据库的DDL和DML文档，对于前者，是需要包含所有的操作的，而对于后者，必不可少的是查询语句，用来提供给DBA，来做查询sql的review，以保证索引的正确建立和查询语句的合理等。</li>
+<li>系统部署文档：描述系统关键部分部署在哪里，需要做哪些配置。</li>
+<li>系统发布ChangeLog：对系统每次发布的改动进行描述，包括数据库、缓存、数据队列、新增/变动了哪些依赖服务等。此外，对数据库、缓存这种关键服务的量化分析也可以写在这里。</li>
+</ul>
+<p>使用的工具可以是 WORD, Markdown 或在线协作工具。我推崇的格式是 markdown，比 WORD 文档更适合团队协作和版本追踪。Markdown 工具很多，可用 <a href="http://pad.haroopress.com" target="_blank" rel="external">haroopad</a>, <a href="https://pandao.github.io/editor.md" target="_blank" rel="external">pandao editor</a> 等</p>
+<p>文档的范例可参见<a href="https://github.com/superhj1987/awesome-tech-collections/tree/master/document" target="_blank" rel="external">这里</a>。</p>
+<h3 id="绩效考核"><a href="#绩效考核" class="headerlink" title="绩效考核"></a>绩效考核</h3><ul>
+<li>绩效指标的确定：分职位，分阶段确定不同的指标。</li>
+</ul>
+<h2 id="Phases-研发各阶段"><a href="#Phases-研发各阶段" class="headerlink" title="Phases 研发各阶段"></a>Phases 研发各阶段</h2><p>梳理各阶段的角色、任务和工具链。</p>
+<h3 id="Req-需求调研"><a href="#Req-需求调研" class="headerlink" title="Req 需求调研"></a>Req 需求调研</h3><p>需求梳理、分析是产品研发的前期阶段，易被忽略但极为重要的阶段。一个不符合市场需求的产品推倒重来，浪费的是研发人员的时间和公司在市场上的时机和表现。</p>
+<ul>
+<li>需求调研：产品经理做需求调研，确定产品需求，编写需求文档（一张产品功能脑图或者一份功能列表），完成产品原型（手绘草图即可）<br>需求的来源可能来自客户、老板和市场部。<br>创业公司不一定有专职的产品经理，可能由技术负责人/研发人员同时兼任了。</li>
+<li>原型设计：产品人员根据原型设计出一系列 UI 界面，包括产品业务流程图、交互原型。</li>
+<li>需求评审：产品经理召集产品、UI、开发、测试等人员召开需求评审会议，确定最终产品的界面和交互。</li>
+<li>工具：纸笔，<a href="https://modao.cc" target="_blank" rel="external">墨刀</a></li>
+</ul>
+<h3 id="Design-设计及文档产出"><a href="#Design-设计及文档产出" class="headerlink" title="Design 设计及文档产出"></a>Design 设计及文档产出</h3><ul>
+<li>概要设计和详细设计。很多时候详细设计都省略了，但基本的概要设计还是要的，包括：<ul>
+<li>架构文档</li>
+<li>流程交互图<br>UML工具：<a href="http://staruml.io" target="_blank" rel="external">StarUML</a>, <a href="http://www.processon.com" target="_blank" rel="external">ProcessOn</a></li>
+</ul>
+</li>
+<li>API 接口文档。 <a href="https://github.com/thx/RAP" target="_blank" rel="external">阿里妈妈RAP</a> ，<a href="http://swagger.io" target="_blank" rel="external">Swagger</a></li>
+</ul>
+<h3 id="Dev-开发"><a href="#Dev-开发" class="headerlink" title="Dev 开发"></a>Dev 开发</h3><p>开发人员根据 UI 界面、需求文档和技术文档开始编写代码，开发模块上的功能。</p>
+<h4 id="Code-Standard-Checklist-技术规范"><a href="#Code-Standard-Checklist-技术规范" class="headerlink" title="Code Standard / Checklist 技术规范"></a>Code Standard / Checklist 技术规范</h4><p>统一的技术规范和 checklist 利于团队协作，减少错误发生的可能性，增强可维护性。</p>
+<ul>
+<li>数据库规范</li>
+<li>代码规范</li>
+<li>接口规范</li>
+<li>可用性检查列表</li>
+<li>测试规范</li>
+<li>安全规范</li>
+</ul>
+<h4 id="QA-质量保证"><a href="#QA-质量保证" class="headerlink" title="QA 质量保证"></a>QA 质量保证</h4><ul>
+<li>Jenkins 静态分析：Findbugs；CheckStyle；单元测试覆盖率 &gt; 95%</li>
+<li>Code Review 代码评审：每周一次的集体 Review</li>
+<li>测试</li>
+</ul>
+<h4 id="Tools-使用的工具"><a href="#Tools-使用的工具" class="headerlink" title="Tools 使用的工具"></a>Tools 使用的工具</h4><ul>
+<li>svn/git, Intellij Idea/Eclipse</li>
+<li>前端框架：Vue 2.0</li>
+<li>后台管理程序模板<ul>
+<li><a href="https://github.com/puikinsh/gentelella" target="_blank" rel="external">puikinsh/gentelella: Free Bootstrap 3 Admin Template</a></li>
+<li><a href="https://github.com/almasaeed2010/AdminLTE" target="_blank" rel="external">almasaeed2010/AdminLTE: AdminLTE - Free Premium Admin control Panel Theme</a></li>
+</ul>
+</li>
+<li>后端工具：<a href="http://projects.spring.io/spring-boot" target="_blank" rel="external">Spring Boot CLI</a></li>
+<li>DB Schema: <a href="http://schemaspy.sourceforge.net" target="_blank" rel="external">SchemaSpy</a></li>
+</ul>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><ul>
+<li>缓存</li>
+<li>事务控制</li>
+<li>安全</li>
+<li>注重监控模块</li>
+</ul>
+<h3 id="Deploy-自动化部署"><a href="#Deploy-自动化部署" class="headerlink" title="Deploy 自动化部署"></a>Deploy 自动化部署</h3><ul>
+<li>开发环境 -&gt; 测试环境 -&gt; mock 环境 -&gt; 线上环境</li>
+<li>CI 工具：<a href="https://jenkins.io/index.html" target="_blank" rel="external">Jenkins</a></li>
+</ul>
+<h3 id="Testing-测试"><a href="#Testing-测试" class="headerlink" title="Testing 测试"></a>Testing 测试</h3><ul>
+<li>功能测试</li>
+<li>性能测试: ab, JMeter</li>
+<li>安全性测试</li>
+<li>集成测试</li>
+<li>移动端自动化测试工具</li>
+</ul>
+<h4 id="Bug-管理"><a href="#Bug-管理" class="headerlink" title="Bug 管理"></a>Bug 管理</h4><ul>
+<li>工具：使用的是 redmine. 官方安装较为繁琐，可使用 <a href="https://bitnami.com/stack/redmine" target="_blank" rel="external">bitnami redmine 安装包</a> 简易安装。</li>
+</ul>
+<h3 id="Go-Live-上线"><a href="#Go-Live-上线" class="headerlink" title="Go Live 上线"></a>Go Live 上线</h3><p>Release Checklist Document，包括数据库更改、最新运行包，部署时间与方式，注意点，验证检查项等等。</p>
+<h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><ul>
+<li>db backup</li>
+<li>docker。团队里没有这方面的技术储备，不敢贸然上 docker。待研究。</li>
+</ul>
+<h3 id="其他效率-辅助工具"><a href="#其他效率-辅助工具" class="headerlink" title="其他效率/辅助工具"></a>其他效率/辅助工具</h3><ul>
+<li>思维导图工具：<a href="https://www.mindjet.com" target="_blank" rel="external">MindManager</a>， <a href="http://naotu.baidu.com" target="_blank" rel="external">百度脑图</a>，<a href="http://www.xmind.net" target="_blank" rel="external">XMind</a></li>
+<li>即时沟通：<a href="https://bearychat.com" target="_blank" rel="external">BearyChat</a></li>
+<li>移动办公app：<a href="http://jingoal.com" target="_blank" rel="external">今目标</a>（也是厦门企业），<a href="https://www.dingtalk.com" target="_blank" rel="external">阿里钉钉</a></li>
+<li>其他<ul>
+<li><a href="http://www.ghisler.com" target="_blank" rel="external">Total Commander</a><br>Alternatives under linux: <a href="http://www.krusader.org" target="_blank" rel="external">Krusader</a>, <a href="https://gcmd.github.io" target="_blank" rel="external">Gnome Commander</a></li>
+<li><a href="http://www.vim.org" target="_blank" rel="external">gvim</a></li>
+<li><a href="http://www.heidisql.com" target="_blank" rel="external">HeidiSQL</a>: 数据库管理工具，完全可替代商业的 Navicat</li>
+<li><a href="http://cmder.net" target="_blank" rel="external">cmder</a></li>
+<li><a href="http://babun.github.io/" target="_blank" rel="external">babun</a>: Win 上的微型 Linux 环境</li>
+<li><a href="http://qydev.com/" target="_blank" rel="external">Ngrok国内免费服务器——糖果科技</a>：内网穿透利器</li>
+<li><a href="http://www.launchy.net" target="_blank" rel="external">Launchy</a></li>
+<li><a href="http://mobaxterm.mobatek.net" target="_blank" rel="external">MobaXterm</a></li>
+<li><a href="https://atom.io" target="_blank" rel="external">Atom</a></li>
+<li><a href="https://nodejs.org" target="_blank" rel="external">NodeJS</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>对未建立或未完善完整技术团队和体系的公司来说：</p>
+<ul>
+<li>组建核心技术团队。招聘到合适的人是件费时费心的事儿，团队磨合也是一个长期的过程。</li>
+<li>统一技术规范、工具链</li>
+<li>搭建开发/测试/预发布/生产各环境：svn/git repo; maven/gradle repo; redmine；Jenkins</li>
+</ul>
+<p>另外，这些是比较理想的流程，但创业公司因为时间、成本的原因，省去了很多流程，还有很多例外的情况，如开发倒逼需求，需求倒逼设计，不一而足，这要依实际情况调整了。这也是管理与开发的一大不同：对于机器，确定性、可预测性，而对于人性，则有更大的灵活性。但看着一个初步的 idea 在自己团队的努力下，变成一个可触及的产品，还是很有成就感的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/24219376" target="_blank" rel="external">目标驱动的技术管理 - 软件工程师的自我修养 - 知乎专栏</a></li>
+<li><a href="http://www.rowkey.me/blog/2016/08/17/dev-manage" target="_blank" rel="external">研发体系这点事 - 后端技术杂谈 | 飒然Hang</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21719921" target="_blank" rel="external">我有一个 App 创意丨如何将其实现？ - FenzoTech - 知乎专栏</a></li>
 </ul>
 
       
@@ -184,16 +304,20 @@
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev-phases/">dev phases</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mgmt/">mgmt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolchain/">toolchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolset/">toolset</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
 	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/tech/">tech</a>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/pm-summary/">展开全文 >></a>
+        </p>
       
 
       
@@ -202,33 +326,15 @@
   </div>
 </article>
 
-  
-<nav id="article-nav">
-  
-    <a href="/2014/11/tomcat-tips/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Tomcat Tips
-        
-      </div>
-    </a>
+
+
+
+
+
+
+
   
   
-    <a href="/2014/09/parallel-deploy-script/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Tomcat 并行部署</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-
-
 
           </div>
         </div>
@@ -250,9 +356,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
