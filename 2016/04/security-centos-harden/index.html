@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://foudingzheng.info">
+  <title>CentOS 安全加固 | Fouding&#39;s Blog on Life, Career and Technologies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CentOS 加固12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 安全加固">
+<meta property="og:url" content="http://foudingzheng.info/2016/04/security-centos-harden/index.html">
+<meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
+<meta property="og:description" content="CentOS 加固12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+<meta property="og:updated_time" content="2016-12-14T09:34:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 安全加固">
+<meta name="twitter:description" content="CentOS 加固12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910">
+  
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/avatar.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">foudingzh</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知道行德</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/mgmt">管理</a></li>
+	        
+				<li><a href="/tags/tech">技术</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">foudingzh</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">foudingzh</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知道行德</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/mgmt">管理</a></li>
+		        
+					<li><a href="/tags/tech">技术</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-security-centos-harden" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS 安全加固
+    </h1>
+  
+
+        <a href="/2016/04/security-centos-harden/" class="archive-article-date">
+  	<time datetime="2016-04-26T03:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-26</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CentOS-加固"><a href="#CentOS-加固" class="headerlink" title="CentOS 加固"></a>CentOS 加固</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 用户名</span></div><div class="line">USR=ajhealth</div><div class="line"></div><div class="line"><span class="comment"># 密码：大小写、特殊字符、数字，大于8个字符</span></div><div class="line"></div><div class="line">authconfig --passalgo=sha512 --update</div><div class="line"></div><div class="line"><span class="comment">### 移除空闲时间大于15分钟的用户</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"readonly TMOUT=900"</span> &gt;&gt; /etc/profile.d/os-security.sh</div><div class="line"><span class="built_in">echo</span> <span class="string">"readonly HISTFILE"</span> &gt;&gt; /etc/profile.d/os-security.sh</div><div class="line">chmod +x /etc/profile.d/os-security.sh</div><div class="line"></div><div class="line"><span class="comment">### 禁用不使用的用户和组</span></div><div class="line">cp /etc/passwd&#123;,.bak&#125;</div><div class="line">sed -i <span class="string">"/^adm:x\|lp:x\|shutdown:x\|halt:x\|uucp:x\|operator:x\|games:x\|gopher:x\|ftp:x\|nfsnobody:x\|nfsnobody:x\|postfix:x/ s/^/# /"</span> /etc/passwd </div><div class="line"></div><div class="line">cp /etc/group&#123;,.dist&#125;</div><div class="line">sed -i <span class="string">"/adm:x\|lp:x\|uucp:x\|games:x\|gopher:x\|video:x\|dip:x\|ftp:x\|audio:x\|floppy:x\|postfix:x/ s/^/# /"</span> /etc/group</div><div class="line"></div><div class="line"><span class="comment">### 关闭不使用的服务</span></div><div class="line">chkconfig --list | grep <span class="string">'3:on'</span></div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">### 创建 sudo 用户</span></div><div class="line">visudo</div><div class="line"></div><div class="line"><span class="comment">### SSH安全设置</span></div><div class="line"></div><div class="line">cp /etc/ssh/sshd_config&#123;,.bak&#125;</div><div class="line">sed -i <span class="string">"s/PermitRootLogin yes/PermitRootLogin no/"</span> /etc/ssh/sshd_config <span class="comment"># 禁止root直接远程登录</span></div><div class="line">sed -i <span class="string">"/^#Port 22/a Port 11011"</span> /etc/ssh/sshd_config <span class="comment"># change port</span></div><div class="line">sed -i <span class="string">"/^#IgnoreRhosts/ s/^#//g"</span> /etc/ssh/sshd_config <span class="comment"># ignore Rhosts files</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"auth required pam_tally2.so deny=6 unlock_time=180 even_deny_root root_unlock_time=180"</span> &gt;&gt; /etc/pam.d/login <span class="comment"># 限制登录失败次数并锁定</span></div><div class="line"></div><div class="line"><span class="comment">#### 登录IP限制</span></div><div class="line"><span class="comment">##### 更严格的限制是在sshd_config中定死允许ssh的用户和来源ip：</span></div><div class="line"><span class="built_in">echo</span> AllowUsers <span class="variable">$USR</span>@10.116.44.24 &gt;&gt; /etc/ssh/sshd_config</div><div class="line"><span class="comment"># echo AllowUsers $USR@10.116.44.24 hadoop@10.116.44.24 hadoop@hadoop1 hadoop@10.116.43.165 &gt;&gt; /etc/ssh/sshd_config</span></div><div class="line">tail -2 /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment"># restart sshd:</span></div><div class="line">service sshd restart</div><div class="line"></div><div class="line">[</div><div class="line">	或者使用tcpwrapper:</div><div class="line">	vi /etc/hosts.allow</div><div class="line">	sshd:172.29.73.23</div><div class="line">	sshd:172.29.73.</div><div class="line"></div><div class="line">	vi /etc/hosts.deny</div><div class="line">	sshd:all</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment">#### 减少history命令记录</span></div><div class="line">sed -i <span class="string">"$ a \\</span></div><div class="line">if [ \"\$SHLVL\" = 1 ]; then\\</div><div class="line">  history -c\\</div><div class="line">fi</div><div class="line">" ~/.bash_logout</div><div class="line"></div><div class="line">sed -i <span class="string">"$ a \\</span></div><div class="line">if [ \"\$SHLVL\" = 1 ]; then\\</div><div class="line">  history -c\\</div><div class="line">fi</div><div class="line">" $(<span class="built_in">eval</span> <span class="built_in">echo</span> ~<span class="variable">$USER</span>)/.bash_logout</div><div class="line"></div><div class="line"><span class="comment">#### 禁ping</span></div><div class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</div><div class="line"><span class="built_in">echo</span> <span class="string">"echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all"</span> &gt;&gt; /etc/rc.d/rc.local</div><div class="line"></div><div class="line">%% --- ---</div><div class="line"></div><div class="line"><span class="comment">#### 增强特殊文件权限</span></div><div class="line"></div><div class="line">给下面的文件加上不可更改属性，从而防止非授权用户获得权限</div><div class="line">chattr +i /etc/passwd</div><div class="line">chattr +i /etc/shadow</div><div class="line">chattr +i /etc/group</div><div class="line">chattr +i /etc/gshadow</div><div class="line">chattr +i /etc/services <span class="comment">#给系统服务端口列表文件加锁，防止未经许可的删除或添加服务</span></div><div class="line">chattr +i /etc/pam.d/su</div><div class="line">chattr +i /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment">### 显示文件的属性</span></div><div class="line">lsattr /etc/passwd /etc/shadow /etc/services /etc/ssh/sshd_config</div><div class="line"><span class="comment">### 注意：执行以上 chattr 权限修改之后，就无法添加删除用户了。</span></div><div class="line"><span class="comment">### 如果再要添加删除用户，需要先取消上面的设置，等用户添加删除完成之后，再执行上面的操作，例如取消只读权限chattr -i /etc/passwd。（记得重新设置只读）</span></div><div class="line"></div><div class="line"><span class="comment">#### 配置只能使用密钥文件登录</span></div><div class="line">**注意：以普通账号操作，不是以root账号操作**</div><div class="line">ssh-keygen -t rsa -b 2048</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/root/.ssh/id_rsa):   //默认路径，回车</div><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):     //输入你的密钥短语，登录时使用</div><div class="line">Enter same passphrase again: </div><div class="line"></div><div class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</div><div class="line">chmod 600 ~/.ssh/authorized_keys</div><div class="line">cat ~/.ssh/id_rsa</div><div class="line"><span class="comment"># save the content to local, and then:</span></div><div class="line">rm ~/.ssh/id_rsa*</div><div class="line"></div><div class="line">sed -i <span class="string">"/#RSAAuthentication\|#PubkeyAuthentication\|#AuthorizedKeysFile/ s/^#//"</span> /etc/ssh/sshd_config </div><div class="line">sed -i <span class="string">"s/PasswordAuthentication yes/PasswordAuthentication no/"</span> /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment">### 防止IP欺骗</span></div><div class="line">cat &gt;&gt; /etc/host.conf &lt;&lt;EOF</div><div class="line">order hosts,<span class="built_in">bind</span></div><div class="line">multi on</div><div class="line">nospoof on</div><div class="line">EOF</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/web-security/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Web 服务器与系统安全
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/interf-design/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">接口设计规范</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 foudingzh
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">troubleshooting</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.quora.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Quora</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stackoverflow.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stackoverflow</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>github</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.zhihu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.oschina.net" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>开源中国</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.infoq.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>InfoQ</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Hello, I&#39;m Fouding based in Xiamen, China. &lt;br&gt;This is my blog about life, career and technologies.</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://foudingzheng.info">
+  <title>Tag: interface design | Fouding&#39;s Blog on Life, Career and Technologies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fouding's Blog on Life, Career and Technologies">
+<meta property="og:url" content="http://foudingzheng.info/tags/interface-design/index.html">
+<meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fouding's Blog on Life, Career and Technologies">
+  
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/avatar.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">foudingzh</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知道行德</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/mgmt">管理</a></li>
+	        
+				<li><a href="/tags/tech">技术</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">foudingzh</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">foudingzh</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知道行德</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/mgmt">管理</a></li>
+		        
+					<li><a href="/tags/tech">技术</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/fouding" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:fouding_zheng[at]outlook.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            
+  
+    <article id="post-interf-design" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/interf-design/">接口设计规范</a>
+    </h1>
+  
+
+        <a href="/2016/04/interf-design/" class="archive-article-date">
+  	<time datetime="2016-04-12T03:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>接口形式主要为 RESTful，但又不拘泥于 RESTful。</p>
+<p>一个完整的 API 请求过程包括：</p>
+<ol>
+<li>HTTP请求方式</li>
+<li>URL Endpoint</li>
+<li>请求数据</li>
+<li>响应结果</li>
+</ol>
+<p>下面分述之。</p>
+<h2 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><table>
+<thead>
+<tr>
+<th>HTTP Operation</th>
+<th>Similar to SQL Stmt</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>SELECT</td>
+<td>获取，查找</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>CREATE</td>
+<td>新增创建</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>UPDATE</td>
+<td>在服务器更新资源（客户端提供改变后的完整资源）</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>UPDATE</td>
+<td>在服务器部分更新资源（客户端提供改变的属性）</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>UPDATE</td>
+<td>删除</td>
+</tr>
+</tbody>
+</table>
+<h2 id="URL-Endpoint"><a href="#URL-Endpoint" class="headerlink" title="URL Endpoint"></a>URL Endpoint</h2><p>URI指向的是唯一的资源对象/资源集合列表。<br>统一所有的 endpoint 使用复数使得 URL 更加规整，让API使用者更加容易理解，对开发者来说也更容易实现。</p>
+<h3 id="URL-Endpoint-组成"><a href="#URL-Endpoint-组成" class="headerlink" title="URL Endpoint 组成"></a>URL Endpoint 组成</h3><p>一个完整的 URL Endpoint 依次是：</p>
+<ul>
+<li>网络协议(HTTP, HTTPS)</li>
+<li>服务器地址</li>
+<li>版本</li>
+<li>接口名称</li>
+<li>参数（可选）<ul>
+<li>GET 参数使用Query String 格式：如：查询时，过滤条件使用 Query String，如 <code>?offset=0&amp;limit=10&amp;sort=_created_at</code>；参数列表应该被 encode 过</li>
+<li>用来描述数据或者请求的元数据放Header中，例如 <code>X-Result-Fields</code></li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code>GET https://api.example.com/v1/users/123456/profiles
+</code></pre><p>说明：</p>
+<ul>
+<li>API 与用户的通信协议，总是使用 HTTPS 协议。</li>
+<li>尽量将API部署在专用域名之下：<code>api.example.com</code></li>
+<li>不使用大写字母；使用中线 <code>-</code> 代替下划线 <code>_</code> </li>
+<li>版本控制的另一种做法是，将版本号放在HTTP头信息中，但不如放入URL方便和直观</li>
+<li>一些常见的参数。<ul>
+<li><code>?limit=10</code>：指定返回记录的数量</li>
+<li><code>?offset=10</code>：指定返回记录的开始位置。</li>
+<li><code>?page=2&amp;per_page=100</code>：指定第几页，以及每页的记录数。</li>
+<li><code>?sortby=name&amp;order=asc</code>：指定返回结果按照哪个属性排序，以及排序顺序。</li>
+<li><code>?user_type_id=1</code>：指定筛选条件</li>
+</ul>
+</li>
+</ul>
+<h3 id="接口分类"><a href="#接口分类" class="headerlink" title="接口分类"></a>接口分类</h3><p>分为对资源对象的CURD操作，服务型接口和系统设置三种。</p>
+<h3 id="资源对象的CURD操作"><a href="#资源对象的CURD操作" class="headerlink" title="资源对象的CURD操作"></a>资源对象的CURD操作</h3><pre><code>GET https://~/$version/trades            获取trades列表  
+GET https://~/$version/trades/:id        根据id获取单个trade  
+POST https://~/$version/trades           创建trade  
+PUT https://~/$version/trades/:id        根据id更新trade  
+PATCH https://~/$version/trades/:id      根据id部分更新trade  
+DELETE https://~/$version/trades/:id     根据id删除trade  
+</code></pre><h3 id="服务型接口"><a href="#服务型接口" class="headerlink" title="服务型接口"></a>服务型接口</h3><p>使用 <code>services</code> 标识：</p>
+<pre><code>https://~/services/$version/server-name  
+</code></pre><p>示例：</p>
+<pre><code>GET https://~/services/$version/search?q=filter?category=file  搜索
+PUT https://~/services/$version/queued/jobs                    往任务队列里面添加一个新的任务  
+DELETE https://~/services/$version/queued/jobs/:id             根据id删除任务
+</code></pre><h3 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h3><p>使用 <code>settings</code> 标识：</p>
+<pre><code>https://~/settings/$version/server-name  
+</code></pre><p>如：更改界面语言环境</p>
+<pre><code>PUT https://~/settings/$version/gui/lang  
+{  
+    &quot;lang&quot;: &quot;zh-CN&quot;  
+}
+</code></pre><h2 id="请求数据"><a href="#请求数据" class="headerlink" title="请求数据"></a>请求数据</h2><p>使用 JSON 格式传输数据，在 http 请求头和响应头申明 <code>Content-Type</code>：</p>
+<pre><code>Request
+  Accept: application/json
+  Content-Type: application/json;charset=UTF-8
+{
+  &quot;name&quot;: &quot;user1&quot;,
+  &quot;location&quot;: &quot;Xiamen&quot;
+}
+</code></pre><h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><p>不使用 Envelope: 响应状态（成功/出错）包含在响应头中；返回的数据结构尽可能简单，不过于包装。</p>
+<h3 id="成功时格式"><a href="#成功时格式" class="headerlink" title="成功时格式"></a>成功时格式</h3><pre><code>Response
+  Content-Type: application/json;charset=UTF-8
+{
+  &quot;id&quot;: 101
+  &quot;name&quot; : &quot;user1&quot;,
+  &quot;location&quot; : &quot;Xiamen&quot;
+}
+</code></pre><h3 id="出错时处理"><a href="#出错时处理" class="headerlink" title="出错时处理"></a>出错时处理</h3><p>出错响应包括</p>
+<ol>
+<li>返回的错误信息</li>
+<li>状态码<br>两部分。</li>
+</ol>
+<h4 id="自定义异常和异常处理"><a href="#自定义异常和异常处理" class="headerlink" title="自定义异常和异常处理"></a>自定义异常和异常处理</h4><p>所有自定义异常继承 <code>RuntimeException</code>, 在业务层抛出, 在统一的 <code>ExceptionHandler</code> 中进行处理。</p>
+<h4 id="错误返回数据格式"><a href="#错误返回数据格式" class="headerlink" title="错误返回数据格式"></a>错误返回数据格式</h4><p>错误信息格式：</p>
+<pre><code>{
+    &quot;message&quot;: &quot;&lt;Prompt Title; required&gt;&quot;,
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;&lt;error code; required&gt;&quot;,
+            &quot;description&quot;: &quot;&lt;Prompt Message; required&gt;&quot;,
+            &quot;resource&quot;: &quot;&lt;optional&gt;&quot;,
+            &quot;field&quot;:&quot;&lt;optional&gt;&quot;,
+            &quot;document&quot;: &quot;&lt;optional&gt;&quot;
+        }
+    ]
+}
+</code></pre><p>其中：</p>
+<ol>
+<li>错误标题 <code>message</code>, 必填</li>
+<li>错误代码 <code>errors.code</code>, 必填</li>
+<li>错误展示信息 <code>errors.description</code>, 必填</li>
+<li>资源 <code>errors.resource</code>, 可选</li>
+<li>属性 <code>errors.field</code>, 可选</li>
+<li>文档地址 <code>errors.document</code>, 可选</li>
+</ol>
+<p>示例: 调用频率超过限制的 Response:</p>
+<pre><code>Headers:
+    Content-Type: application/json;charset=UTF-8
+    X-RateLimit-Limit: 3000
+    X-RateLimit-Reset: 1403162176516
+    X-RateLimit-Remaining: 0
+{
+    &quot;message&quot;: &quot;Something bad happened :-(&quot;,
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;rate_limit_exceeded&quot;,
+            &quot;description&quot;: &quot;Too Many Requests. API rate limit exceeded&quot;,
+            &quot;document&quot;: &quot;https://developer.github.com/v3/gists/&quot;
+        }
+    ]
+}
+</code></pre><h4 id="应用状态码"><a href="#应用状态码" class="headerlink" title="应用状态码"></a>应用状态码</h4><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>HTTP Operation</th>
+<th>Body Contents</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>GET,PUT</td>
+<td>资源</td>
+<td>操作成功</td>
+</tr>
+<tr>
+<td>201</td>
+<td>POST</td>
+<td>资源,元数据</td>
+<td>对象创建成功</td>
+</tr>
+<tr>
+<td>202</td>
+<td>POST,PUT,DELETE,PATCH</td>
+<td>N/A</td>
+<td>请求已经被接受</td>
+</tr>
+<tr>
+<td>204</td>
+<td>DELETE,PUT,PATCH</td>
+<td>N/A</td>
+<td>操作已经执行成功，但是没有返回数据</td>
+</tr>
+<tr>
+<td>301</td>
+<td>GET</td>
+<td>link</td>
+<td>资源已被移除</td>
+</tr>
+<tr>
+<td>303</td>
+<td>GET</td>
+<td>link</td>
+<td>重定向</td>
+</tr>
+<tr>
+<td>304</td>
+<td>GET</td>
+<td>N/A</td>
+<td>资源没有被修改</td>
+</tr>
+<tr>
+<td>400</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>参数列表错误(缺少，格式不匹配)</td>
+</tr>
+<tr>
+<td>401</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>未授权</td>
+</tr>
+<tr>
+<td>403</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>访问受限，授权过期</td>
+</tr>
+<tr>
+<td>404</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>资源，服务未找到</td>
+</tr>
+<tr>
+<td>405</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>不允许的http方法</td>
+</tr>
+<tr>
+<td>409</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>资源冲突，或者资源被锁定</td>
+</tr>
+<tr>
+<td>415</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>不支持的数据(媒体)类型</td>
+</tr>
+<tr>
+<td>429</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>请求过多被限制</td>
+</tr>
+<tr>
+<td>500</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>系统内部错误</td>
+</tr>
+<tr>
+<td>501</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>接口未实现</td>
+</tr>
+</tbody>
+</table>
+<h3 id="另一种常见形式是使用-Envelope："><a href="#另一种常见形式是使用-Envelope：" class="headerlink" title="另一种常见形式是使用 Envelope："></a>另一种常见形式是使用 Envelope：</h3><pre><code>{
+  &quot;status&quot;: { },
+  &quot;data&quot;: { }
+}
+</code></pre><p>出错时可仅有 <code>status</code> 而无 <code>data</code> 字段。</p>
+<p><em>本规范采用无 Envelope 的格式</em>。</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>RESTful API是无状态的也就是说用户请求的鉴权和 cookie 以及 session 无关，每一次请求都应该包含鉴权证明。</p>
+<p>RESTful 服务使用 Oauth2 的方式进行调用授权，使用 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" title="HTTP Header" target="_blank" rel="external">http 请求头</a><code>Authorization</code>设置授权码; 必须使用<code>User-Agent</code>设置客户端信息, 无<code>User-Agent</code>请求头的请求应该被拒绝访问。</p>
+<pre><code>Request Header
+
+User-Agent: Data-Server-Client
+Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
+</code></pre><p>说明：</p>
+<ul>
+<li>授权码要放在 Http Header 中，可避免重定向传递时可能发生的授权码泄漏；</li>
+<li>采用 JWT token。</li>
+</ul>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h2 id="聚合-API"><a href="#聚合-API" class="headerlink" title="聚合 API"></a>聚合 API</h2><p>把当前用户需要在第一时间内容加载的多个接口聚合成一个请求发送到服务端，服务端根据请求内容，一次性把所有数据合并返回。相比于页面级 API，具备更高的灵活性，同时又能很容易的实现页面级 API 的功能。</p>
+<p>地址：/$version/aggApi</p>
+<p>传入参数：</p>
+<pre><code>data:[
+  {url:&apos;api1&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api2&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api3&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api4&apos;,type:&apos;get&apos;,data:{...}}
+]
+</code></pre><p>返回数据：</p>
+<pre><code>{
+  status:0,
+  msg:&apos;&apos;,
+  data:[
+    {status:0,msg:&apos;&apos;,data:[]},
+    {status:-1,msg:&apos;&apos;,data:{}},
+    {status:1,msg:&apos;&apos;,data:{}},
+    {status:0,msg:&apos;&apos;,data:[]},
+  ]
+}
+</code></pre><h2 id="API-文档"><a href="#API-文档" class="headerlink" title="API 文档"></a>API 文档</h2><ul>
+<li><a href="https://github.com/thx/RAP" target="_blank" rel="external">阿里妈妈RAP</a></li>
+<li><a href="http://swagger.io" target="_blank" rel="external">Swagger</a></li>
+</ul>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ul>
+<li>使用ISO-8601格式表达时间字段，例如: <code>2014-04-05T14:30Z</code></li>
+<li>响应：使用 HTTP Header 时，优先使用合适的标准头属性。用 <code>X-</code> 作为前缀自定义一个头属性，例如: <code>X-Result-Fields</code>。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="http://en.wikipedia.org/wiki/HATEOAS" target="_blank" rel="external">HATEOAS</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank" rel="external">Best Practices for Designing a Pragmatic RESTful API | Vinay Sahni</a></li>
+<li><a href="http://arccode.net/2015/02/26/RESTful最佳实践/" target="_blank" rel="external">RESTful最佳实践 | Arccode’s blog</a></li>
+<li><a href="http://arccode.net/2015/04/18/前后端完全分离之API设计/" target="_blank" rel="external">前后端完全分离之API设计 | Arccode’s blog</a></li>
+<li><a href="https://developer.yahoo.com/social/rest_api_guide/http-response-codes.html" target="_blank" rel="external">HTTP Response Status Codes - YDN</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interface-design/">interface design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/restful/">restful</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/interf-design/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 foudingzh
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: false,
+		isArchive: false,
+		isTag: true,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">troubleshooting</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.quora.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Quora</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stackoverflow.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stackoverflow</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>github</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.zhihu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.jianshu.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>简书</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.oschina.net" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>开源中国</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.infoq.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>InfoQ</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Hello, I&#39;m Fouding based in Xiamen, China. &lt;br&gt;This is my blog about life, career and technologies.</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://foudingzheng.info">
-  <title>Archives | Fouding&#39;s Blog</title>
+  <title>Archives | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Fouding's Blog">
+<meta property="og:title" content="Fouding's Blog on Life, Career and Technologies">
 <meta property="og:url" content="http://foudingzheng.info/archives/page/2/index.html">
-<meta property="og:site_name" content="Fouding's Blog">
+<meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fouding's Blog">
+<meta name="twitter:title" content="Fouding's Blog on Life, Career and Technologies">
   
-    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -138,6 +138,213 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-nginx-modsecurity-installation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/nginx-modsecurity-installation/">CentOS 上 Nginx 安装 modSecurity 模块</a>
+    </h1>
+  
+
+        <a href="/2015/03/nginx-modsecurity-installation/" class="archive-article-date">
+  	<time datetime="2015-03-01T13:28:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-01</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Web应用防火墙-WAF"><a href="#Web应用防火墙-WAF" class="headerlink" title="Web应用防火墙 WAF"></a>Web应用防火墙 WAF</h2><p>Web应用防护系统（Web Application Firewall, 简称：WAF）代表了一类新兴的信息安全技术，用以解决诸如防火墙一类传统设备束手无策的Web应用安全问题。与传统防火墙不同，WAF工作在应用层，因此对Web应用防护具有先天的技术优势。基于对Web应用业务和逻辑的深刻理解，WAF对来自Web应用程序客户端的各类请求进行内容检测和验证，确保其安全性与合法性，对非法的请求予以实时阻断，从而对各类网站站点进行有效防护。 </p>
+<p>ModSecurity是一个入侵侦测与防护引擎，其目的是为增强Web应用程序的安全性和保护Web应用程序避免遭受来自已知与未知的攻击。</p>
+<h2 id="Nginx-安装-modSecurity-模块"><a href="#Nginx-安装-modSecurity-模块" class="headerlink" title="Nginx 安装 modSecurity 模块"></a>Nginx 安装 modSecurity 模块</h2><ol>
+<li>安装依赖</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su</div><div class="line"></div><div class="line">yum install -y gcc make automake autoconf libtool</div><div class="line">yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel</div></pre></td></tr></table></figure>
+<p>2. 编译 modSecurity</p>
+<p>首先到 modSecurity 官网上下载最新版并编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz</div><div class="line"></div><div class="line">tar -xvpzf modsecurity-2.9.0.tar.gz</div><div class="line"><span class="built_in">cd</span> modsecurity-2.9.0</div><div class="line"></div><div class="line">./autogen.sh</div><div class="line">./configure --enable-standalone-module</div><div class="line">make</div></pre></td></tr></table></figure>
+<p>会花1分钟左右的时间去编译。</p>
+<p>3. 将 modSecurity 模块打包进 nginx</p>
+<p>要从源码层级将 modSecurity 模块编译进 nginx。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">wget http://nginx.org/download/nginx-1.7.8.tar.gz</div><div class="line">tar -xvpzf nginx-1.7.8.tar.gz</div><div class="line"><span class="built_in">cd</span> nginx-1.7.8</div><div class="line">./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin</div></pre></td></tr></table></figure>
+<p>安装后，nginx 位于 <code>/usr/local/nginx/sbin/nginx</code>。</p>
+<p>4. 启用 modSecurity</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</div><div class="line">vi conf/nginx.conf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location / &#123;</div><div class="line">	ModSecurityEnabled on;</div><div class="line">	ModSecurityConfig modsecurity.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create am empty modsecurity.conf</span></div><div class="line">touch conf/modsecurity.conf</div><div class="line"><span class="comment"># test the conf file</span></div><div class="line">sudo ./nginx -t</div></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://baike.baidu.com/link?url=lxg5knLVTwZ2vbth76MM5aXtFCv16VOW6dNekXyqKtwRzwUs1qcUM6MrtrvjSCmWlenY0W6t_8a1iDhqqR9aba" target="_blank" rel="external">百度百科</a></li>
+<li><a href="http://www.nginxtips.com/how-to-install-mod_security-on-nginx/" target="_blank" rel="external">How to install Mod_Security on Nginx</a></li>
+</ul>
+<h2 id="nbsp"><a href="#nbsp" class="headerlink" title="&nbsp;"></a>&nbsp;</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/modSecurity/">modSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/waf/">waf</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/03/nginx-modsecurity-installation/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-linux-utilities" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/linux-utilities/">Linux Utilities</a>
+    </h1>
+  
+
+        <a href="/2015/03/linux-utilities/" class="archive-article-date">
+  	<time datetime="2015-03-01T09:08:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-01</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Content-Type: application/json&quot; -d &apos;&#123;&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;&#125;&apos; http://foo.com/api/login</div></pre></td></tr></table></figure></p>
+<p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
+<p>For windows, single quotes around json did not work and I ended up escaping double quotes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123; \&quot;key1\&quot;: \&quot;value1\&quot; &#125;&quot; http://foo.com/api/method</div></pre></td></tr></table></figure></p>
+<h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/">Troubleshooting: POST Data Cannot Be Read From HttpServletRequest</a>
+    </h1>
+  
+
+        <a href="/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/" class="archive-article-date">
+  	<time datetime="2015-02-13T07:24:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-02-13</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"goodsOrder"</span>, method = RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">goodsOrder</span><span class="params">(HttpServletRequest request, @RequestParam(value=<span class="string">"page"</span>, required=<span class="keyword">false</span>, defaultValue=<span class="string">"1"</span>)</span> <span class="keyword">int</span> page)</span></div><div class="line">	<span class="keyword">byte</span>[] postBytes = IOUtils.toByteArray(request.getInputStream());</div><div class="line">	</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此处，取到的 <code>postBytes</code> 总为空，而不是用户提交的数据。</p>
+<h2 id="原因及解决"><a href="#原因及解决" class="headerlink" title="原因及解决"></a>原因及解决</h2><p>使用 Spring <code>@RequestParam</code> 来注入参数时，Spring 会去读取 <code>HttpServletRequest request</code> 的值，而request.getInputStream() 只能读取一次，所以就造成第二次去读参数时，获取不到数据了。</p>
+<p>注意：<code>ServletRequest.getParameter()</code> 等方法也会隐式地读取请求数据，数据读取一次后得将其保存起来，因为不能再重新获取了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/">troubleshooting</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/tech/">tech</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
   
     <article id="post-nginx-conf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -518,207 +725,6 @@
 
 
   
-    <article id="post-Troubleshooting-SpringMVC-hang-on-startup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">Troubleshooting: SpringMVC Hang on Startup</a>
-    </h1>
-  
-
-        <a href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/" class="archive-article-date">
-  	<time datetime="2015-01-14T08:31:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-14</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p>The webapp hang at:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO: Initializing Spring root WebApplicationContext</div></pre></td></tr></table></figure></p>
-<p>when startup.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Enable logging for Spring in logback.xml to check the startup process:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logging/">logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/troubleshooting/">troubleshooting</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/tech/">tech</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-java-code-snippets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/java-code-snippets/">Java Code Snippets</a>
-    </h1>
-  
-
-        <a href="/2014/11/java-code-snippets/" class="archive-article-date">
-  	<time datetime="2014-11-07T06:19:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-07</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toHexString</span><span class="params">(<span class="keyword">byte</span>[] array)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> javax.xml.bind.DatatypeConverter.printHexBinary(array);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> * insert code as you would anywhere else</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
-<p>An Example from a java.awt.Event method javadoc:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;</div><div class="line"> *    int offmask = CTRL_DOWN_MASK;</div><div class="line"> *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) &#123;</div><div class="line"> *        ...</div><div class="line"> *    &#125;</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
-<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, K&gt; <span class="function">Map&lt;K, String&gt; <span class="title">getFieldDescriptions</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">	Map&lt;K, String&gt; map = <span class="keyword">new</span> HashMap&lt;K,String&gt;();</div><div class="line">	<span class="keyword">for</span> (Field f : clazz.getDeclaredFields()) &#123;</div><div class="line">		<span class="keyword">int</span> mod = f.getModifiers();</div><div class="line">		<span class="keyword">if</span> (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">				K fld = (K) f.get(<span class="keyword">null</span>);</div><div class="line">				</div><div class="line">				Integer st = <span class="keyword">null</span>;</div><div class="line">				<span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Integer) &#123;</div><div class="line">					st = (Integer) fld;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Short) &#123;</div><div class="line">					st = (<span class="keyword">int</span>) (<span class="keyword">short</span>) (Short) fld;</div><div class="line">				&#125;</div><div class="line">				map.put(fld, String.format(<span class="string">"0x%04X, %s"</span>, st&amp;<span class="number">0xFFFFFFFF</span>, f.getName()));</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">				<span class="comment">/* ignore */</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> map;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Check-if-AJAX-request"><a href="#Check-if-AJAX-request" class="headerlink" title="Check if AJAX request"></a>Check if AJAX request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isAjax</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"XMLHttpRequest"</span>.equalsIgnoreCase(request.getHeader(<span class="string">"X-Requested-With"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Check-if-POST-request"><a href="#Check-if-POST-request" class="headerlink" title="Check if POST request"></a>Check if POST request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPost</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"POST"</span>.equals(request.getMethod());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-web-root"><a href="#Get-web-root" class="headerlink" title="Get web root"></a>Get web root</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getWebRootPath</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> HttpUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath().split(<span class="string">"WEB-INF/"</span>)[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx"><a href="#Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx" class="headerlink" title="Get client ip, event if the server is behind a proxy server (e.g. nginx)"></a>Get client ip, event if the server is behind a proxy server (e.g. nginx)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span> </span>&#123;     </div><div class="line">	String ip = request.getHeader(<span class="string">"x-forwarded-for"</span>);     </div><div class="line">	<span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip))&#123;</div><div class="line">		ip = request.getHeader(<span class="string">"Proxy-Client-IP"</span>);     </div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>);</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getRemoteAddr();     </div><div class="line">	&#125;    </div><div class="line">	<span class="keyword">return</span> ip; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-all-net-interfaces’-IP"><a href="#Get-all-net-interfaces’-IP" class="headerlink" title="Get all net interfaces’ IP"></a>Get all net interfaces’ IP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">getAllLocalIPs</span><span class="params">()</span> </span>&#123;</div><div class="line">	List&lt;String&gt; ipLst = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		Enumeration&lt;NetworkInterface&gt; e = NetworkInterface.getNetworkInterfaces();</div><div class="line">		<span class="keyword">while</span> (e.hasMoreElements()) &#123;</div><div class="line">			NetworkInterface n = (NetworkInterface) e.nextElement();</div><div class="line">			Enumeration&lt;InetAddress&gt; ee = n.getInetAddresses();</div><div class="line">			<span class="keyword">while</span> (ee.hasMoreElements()) &#123;</div><div class="line">				InetAddress i = (InetAddress) ee.nextElement();</div><div class="line">				ipLst.add(i.getHostAddress());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">if</span> (ipLst.size() == <span class="number">0</span>) &#123;</div><div class="line">			ipLst.add(LOCALHOST);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ipLst;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Set-bits-of-a-long-variable"><a href="#Set-bits-of-a-long-variable" class="headerlink" title="Set bits of a long variable"></a>Set bits of a <code>long</code> variable</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">setBits</span><span class="params">(<span class="keyword">long</span> num, <span class="keyword">long</span> val, <span class="keyword">int</span> offset, <span class="keyword">int</span> len)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> shift = Long.SIZE-offset-len;</div><div class="line">	<span class="keyword">if</span> (len &gt; <span class="number">1</span> || val == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">long</span> ones = ((<span class="number">1L</span> &lt;&lt; len) - <span class="number">1</span>) &lt;&lt; shift; <span class="comment">//[] 1L</span></div><div class="line">		<span class="keyword">return</span> ((num &amp; ~ones) | (val &lt;&lt; shift));</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> (<span class="keyword">long</span>) (num | (<span class="number">1</span> &lt;&lt; shift));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-snippet/">code snippet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/tech/">tech</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/java-code-snippets/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-tomcat-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/tomcat-tips/">Tomcat Tips</a>
-    </h1>
-  
-
-        <a href="/2014/11/tomcat-tips/" class="archive-article-date">
-  	<time datetime="2014-11-03T09:25:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-03</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Some tips for Tomcat7.</p>
-<h2 id="Move-the-constant-lib-as-external-libs"><a href="#Move-the-constant-lib-as-external-libs" class="headerlink" title="Move the constant lib as external libs:"></a>Move the constant lib as external libs:</h2><ul>
-<li>Step 1: Copy the lib to somewhere else, e.g. <code>${catalina.home}/anyfish-lib</code></li>
-<li>Step 2: Eclipse: Properties for app &gt; Deployment Assembly &gt; Remove ‘Maven Dependencies’</li>
-<li>Step 3: Add following config in <tomcathome>/conf/context.xml: <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Loader</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.loader.VirtualWebappLoader"</span> <span class="attr">virtualClasspath</span>=<span class="string">"$&#123;catalina.home&#125;/anyfish-lib/*.jar"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</tomcathome></li>
-</ul>
-<p>So the final packaged .war file size is reduced dramatically!</p>
-<p>To achive Step 2 in maven, edit the pom.xml file:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>Note the <code>&lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;</code> config above (Don’t package the common spring, logging libaries etc into .war file; keep only mylib.jar).</p>
-<h2 id="Deploy-new-version-w-o-shutting-down-tomcat"><a href="#Deploy-new-version-w-o-shutting-down-tomcat" class="headerlink" title="Deploy new version w/o shutting down tomcat"></a>Deploy new version w/o shutting down tomcat</h2><p>To deploy a new version of webapp without shutting down tomcat, use parallel deployment in tomcat7, refer to <a href="/2014/09/parallel-deploy-script/">tomcat parallel deploy</a>.</p>
-<p>Note the <code>&lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;</code> config above.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/tech/">tech</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/tomcat-tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
@@ -788,7 +794,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,22 +830,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vagrant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">python</a>
               </li>
              
@@ -832,15 +842,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">shell</a>
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -852,7 +866,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -872,39 +902,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">web</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -916,6 +922,22 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">architecture</a>
               </li>
              
@@ -924,7 +946,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
+                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://foudingzheng.info">
-  <title>Category: mgmt | Fouding&#39;s Blog</title>
+  <title>Category: mgmt | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Fouding's Blog">
+<meta property="og:title" content="Fouding's Blog on Life, Career and Technologies">
 <meta property="og:url" content="http://foudingzheng.info/categories/mgmt/index.html">
-<meta property="og:site_name" content="Fouding's Blog">
+<meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fouding's Blog">
+<meta name="twitter:title" content="Fouding's Blog on Life, Career and Technologies">
   
-    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -139,6 +139,584 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-web-security" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/web-security/">Web 服务器与系统安全</a>
+    </h1>
+  
+
+        <a href="/2016/04/web-security/" class="archive-article-date">
+  	<time datetime="2016-04-28T13:30:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-28</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><ul>
+<li>最小的权限+最小的服务=最大的安全。保持简单，程序只实现指定的功能。坚持最小权限，把可能造成的危害降到最低。</li>
+<li>对操作者（IP）的所有操作默认不信任，采用白名单机制，只放行已知的操作。</li>
+<li>永远不要信任用户的输入。对所有的输入进行前台和后台两次检查。</li>
+<li>操作之前先备份。</li>
+<li>密码复杂度：长度至少8位，并包括数字、小写字母、大写字母和特殊符号4类中至少2类</li>
+</ul>
+<h2 id="安全范围"><a href="#安全范围" class="headerlink" title="安全范围"></a>安全范围</h2><ul>
+<li>操作系统安全加固</li>
+<li>Web 程序安全</li>
+<li>数据库安全</li>
+<li>接口安全</li>
+<li>其他系统服务安全</li>
+</ul>
+<h2 id="操作系统安全加固"><a href="#操作系统安全加固" class="headerlink" title="操作系统安全加固"></a>操作系统安全加固</h2><ul>
+<li>禁用不使用的用户</li>
+<li>关闭不必要的端口和服务</li>
+<li>禁止root直接远程登录</li>
+<li>防止一般网络攻击: 禁ping等</li>
+<li>其他。</li>
+</ul>
+<p>CentosOS 加固的教程不少。可参考：</p>
+<ul>
+<li><a href="https://wiki.centos.org/HowTos/OS_Protection" target="_blank" rel="external">HowTos/OS Protection - CentOS Wiki</a></li>
+<li><a href="http://mengphilip.blog.51cto.com/2243393/1630495" target="_blank" rel="external">CentOS 6 服务器简单安全配置 - 网站架构技术总结 - 51CTO技术博客</a></li>
+<li><a href="https://www.hikyle.me/archives/5/" target="_blank" rel="external">让 Linux 服务器更加安全的经验总结 - Kyle 笔记</a></li>
+<li><a href="http://www.javatang.com/archives/2012/02/28/4601581.html" target="_blank" rel="external">Java堂 » CentOS安装之后的系统安全配置</a></li>
+<li><a href="http://www.osyunwei.com/archives/754.html" target="_blank" rel="external">CentOS Linux服务器安全设置 | 系统运维</a></li>
+</ul>
+<h2 id="Web-程序安全"><a href="#Web-程序安全" class="headerlink" title="Web 程序安全"></a>Web 程序安全</h2><h3 id="常见名词解释"><a href="#常见名词解释" class="headerlink" title="常见名词解释"></a>常见名词解释</h3><ul>
+<li><p>浏览器安全<br>同源策略（Same Origin Policy）防止了跨域读写某些资源。<br>浏览器提供了浏览器沙箱，使进程在一个相对独立的空间运行，能在一定程度上保护浏览器安全。</p>
+</li>
+<li><p>跨站脚本攻击 XSS<br>跨站脚本攻击主要是注入到网站内容中，授权用户访问内容时执行一段恶意代码，从而获取用户的私密信息或者进行破坏。通常叫做XSS攻击，是针对动态网站的攻击。</p>
+</li>
+<li><p>跨站点请求伪造 CSRF<br>CSRF，指的是伪造出一个请求，诱使授权用户访问，以授权用户的身份去执行请求，从而达到对授权用户信息的读取、攻击等。</p>
+</li>
+<li><p>点击劫持<br>Click jacking，是指将恶意代码隐藏在看似无害的内容后者按钮之下，诱导用户访问的一种手段。</p>
+</li>
+</ul>
+<h3 id="常见攻击类型"><a href="#常见攻击类型" class="headerlink" title="常见攻击类型"></a>常见攻击类型</h3><ul>
+<li>SQL 注入</li>
+<li>跨站请求伪造攻击（CSRF）</li>
+<li>跨站脚本攻击（XSS）</li>
+<li>远程任意命令执行</li>
+<li>拒绝服务攻击（DoS）</li>
+<li>Cookie劫持</li>
+</ul>
+<h3 id="检查项"><a href="#检查项" class="headerlink" title="检查项"></a>检查项</h3><ul>
+<li>输入的数据没有进行有效的控制和验证</li>
+<li>防恶意注册: 可否用自动填表工具自动注册用户</li>
+<li>有无缺省的超级用户</li>
+<li>密码错误次数有无限制</li>
+<li>cookie 中或 隐藏变量中是否含有用户名\密码\userid 等关键信息</li>
+<li>通过 http 抓包的获取 http 请求信息包经改装后重现发送</li>
+<li>文件上传风险</li>
+<li>访问控制策略是否得当</li>
+<li>其他</li>
+</ul>
+<h2 id="数据库安全"><a href="#数据库安全" class="headerlink" title="数据库安全"></a>数据库安全</h2><ul>
+<li>用户：最小权限</li>
+<li>数据库中存在的密码应经过加密</li>
+<li>其他</li>
+</ul>
+<h2 id="接口安全"><a href="#接口安全" class="headerlink" title="接口安全"></a>接口安全</h2><ul>
+<li><h2 id="其他系统服务"><a href="#其他系统服务" class="headerlink" title="其他系统服务"></a>其他系统服务</h2></li>
+<li>redis</li>
+<li>tomcat</li>
+</ul>
+<h2 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h2><ul>
+<li>审计</li>
+<li>使用漏洞扫描工具、入侵检测系统等进行系统渗透测试。</li>
+<li>防火墙配置</li>
+<li>Web 程序防火墙（WAF）: modSecurity</li>
+</ul>
+<h2 id="日常维护项目"><a href="#日常维护项目" class="headerlink" title="日常维护项目"></a>日常维护项目</h2><ul>
+<li>定期做日志安全检查、审计</li>
+<li>及时给操作系统打补丁</li>
+<li>其他</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://segmentfault.com/a/1190000002532945" target="_blank" rel="external">通用 CentOS 6 服务器安全配置指南 - Sean’s Notes - SegmentFault</a><br><a href="http://www.androiddev.net/centos-close-ports/" target="_blank" rel="external">关闭不必要的端口和服务-CentOS | 码农日记</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/web-security/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-security-centos-harden" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/security-centos-harden/">CentOS 安全加固</a>
+    </h1>
+  
+
+        <a href="/2016/04/security-centos-harden/" class="archive-article-date">
+  	<time datetime="2016-04-26T03:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-26</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CentOS-加固"><a href="#CentOS-加固" class="headerlink" title="CentOS 加固"></a>CentOS 加固</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 用户名</span></div><div class="line">USR=ajhealth</div><div class="line"></div><div class="line"><span class="comment"># 密码：大小写、特殊字符、数字，大于8个字符</span></div><div class="line"></div><div class="line">authconfig --passalgo=sha512 --update</div><div class="line"></div><div class="line"><span class="comment">### 移除空闲时间大于15分钟的用户</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"readonly TMOUT=900"</span> &gt;&gt; /etc/profile.d/os-security.sh</div><div class="line"><span class="built_in">echo</span> <span class="string">"readonly HISTFILE"</span> &gt;&gt; /etc/profile.d/os-security.sh</div><div class="line">chmod +x /etc/profile.d/os-security.sh</div><div class="line"></div><div class="line"><span class="comment">### 禁用不使用的用户和组</span></div><div class="line">cp /etc/passwd&#123;,.bak&#125;</div><div class="line">sed -i <span class="string">"/^adm:x\|lp:x\|shutdown:x\|halt:x\|uucp:x\|operator:x\|games:x\|gopher:x\|ftp:x\|nfsnobody:x\|nfsnobody:x\|postfix:x/ s/^/# /"</span> /etc/passwd </div><div class="line"></div><div class="line">cp /etc/group&#123;,.dist&#125;</div><div class="line">sed -i <span class="string">"/adm:x\|lp:x\|uucp:x\|games:x\|gopher:x\|video:x\|dip:x\|ftp:x\|audio:x\|floppy:x\|postfix:x/ s/^/# /"</span> /etc/group</div><div class="line"></div><div class="line"><span class="comment">### 关闭不使用的服务</span></div><div class="line">chkconfig --list | grep <span class="string">'3:on'</span></div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">### 创建 sudo 用户</span></div><div class="line">visudo</div><div class="line"></div><div class="line"><span class="comment">### SSH安全设置</span></div><div class="line"></div><div class="line">cp /etc/ssh/sshd_config&#123;,.bak&#125;</div><div class="line">sed -i <span class="string">"s/PermitRootLogin yes/PermitRootLogin no/"</span> /etc/ssh/sshd_config <span class="comment"># 禁止root直接远程登录</span></div><div class="line">sed -i <span class="string">"/^#Port 22/a Port 11011"</span> /etc/ssh/sshd_config <span class="comment"># change port</span></div><div class="line">sed -i <span class="string">"/^#IgnoreRhosts/ s/^#//g"</span> /etc/ssh/sshd_config <span class="comment"># ignore Rhosts files</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"auth required pam_tally2.so deny=6 unlock_time=180 even_deny_root root_unlock_time=180"</span> &gt;&gt; /etc/pam.d/login <span class="comment"># 限制登录失败次数并锁定</span></div><div class="line"></div><div class="line"><span class="comment">#### 登录IP限制</span></div><div class="line"><span class="comment">##### 更严格的限制是在sshd_config中定死允许ssh的用户和来源ip：</span></div><div class="line"><span class="built_in">echo</span> AllowUsers <span class="variable">$USR</span>@10.116.44.24 &gt;&gt; /etc/ssh/sshd_config</div><div class="line"><span class="comment"># echo AllowUsers $USR@10.116.44.24 hadoop@10.116.44.24 hadoop@hadoop1 hadoop@10.116.43.165 &gt;&gt; /etc/ssh/sshd_config</span></div><div class="line">tail -2 /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment"># restart sshd:</span></div><div class="line">service sshd restart</div><div class="line"></div><div class="line">[</div><div class="line">	或者使用tcpwrapper:</div><div class="line">	vi /etc/hosts.allow</div><div class="line">	sshd:172.29.73.23</div><div class="line">	sshd:172.29.73.</div><div class="line"></div><div class="line">	vi /etc/hosts.deny</div><div class="line">	sshd:all</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment">#### 减少history命令记录</span></div><div class="line">sed -i <span class="string">"$ a \\</span></div><div class="line">if [ \"\$SHLVL\" = 1 ]; then\\</div><div class="line">  history -c\\</div><div class="line">fi</div><div class="line">" ~/.bash_logout</div><div class="line"></div><div class="line">sed -i <span class="string">"$ a \\</span></div><div class="line">if [ \"\$SHLVL\" = 1 ]; then\\</div><div class="line">  history -c\\</div><div class="line">fi</div><div class="line">" $(<span class="built_in">eval</span> <span class="built_in">echo</span> ~<span class="variable">$USER</span>)/.bash_logout</div><div class="line"></div><div class="line"><span class="comment">#### 禁ping</span></div><div class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</div><div class="line"><span class="built_in">echo</span> <span class="string">"echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all"</span> &gt;&gt; /etc/rc.d/rc.local</div><div class="line"></div><div class="line">%% --- ---</div><div class="line"></div><div class="line"><span class="comment">#### 增强特殊文件权限</span></div><div class="line"></div><div class="line">给下面的文件加上不可更改属性，从而防止非授权用户获得权限</div><div class="line">chattr +i /etc/passwd</div><div class="line">chattr +i /etc/shadow</div><div class="line">chattr +i /etc/group</div><div class="line">chattr +i /etc/gshadow</div><div class="line">chattr +i /etc/services <span class="comment">#给系统服务端口列表文件加锁，防止未经许可的删除或添加服务</span></div><div class="line">chattr +i /etc/pam.d/su</div><div class="line">chattr +i /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment">### 显示文件的属性</span></div><div class="line">lsattr /etc/passwd /etc/shadow /etc/services /etc/ssh/sshd_config</div><div class="line"><span class="comment">### 注意：执行以上 chattr 权限修改之后，就无法添加删除用户了。</span></div><div class="line"><span class="comment">### 如果再要添加删除用户，需要先取消上面的设置，等用户添加删除完成之后，再执行上面的操作，例如取消只读权限chattr -i /etc/passwd。（记得重新设置只读）</span></div><div class="line"></div><div class="line"><span class="comment">#### 配置只能使用密钥文件登录</span></div><div class="line">**注意：以普通账号操作，不是以root账号操作**</div><div class="line">ssh-keygen -t rsa -b 2048</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/root/.ssh/id_rsa):   //默认路径，回车</div><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):     //输入你的密钥短语，登录时使用</div><div class="line">Enter same passphrase again: </div><div class="line"></div><div class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</div><div class="line">chmod 600 ~/.ssh/authorized_keys</div><div class="line">cat ~/.ssh/id_rsa</div><div class="line"><span class="comment"># save the content to local, and then:</span></div><div class="line">rm ~/.ssh/id_rsa*</div><div class="line"></div><div class="line">sed -i <span class="string">"/#RSAAuthentication\|#PubkeyAuthentication\|#AuthorizedKeysFile/ s/^#//"</span> /etc/ssh/sshd_config </div><div class="line">sed -i <span class="string">"s/PasswordAuthentication yes/PasswordAuthentication no/"</span> /etc/ssh/sshd_config</div><div class="line"></div><div class="line"><span class="comment">### 防止IP欺骗</span></div><div class="line">cat &gt;&gt; /etc/host.conf &lt;&lt;EOF</div><div class="line">order hosts,<span class="built_in">bind</span></div><div class="line">multi on</div><div class="line">nospoof on</div><div class="line">EOF</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/security-centos-harden/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-interf-design" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/interf-design/">接口设计规范</a>
+    </h1>
+  
+
+        <a href="/2016/04/interf-design/" class="archive-article-date">
+  	<time datetime="2016-04-12T03:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>接口形式主要为 RESTful，但又不拘泥于 RESTful。</p>
+<p>一个完整的 API 请求过程包括：</p>
+<ol>
+<li>HTTP请求方式</li>
+<li>URL Endpoint</li>
+<li>请求数据</li>
+<li>响应结果</li>
+</ol>
+<p>下面分述之。</p>
+<h2 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><table>
+<thead>
+<tr>
+<th>HTTP Operation</th>
+<th>Similar to SQL Stmt</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>SELECT</td>
+<td>获取，查找</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>CREATE</td>
+<td>新增创建</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>UPDATE</td>
+<td>在服务器更新资源（客户端提供改变后的完整资源）</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>UPDATE</td>
+<td>在服务器部分更新资源（客户端提供改变的属性）</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>UPDATE</td>
+<td>删除</td>
+</tr>
+</tbody>
+</table>
+<h2 id="URL-Endpoint"><a href="#URL-Endpoint" class="headerlink" title="URL Endpoint"></a>URL Endpoint</h2><p>URI指向的是唯一的资源对象/资源集合列表。<br>统一所有的 endpoint 使用复数使得 URL 更加规整，让API使用者更加容易理解，对开发者来说也更容易实现。</p>
+<h3 id="URL-Endpoint-组成"><a href="#URL-Endpoint-组成" class="headerlink" title="URL Endpoint 组成"></a>URL Endpoint 组成</h3><p>一个完整的 URL Endpoint 依次是：</p>
+<ul>
+<li>网络协议(HTTP, HTTPS)</li>
+<li>服务器地址</li>
+<li>版本</li>
+<li>接口名称</li>
+<li>参数（可选）<ul>
+<li>GET 参数使用Query String 格式：如：查询时，过滤条件使用 Query String，如 <code>?offset=0&amp;limit=10&amp;sort=_created_at</code>；参数列表应该被 encode 过</li>
+<li>用来描述数据或者请求的元数据放Header中，例如 <code>X-Result-Fields</code></li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code>GET https://api.example.com/v1/users/123456/profiles
+</code></pre><p>说明：</p>
+<ul>
+<li>API 与用户的通信协议，总是使用 HTTPS 协议。</li>
+<li>尽量将API部署在专用域名之下：<code>api.example.com</code></li>
+<li>不使用大写字母；使用中线 <code>-</code> 代替下划线 <code>_</code> </li>
+<li>版本控制的另一种做法是，将版本号放在HTTP头信息中，但不如放入URL方便和直观</li>
+<li>一些常见的参数。<ul>
+<li><code>?limit=10</code>：指定返回记录的数量</li>
+<li><code>?offset=10</code>：指定返回记录的开始位置。</li>
+<li><code>?page=2&amp;per_page=100</code>：指定第几页，以及每页的记录数。</li>
+<li><code>?sortby=name&amp;order=asc</code>：指定返回结果按照哪个属性排序，以及排序顺序。</li>
+<li><code>?user_type_id=1</code>：指定筛选条件</li>
+</ul>
+</li>
+</ul>
+<h3 id="接口分类"><a href="#接口分类" class="headerlink" title="接口分类"></a>接口分类</h3><p>分为对资源对象的CURD操作，服务型接口和系统设置三种。</p>
+<h3 id="资源对象的CURD操作"><a href="#资源对象的CURD操作" class="headerlink" title="资源对象的CURD操作"></a>资源对象的CURD操作</h3><pre><code>GET https://~/$version/trades            获取trades列表  
+GET https://~/$version/trades/:id        根据id获取单个trade  
+POST https://~/$version/trades           创建trade  
+PUT https://~/$version/trades/:id        根据id更新trade  
+PATCH https://~/$version/trades/:id      根据id部分更新trade  
+DELETE https://~/$version/trades/:id     根据id删除trade  
+</code></pre><h3 id="服务型接口"><a href="#服务型接口" class="headerlink" title="服务型接口"></a>服务型接口</h3><p>使用 <code>services</code> 标识：</p>
+<pre><code>https://~/services/$version/server-name  
+</code></pre><p>示例：</p>
+<pre><code>GET https://~/services/$version/search?q=filter?category=file  搜索
+PUT https://~/services/$version/queued/jobs                    往任务队列里面添加一个新的任务  
+DELETE https://~/services/$version/queued/jobs/:id             根据id删除任务
+</code></pre><h3 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h3><p>使用 <code>settings</code> 标识：</p>
+<pre><code>https://~/settings/$version/server-name  
+</code></pre><p>如：更改界面语言环境</p>
+<pre><code>PUT https://~/settings/$version/gui/lang  
+{  
+    &quot;lang&quot;: &quot;zh-CN&quot;  
+}
+</code></pre><h2 id="请求数据"><a href="#请求数据" class="headerlink" title="请求数据"></a>请求数据</h2><p>使用 JSON 格式传输数据，在 http 请求头和响应头申明 <code>Content-Type</code>：</p>
+<pre><code>Request
+  Accept: application/json
+  Content-Type: application/json;charset=UTF-8
+{
+  &quot;name&quot;: &quot;user1&quot;,
+  &quot;location&quot;: &quot;Xiamen&quot;
+}
+</code></pre><h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><p>不使用 Envelope: 响应状态（成功/出错）包含在响应头中；返回的数据结构尽可能简单，不过于包装。</p>
+<h3 id="成功时格式"><a href="#成功时格式" class="headerlink" title="成功时格式"></a>成功时格式</h3><pre><code>Response
+  Content-Type: application/json;charset=UTF-8
+{
+  &quot;id&quot;: 101
+  &quot;name&quot; : &quot;user1&quot;,
+  &quot;location&quot; : &quot;Xiamen&quot;
+}
+</code></pre><h3 id="出错时处理"><a href="#出错时处理" class="headerlink" title="出错时处理"></a>出错时处理</h3><p>出错响应包括</p>
+<ol>
+<li>返回的错误信息</li>
+<li>状态码<br>两部分。</li>
+</ol>
+<h4 id="自定义异常和异常处理"><a href="#自定义异常和异常处理" class="headerlink" title="自定义异常和异常处理"></a>自定义异常和异常处理</h4><p>所有自定义异常继承 <code>RuntimeException</code>, 在业务层抛出, 在统一的 <code>ExceptionHandler</code> 中进行处理。</p>
+<h4 id="错误返回数据格式"><a href="#错误返回数据格式" class="headerlink" title="错误返回数据格式"></a>错误返回数据格式</h4><p>错误信息格式：</p>
+<pre><code>{
+    &quot;message&quot;: &quot;&lt;Prompt Title; required&gt;&quot;,
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;&lt;error code; required&gt;&quot;,
+            &quot;description&quot;: &quot;&lt;Prompt Message; required&gt;&quot;,
+            &quot;resource&quot;: &quot;&lt;optional&gt;&quot;,
+            &quot;field&quot;:&quot;&lt;optional&gt;&quot;,
+            &quot;document&quot;: &quot;&lt;optional&gt;&quot;
+        }
+    ]
+}
+</code></pre><p>其中：</p>
+<ol>
+<li>错误标题 <code>message</code>, 必填</li>
+<li>错误代码 <code>errors.code</code>, 必填</li>
+<li>错误展示信息 <code>errors.description</code>, 必填</li>
+<li>资源 <code>errors.resource</code>, 可选</li>
+<li>属性 <code>errors.field</code>, 可选</li>
+<li>文档地址 <code>errors.document</code>, 可选</li>
+</ol>
+<p>示例: 调用频率超过限制的 Response:</p>
+<pre><code>Headers:
+    Content-Type: application/json;charset=UTF-8
+    X-RateLimit-Limit: 3000
+    X-RateLimit-Reset: 1403162176516
+    X-RateLimit-Remaining: 0
+{
+    &quot;message&quot;: &quot;Something bad happened :-(&quot;,
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;rate_limit_exceeded&quot;,
+            &quot;description&quot;: &quot;Too Many Requests. API rate limit exceeded&quot;,
+            &quot;document&quot;: &quot;https://developer.github.com/v3/gists/&quot;
+        }
+    ]
+}
+</code></pre><h4 id="应用状态码"><a href="#应用状态码" class="headerlink" title="应用状态码"></a>应用状态码</h4><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>HTTP Operation</th>
+<th>Body Contents</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>GET,PUT</td>
+<td>资源</td>
+<td>操作成功</td>
+</tr>
+<tr>
+<td>201</td>
+<td>POST</td>
+<td>资源,元数据</td>
+<td>对象创建成功</td>
+</tr>
+<tr>
+<td>202</td>
+<td>POST,PUT,DELETE,PATCH</td>
+<td>N/A</td>
+<td>请求已经被接受</td>
+</tr>
+<tr>
+<td>204</td>
+<td>DELETE,PUT,PATCH</td>
+<td>N/A</td>
+<td>操作已经执行成功，但是没有返回数据</td>
+</tr>
+<tr>
+<td>301</td>
+<td>GET</td>
+<td>link</td>
+<td>资源已被移除</td>
+</tr>
+<tr>
+<td>303</td>
+<td>GET</td>
+<td>link</td>
+<td>重定向</td>
+</tr>
+<tr>
+<td>304</td>
+<td>GET</td>
+<td>N/A</td>
+<td>资源没有被修改</td>
+</tr>
+<tr>
+<td>400</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>参数列表错误(缺少，格式不匹配)</td>
+</tr>
+<tr>
+<td>401</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>未授权</td>
+</tr>
+<tr>
+<td>403</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>访问受限，授权过期</td>
+</tr>
+<tr>
+<td>404</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>资源，服务未找到</td>
+</tr>
+<tr>
+<td>405</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>不允许的http方法</td>
+</tr>
+<tr>
+<td>409</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>资源冲突，或者资源被锁定</td>
+</tr>
+<tr>
+<td>415</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>不支持的数据(媒体)类型</td>
+</tr>
+<tr>
+<td>429</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>请求过多被限制</td>
+</tr>
+<tr>
+<td>500</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>系统内部错误</td>
+</tr>
+<tr>
+<td>501</td>
+<td>GET,PSOT,PUT,DELETE,PATCH</td>
+<td>错误提示(消息)</td>
+<td>接口未实现</td>
+</tr>
+</tbody>
+</table>
+<h3 id="另一种常见形式是使用-Envelope："><a href="#另一种常见形式是使用-Envelope：" class="headerlink" title="另一种常见形式是使用 Envelope："></a>另一种常见形式是使用 Envelope：</h3><pre><code>{
+  &quot;status&quot;: { },
+  &quot;data&quot;: { }
+}
+</code></pre><p>出错时可仅有 <code>status</code> 而无 <code>data</code> 字段。</p>
+<p><em>本规范采用无 Envelope 的格式</em>。</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>RESTful API是无状态的也就是说用户请求的鉴权和 cookie 以及 session 无关，每一次请求都应该包含鉴权证明。</p>
+<p>RESTful 服务使用 Oauth2 的方式进行调用授权，使用 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" title="HTTP Header" target="_blank" rel="external">http 请求头</a><code>Authorization</code>设置授权码; 必须使用<code>User-Agent</code>设置客户端信息, 无<code>User-Agent</code>请求头的请求应该被拒绝访问。</p>
+<pre><code>Request Header
+
+User-Agent: Data-Server-Client
+Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
+</code></pre><p>说明：</p>
+<ul>
+<li>授权码要放在 Http Header 中，可避免重定向传递时可能发生的授权码泄漏；</li>
+<li>采用 JWT token。</li>
+</ul>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h2 id="聚合-API"><a href="#聚合-API" class="headerlink" title="聚合 API"></a>聚合 API</h2><p>把当前用户需要在第一时间内容加载的多个接口聚合成一个请求发送到服务端，服务端根据请求内容，一次性把所有数据合并返回。相比于页面级 API，具备更高的灵活性，同时又能很容易的实现页面级 API 的功能。</p>
+<p>地址：/$version/aggApi</p>
+<p>传入参数：</p>
+<pre><code>data:[
+  {url:&apos;api1&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api2&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api3&apos;,type:&apos;get&apos;,data:{...}},
+  {url:&apos;api4&apos;,type:&apos;get&apos;,data:{...}}
+]
+</code></pre><p>返回数据：</p>
+<pre><code>{
+  status:0,
+  msg:&apos;&apos;,
+  data:[
+    {status:0,msg:&apos;&apos;,data:[]},
+    {status:-1,msg:&apos;&apos;,data:{}},
+    {status:1,msg:&apos;&apos;,data:{}},
+    {status:0,msg:&apos;&apos;,data:[]},
+  ]
+}
+</code></pre><h2 id="API-文档"><a href="#API-文档" class="headerlink" title="API 文档"></a>API 文档</h2><ul>
+<li><a href="https://github.com/thx/RAP" target="_blank" rel="external">阿里妈妈RAP</a></li>
+<li><a href="http://swagger.io" target="_blank" rel="external">Swagger</a></li>
+</ul>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ul>
+<li>使用ISO-8601格式表达时间字段，例如: <code>2014-04-05T14:30Z</code></li>
+<li>响应：使用 HTTP Header 时，优先使用合适的标准头属性。用 <code>X-</code> 作为前缀自定义一个头属性，例如: <code>X-Result-Fields</code>。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="http://en.wikipedia.org/wiki/HATEOAS" target="_blank" rel="external">HATEOAS</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank" rel="external">Best Practices for Designing a Pragmatic RESTful API | Vinay Sahni</a></li>
+<li><a href="http://arccode.net/2015/02/26/RESTful最佳实践/" target="_blank" rel="external">RESTful最佳实践 | Arccode’s blog</a></li>
+<li><a href="http://arccode.net/2015/04/18/前后端完全分离之API设计/" target="_blank" rel="external">前后端完全分离之API设计 | Arccode’s blog</a></li>
+<li><a href="https://developer.yahoo.com/social/rest_api_guide/http-response-codes.html" target="_blank" rel="external">HTTP Response Status Codes - YDN</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interface-design/">interface design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/restful/">restful</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/interf-design/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-pm-summary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -157,15 +735,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>创业公司研发部较少有纯管理性的职位，一般要身兼核心模块框架开发和团队管理的职责。这就要求负责人有较深的技术背景，上马能写核心模块，下马能指导成员遇到的遇到难题，建立起技术上的威信；管理上刚柔并济，让人心服。</p>
-<p>在创业公司负责了几年的技术研发和管理，有自己的一点小心得，会陆续放在博客上来。</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Infosys 学到的要点： <em>methodologies</em>, <em>process</em>, <em>code standard/checklist</em>。</p>
-<p>先说说贯穿于整个工作中的“团队建设”、“任务排期”、“文档协作”和“绩效考核”。</p>
+        <p>在创业公司负责了几年的技术研发和管理，有自己的一点小心得，会陆续放在博客上来。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Infosys 学到的要点： <em>Methodologies</em>, <em>Process</em>, <em>Code Standard/Guideline/Best Practices</em>, “Checklist”。</p>
+<p>创业公司研发部较少有纯管理性的职位，一般要身兼核心模块框架开发和团队管理的职责。这就要求负责人有较深的技术背景，上马能写核心模块，下马能指导成员遇到的遇到难题，建立起技术上的威信；管理上刚柔并济，让人心服。</p>
+<p>创业公司，最大的不变就是变化。公司到处都不完善，而不完善的地方即是机会。做好这个心理准备，将成长得更快。</p>
+<p>先说说贯穿于整个工作中的“团队建设”、“开会”、“任务排期”、“文档协作”和“绩效考核”。</p>
 <h3 id="团队建设"><a href="#团队建设" class="headerlink" title="团队建设"></a>团队建设</h3><p>公司，尤其是创业公司，最重要的是人，包括市场部人员、研发部人员和后勤人员等。<br>要保持团队，尤其是核心成员的稳定性，不仅在待遇上处于业界中上水平，还须在团队氛围和技能提升上让成员觉得这是一个好的队伍，值得一起共事。</p>
 <p>定位：服务于研发团队，给一线团队创造一个良好的工作环境。在内，创造令人愉快的环境和氛围；公司内，协调好与市场、后勤等其他部门的关系，包括为团队向公司争取应得的利益。</p>
 <ul>
 <li>团队氛围：开放、互助</li>
 <li>技术提升：构建内部的技术 wiki 并建立技术分享机制</li>
+<li>定期的信息共享：让大家知道公司市场、运营情况；知道彼此在做什么，遇到了什么问题。</li>
 <li>管理能力提升，同时建立起人才梯队</li>
 <li>团队活动<ul>
 <li>饭后大家一起散步聊天（是真的散步-_-），是很好的方式</li>
@@ -175,7 +755,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="任务排期"><a href="#任务排期" class="headerlink" title="任务排期"></a>任务排期</h3><p>排期：预估开发周期，制定项目开发进度，分解任务，分配任务。</p>
+<h3 id="开会"><a href="#开会" class="headerlink" title="开会"></a>开会</h3><p>每次开会前需要会议 Owner 准备议题，并将相关文档发送给参会者熟悉；开会一定要形成决议，会后要有可执行的 Action 和任务分配到相关人员。</p>
+<h3 id="任务排期与跟踪"><a href="#任务排期与跟踪" class="headerlink" title="任务排期与跟踪"></a>任务排期与跟踪</h3><p>排期：预估开发周期，制定项目开发进度，分解任务，分配任务。<br>执行任务过程中，每天/两天应有进度跟踪。如果使用项目管理软件（如 Worktile 或 Kanboard），成员应及时更新状态。</p>
 <ul>
 <li>方法：WBS</li>
 <li>工具：看板模式，如 Worktile；</li>
@@ -185,13 +766,14 @@
 </ul>
 <h3 id="文档协作"><a href="#文档协作" class="headerlink" title="文档协作"></a>文档协作</h3><p>创业公司不会按传统的研发流程按步就班地进行，更多强调的是快速开发。不仅非研发人员（老板，市场部等）不关注研发过程中的文档，连研发人员也很多对文档写作有排斥心理，认为写好代码，程序能跑就好了。<br>的确，传统方式中的文档太多了，而且写了以后也不一定有人去看。<br>但敏捷开发强调的是快速试错、快速迭代，而非简单粗暴，<em>对比传统开发模型虽然并不强调文档，但并不代表不需要</em>。对于一个项目，从开始就需要需求文档、产品原型文档、项目进度文档等等，而到了研发这一步，在系统实现、写代码之前最好的就是先”想”再做，而”想”的一种比较好的输出形式就是文档。对于一个软件系统，一般来说需要写的文档有以下几种：</p>
 <ul>
-<li>系统业务流程文档：描述系统业务逻辑的文档，能清晰的说明真个业务的流程。</li>
+<li>系统业务流程文档：描述系统业务逻辑的文档，能清晰的说明整个业务的流程。</li>
 <li>系统架构设计文档：对整个系统的架构的描述，需要包含系统的各个关键组成模块以及相关的各个关键技术点等。</li>
 <li>系统功能模块概要设计/详细设计文档：对于某一个模块的流程、逻辑的描述。</li>
 <li>数据DDL/DML文档: 与系统相关的数据库的DDL和DML文档，对于前者，是需要包含所有的操作的，而对于后者，必不可少的是查询语句，用来提供给DBA，来做查询sql的review，以保证索引的正确建立和查询语句的合理等。</li>
 <li>系统部署文档：描述系统关键部分部署在哪里，需要做哪些配置。</li>
 <li>系统发布ChangeLog：对系统每次发布的改动进行描述，包括数据库、缓存、数据队列、新增/变动了哪些依赖服务等。此外，对数据库、缓存这种关键服务的量化分析也可以写在这里。</li>
 </ul>
+<p>文档选择的基本原则是：既不流于形式，又能保证研发过程的一致性和可维护性，减少不必更多的返工。</p>
 <p>使用的工具可以是 WORD, Markdown 或在线协作工具。我推崇的格式是 markdown，比 WORD 文档更适合团队协作和版本追踪。Markdown 工具很多，可用 <a href="http://pad.haroopress.com" target="_blank" rel="external">haroopad</a>, <a href="https://pandao.github.io/editor.md" target="_blank" rel="external">pandao editor</a> 等</p>
 <p>文档的范例可参见<a href="https://github.com/superhj1987/awesome-tech-collections/tree/master/document" target="_blank" rel="external">这里</a>。</p>
 <h3 id="绩效考核"><a href="#绩效考核" class="headerlink" title="绩效考核"></a>绩效考核</h3><ul>
@@ -206,8 +788,8 @@
 <li>工具：纸笔，<a href="https://modao.cc" target="_blank" rel="external">墨刀</a></li>
 </ul>
 <h3 id="Design-设计及文档产出"><a href="#Design-设计及文档产出" class="headerlink" title="Design 设计及文档产出"></a>Design 设计及文档产出</h3><ul>
-<li>概要设计和详细设计。很多时候详细设计都省略了，但基本的概要设计还是要的，包括：<ul>
-<li>架构文档</li>
+<li>概要设计和详细设计。很多时候详细设计都省略了，但基本的概要设计还是要的。文档中包括：<ul>
+<li>架构文档：建立系统总体结构，划分功能模块</li>
 <li>流程交互图<br>UML工具：<a href="http://staruml.io" target="_blank" rel="external">StarUML</a>, <a href="http://www.processon.com" target="_blank" rel="external">ProcessOn</a></li>
 </ul>
 </li>
@@ -228,12 +810,16 @@
 <li>Code Review 代码评审：每周一次的集体 Review</li>
 <li>测试</li>
 </ul>
-<h4 id="Tools-使用的工具"><a href="#Tools-使用的工具" class="headerlink" title="Tools 使用的工具"></a>Tools 使用的工具</h4><ul>
+<h4 id="Tools-使用的工具-资源"><a href="#Tools-使用的工具-资源" class="headerlink" title="Tools 使用的工具/资源"></a>Tools 使用的工具/资源</h4><ul>
+<li>项目管理：<a href="https://github.com/phacility/phabricator" target="_blank" rel="external">phabricator</a>： 可 code review，bug tracking，任务管理和知识整理等。</li>
 <li>svn/git, Intellij Idea/Eclipse</li>
-<li>前端框架：Vue 2.0</li>
-<li>后台管理程序模板<ul>
+<li>前端资源<ul>
+<li>SPA 框架：<a href="https://vuejs.org" target="_blank" rel="external">Vue 2.0</a></li>
+<li><a href="https://materializecss.com/" target="_blank" rel="external">Materializecss</a></li>
+<li><a href="https://github.com/JingwenTian/awesome-frontend" target="_blank" rel="external">GitHub - JingwenTian/awesome-frontend</a></li>
 <li><a href="https://github.com/puikinsh/gentelella" target="_blank" rel="external">puikinsh/gentelella: Free Bootstrap 3 Admin Template</a></li>
 <li><a href="https://github.com/almasaeed2010/AdminLTE" target="_blank" rel="external">almasaeed2010/AdminLTE: AdminLTE - Free Premium Admin control Panel Theme</a></li>
+<li>ubold</li>
 </ul>
 </li>
 <li>后端工具：<a href="http://projects.spring.io/spring-boot" target="_blank" rel="external">Spring Boot CLI</a></li>
@@ -257,7 +843,7 @@
 <li>移动端自动化测试工具</li>
 </ul>
 <h4 id="Bug-管理"><a href="#Bug-管理" class="headerlink" title="Bug 管理"></a>Bug 管理</h4><ul>
-<li>工具：使用的是 redmine. 官方安装较为繁琐，可使用 <a href="https://bitnami.com/stack/redmine" target="_blank" rel="external">bitnami redmine 安装包</a> 简易安装。</li>
+<li>工具：<a href="https://www.sogou.com/link?url=DSOYnZeCC_r5_Of3KQ8zavekzScFKIZH&amp;query=redmine" target="_blank" rel="external">redmine</a>. Redmine 官方安装较为繁琐，可使用 <a href="https://bitnami.com/stack/redmine" target="_blank" rel="external">bitnami redmine 安装包</a> 简易安装。</li>
 </ul>
 <h3 id="Go-Live-上线"><a href="#Go-Live-上线" class="headerlink" title="Go Live 上线"></a>Go Live 上线</h3><p>Release Checklist Document，包括数据库更改、最新运行包，部署时间与方式，注意点，验证检查项等等。</p>
 <h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><ul>
@@ -285,10 +871,12 @@
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>对未建立或未完善完整技术团队和体系的公司来说：</p>
 <ul>
 <li>组建核心技术团队。招聘到合适的人是件费时费心的事儿，团队磨合也是一个长期的过程。</li>
-<li>统一技术规范、工具链</li>
+<li>研发基础设施：统一技术规范、工具链</li>
 <li>搭建开发/测试/预发布/生产各环境：svn/git repo; maven/gradle repo; redmine；Jenkins</li>
 </ul>
-<p>另外，这些是比较理想的流程，但创业公司因为时间、成本的原因，省去了很多流程，还有很多例外的情况，如开发倒逼需求，需求倒逼设计，不一而足，这要依实际情况调整了。这也是管理与开发的一大不同：对于机器，确定性、可预测性，而对于人性，则有更大的灵活性。但看着一个初步的 idea 在自己团队的努力下，变成一个可触及的产品，还是很有成就感的。</p>
+<p>对于创业公司来说，需要建立一些必要的流程和制度。但流程这个东西必然需要经过试行，然后持续改进。</p>
+<p>因此在初期就幻想建立一套完善的流程和制度是不切实际的。 资源和人力匮乏的情况下，一切以业务和产品优先。在过程中改进，只建立必要的流程和制度就行了。</p>
+<p>所以，这些只是比较理想的流程，创业公司会因为时间、成本的原因，省去了很多流程，另外还有很多例外的情况，如开发倒逼需求，需求倒逼设计，不一而足，这要依实际情况调整了。这也是管理与开发的一大不同：对于机器，确定性、可预测性，而对于人性，则有更大的灵活性。但看着一个初步的 idea 在自己团队和整个公司的努力下，变成一个可触及的产品，还是很有成就感的。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/24219376" target="_blank" rel="external">目标驱动的技术管理 - 软件工程师的自我修养 - 知乎专栏</a></li>
 <li><a href="http://www.rowkey.me/blog/2016/08/17/dev-manage" target="_blank" rel="external">研发体系这点事 - 后端技术杂谈 | 飒然Hang</a></li>
@@ -304,7 +892,7 @@
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev-phases/">dev phases</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mgmt/">mgmt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolchain/">toolchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolset/">toolset</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev-phases/">dev phases</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mgmt/">mgmt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolchain/">toolchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolset/">toolset</a></li></ul>
 	</div>
 
       
@@ -490,7 +1078,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vagrant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,22 +1114,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vagrant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">python</a>
               </li>
              
@@ -534,15 +1126,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">shell</a>
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,7 +1150,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,39 +1186,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">web</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,6 +1206,22 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">architecture</a>
               </li>
              
@@ -626,7 +1230,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
+                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>
