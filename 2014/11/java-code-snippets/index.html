@@ -8,24 +8,36 @@
   <link rel="dns-prefetch" href="http://foudingzheng.info">
   <title>Java Code Snippets | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Byte array to hex string123public static String toHexString(byte[] array) &amp;#123;    return javax.xml.bind.DatatypeConverter.printHexBinary(array);&amp;#125;
-Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
+  <meta name="description" content="Byte array to hex string    public static String toHexString(byte[] array) {
+        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
+    }
+
+Code in comments    /**
+     * &amp;lt;PRE&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Code Snippets">
 <meta property="og:url" content="http://foudingzheng.info/2014/11/java-code-snippets/index.html">
 <meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
-<meta property="og:description" content="Byte array to hex string123public static String toHexString(byte[] array) &amp;#123;    return javax.xml.bind.DatatypeConverter.printHexBinary(array);&amp;#125;
-Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
-<meta property="og:updated_time" content="2015-03-09T08:36:52.000Z">
+<meta property="og:description" content="Byte array to hex string    public static String toHexString(byte[] array) {
+        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
+    }
+
+Code in comments    /**
+     * &amp;lt;PRE&amp;gt;">
+<meta property="og:updated_time" content="2016-12-15T03:15:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Code Snippets">
-<meta name="twitter:description" content="Byte array to hex string123public static String toHexString(byte[] array) &amp;#123;    return javax.xml.bind.DatatypeConverter.printHexBinary(array);&amp;#125;
-Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
+<meta name="twitter:description" content="Byte array to hex string    public static String toHexString(byte[] array) {
+        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
+    }
+
+Code in comments    /**
+     * &amp;lt;PRE&amp;gt;">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -162,17 +174,108 @@ Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toHexString</span><span class="params">(<span class="keyword">byte</span>[] array)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> javax.xml.bind.DatatypeConverter.printHexBinary(array);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> * insert code as you would anywhere else</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
+        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><pre><code class="java">    public static String toHexString(byte[] array) {
+        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
+    }
+</code></pre>
+<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><pre><code class="java">    /**
+     * &lt;PRE&gt;
+     * insert code as you would anywhere else
+     * &lt;/PRE&gt;
+     */
+</code></pre>
 <p>An Example from a java.awt.Event method javadoc:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &lt;PRE&gt;</div><div class="line"> *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;</div><div class="line"> *    int offmask = CTRL_DOWN_MASK;</div><div class="line"> *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) &#123;</div><div class="line"> *        ...</div><div class="line"> *    &#125;</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
-<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, K&gt; <span class="function">Map&lt;K, String&gt; <span class="title">getFieldDescriptions</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">	Map&lt;K, String&gt; map = <span class="keyword">new</span> HashMap&lt;K,String&gt;();</div><div class="line">	<span class="keyword">for</span> (Field f : clazz.getDeclaredFields()) &#123;</div><div class="line">		<span class="keyword">int</span> mod = f.getModifiers();</div><div class="line">		<span class="keyword">if</span> (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">				K fld = (K) f.get(<span class="keyword">null</span>);</div><div class="line">				</div><div class="line">				Integer st = <span class="keyword">null</span>;</div><div class="line">				<span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Integer) &#123;</div><div class="line">					st = (Integer) fld;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Short) &#123;</div><div class="line">					st = (<span class="keyword">int</span>) (<span class="keyword">short</span>) (Short) fld;</div><div class="line">				&#125;</div><div class="line">				map.put(fld, String.format(<span class="string">"0x%04X, %s"</span>, st&amp;<span class="number">0xFFFFFFFF</span>, f.getName()));</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">				<span class="comment">/* ignore */</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> map;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Check-if-AJAX-request"><a href="#Check-if-AJAX-request" class="headerlink" title="Check if AJAX request"></a>Check if AJAX request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isAjax</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"XMLHttpRequest"</span>.equalsIgnoreCase(request.getHeader(<span class="string">"X-Requested-With"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Check-if-POST-request"><a href="#Check-if-POST-request" class="headerlink" title="Check if POST request"></a>Check if POST request</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPost</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"POST"</span>.equals(request.getMethod());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-web-root"><a href="#Get-web-root" class="headerlink" title="Get web root"></a>Get web root</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getWebRootPath</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> HttpUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath().split(<span class="string">"WEB-INF/"</span>)[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx"><a href="#Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx" class="headerlink" title="Get client ip, event if the server is behind a proxy server (e.g. nginx)"></a>Get client ip, event if the server is behind a proxy server (e.g. nginx)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span> </span>&#123;     </div><div class="line">	String ip = request.getHeader(<span class="string">"x-forwarded-for"</span>);     </div><div class="line">	<span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip))&#123;</div><div class="line">		ip = request.getHeader(<span class="string">"Proxy-Client-IP"</span>);     </div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>);</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</div><div class="line">		ip = request.getRemoteAddr();     </div><div class="line">	&#125;    </div><div class="line">	<span class="keyword">return</span> ip; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Get-all-net-interfaces’-IP"><a href="#Get-all-net-interfaces’-IP" class="headerlink" title="Get all net interfaces’ IP"></a>Get all net interfaces’ IP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">getAllLocalIPs</span><span class="params">()</span> </span>&#123;</div><div class="line">	List&lt;String&gt; ipLst = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		Enumeration&lt;NetworkInterface&gt; e = NetworkInterface.getNetworkInterfaces();</div><div class="line">		<span class="keyword">while</span> (e.hasMoreElements()) &#123;</div><div class="line">			NetworkInterface n = (NetworkInterface) e.nextElement();</div><div class="line">			Enumeration&lt;InetAddress&gt; ee = n.getInetAddresses();</div><div class="line">			<span class="keyword">while</span> (ee.hasMoreElements()) &#123;</div><div class="line">				InetAddress i = (InetAddress) ee.nextElement();</div><div class="line">				ipLst.add(i.getHostAddress());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">if</span> (ipLst.size() == <span class="number">0</span>) &#123;</div><div class="line">			ipLst.add(LOCALHOST);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ipLst;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Set-bits-of-a-long-variable"><a href="#Set-bits-of-a-long-variable" class="headerlink" title="Set bits of a long variable"></a>Set bits of a <code>long</code> variable</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">setBits</span><span class="params">(<span class="keyword">long</span> num, <span class="keyword">long</span> val, <span class="keyword">int</span> offset, <span class="keyword">int</span> len)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> shift = Long.SIZE-offset-len;</div><div class="line">	<span class="keyword">if</span> (len &gt; <span class="number">1</span> || val == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">long</span> ones = ((<span class="number">1L</span> &lt;&lt; len) - <span class="number">1</span>) &lt;&lt; shift; <span class="comment">//[] 1L</span></div><div class="line">		<span class="keyword">return</span> ((num &amp; ~ones) | (val &lt;&lt; shift));</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> (<span class="keyword">long</span>) (num | (<span class="number">1</span> &lt;&lt; shift));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">    /**
+     * &lt;PRE&gt;
+     *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;
+     *    int offmask = CTRL_DOWN_MASK;
+     *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) {
+     *        ...
+     *    }
+     * &lt;/PRE&gt;
+     */
+</code></pre>
+<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><pre><code class="java">    public static &lt;T, K&gt; Map&lt;K, String&gt; getFieldDescriptions(Class&lt;T&gt; clazz) {
+        Map&lt;K, String&gt; map = new HashMap&lt;K,String&gt;();
+        for (Field f : clazz.getDeclaredFields()) {
+            int mod = f.getModifiers();
+            if (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) {
+                try {
+                    @SuppressWarnings(&quot;unchecked&quot;)
+                    K fld = (K) f.get(null);
+
+                    Integer st = null;
+                    if (fld instanceof Integer) {
+                        st = (Integer) fld;
+                    } else if (fld instanceof Short) {
+                        st = (int) (short) (Short) fld;
+                    }
+                    map.put(fld, String.format(&quot;0x%04X, %s&quot;, st&amp;0xFFFFFFFF, f.getName()));
+                } catch (Exception ex) {
+                    /* ignore */
+                }
+            }
+        }
+
+        return map;
+    }
+</code></pre>
+<a id="more"></a>
+<h3 id="Check-if-AJAX-request"><a href="#Check-if-AJAX-request" class="headerlink" title="Check if AJAX request"></a>Check if AJAX request</h3><pre><code class="java">    public static boolean isAjax(HttpServletRequest request) {
+        return &quot;XMLHttpRequest&quot;.equalsIgnoreCase(request.getHeader(&quot;X-Requested-With&quot;));
+    }
+</code></pre>
+<h3 id="Check-if-POST-request"><a href="#Check-if-POST-request" class="headerlink" title="Check if POST request"></a>Check if POST request</h3><pre><code class="java">    public static boolean isPost(HttpServletRequest request) {
+        return &quot;POST&quot;.equals(request.getMethod());
+    }
+</code></pre>
+<h3 id="Get-web-root"><a href="#Get-web-root" class="headerlink" title="Get web root"></a>Get web root</h3><pre><code class="java">    public static String getWebRootPath() {
+        return HttpUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath().split(&quot;WEB-INF/&quot;)[0];
+    }
+</code></pre>
+<h3 id="Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx"><a href="#Get-client-ip-event-if-the-server-is-behind-a-proxy-server-e-g-nginx" class="headerlink" title="Get client ip, event if the server is behind a proxy server (e.g. nginx)"></a>Get client ip, event if the server is behind a proxy server (e.g. nginx)</h3><pre><code class="java">    public static String getIpAddr(HttpServletRequest request) {     
+        String ip = request.getHeader(&quot;x-forwarded-for&quot;);     
+        if (ip == null || ip.length() == 0 || &quot;unknown&quot;.equalsIgnoreCase(ip)){
+            ip = request.getHeader(&quot;Proxy-Client-IP&quot;);     
+        } else if (ip == null || ip.length() == 0 || &quot;unknown&quot;.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(&quot;WL-Proxy-Client-IP&quot;);
+        } else if (ip == null || ip.length() == 0 || &quot;unknown&quot;.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();     
+        }    
+        return ip; 
+    }
+</code></pre>
+<h3 id="Get-all-net-interfaces’-IP"><a href="#Get-all-net-interfaces’-IP" class="headerlink" title="Get all net interfaces’ IP"></a>Get all net interfaces’ IP</h3><pre><code class="java">    public static List&lt;String&gt; getAllLocalIPs() {
+        List&lt;String&gt; ipLst = new ArrayList&lt;&gt;();
+        try {
+            Enumeration&lt;NetworkInterface&gt; e = NetworkInterface.getNetworkInterfaces();
+            while (e.hasMoreElements()) {
+                NetworkInterface n = (NetworkInterface) e.nextElement();
+                Enumeration&lt;InetAddress&gt; ee = n.getInetAddresses();
+                while (ee.hasMoreElements()) {
+                    InetAddress i = (InetAddress) ee.nextElement();
+                    ipLst.add(i.getHostAddress());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (ipLst.size() == 0) {
+                ipLst.add(LOCALHOST);
+            }
+        }
+        return ipLst;
+    }
+</code></pre>
+<h3 id="Set-bits-of-a-long-variable"><a href="#Set-bits-of-a-long-variable" class="headerlink" title="Set bits of a long variable"></a>Set bits of a <code>long</code> variable</h3><pre><code class="java">    public static long setBits(long num, long val, int offset, int len) {
+        int shift = Long.SIZE-offset-len;
+        if (len &gt; 1 || val == 0) {
+            long ones = ((1L &lt;&lt; len) - 1) &lt;&lt; shift; //[] 1L
+            return ((num &amp; ~ones) | (val &lt;&lt; shift));
+        } else {
+            return (long) (num | (1 &lt;&lt; shift));
+        }
+    }
+</code></pre>
 
       
 
@@ -300,7 +403,7 @@ Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -312,7 +415,119 @@ Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -333,118 +548,6 @@ Code in comments12345/** * &amp;lt;PRE&amp;gt; * insert">
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

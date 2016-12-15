@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://foudingzheng.info/2015/08/docker-getting-feet-wet/index.html">
 <meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
 <meta property="og:description" content="Setup Docker with VagrantGet the vagrant-based docker env from DockerRoot Vagrant Box, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8">
-<meta property="og:updated_time" content="2016-12-11T14:29:48.000Z">
+<meta property="og:updated_time" content="2016-12-15T03:12:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker: Getting Feet Wet: Build the LAMP Stack">
 <meta name="twitter:description" content="Setup Docker with VagrantGet the vagrant-based docker env from DockerRoot Vagrant Box, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8">
@@ -22,7 +22,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -170,11 +170,12 @@
 <li>Adding additional processes that operate on the data is equally easy. What if you wanted to push the HTML files to an Amazon S3, in addition to serving them locally? Just create a new s3sync Docker image.</li>
 </ul>
 </blockquote>
+<a id="more"></a>
 <h2 id="Build-the-LAMP-Stack"><a href="#Build-the-LAMP-Stack" class="headerlink" title="Build the LAMP Stack"></a>Build the LAMP Stack</h2><h3 id="1-mysql-data-container"><a href="#1-mysql-data-container" class="headerlink" title="1. mysql data container"></a>1. mysql data container</h3><p>Build mysql-data image and run (as container):</p>
 <pre><code>docker run --name cont-db-data mariadb echo &quot;Data-only container for mariadb&quot;
 </code></pre><p>Note: not need to expose volume (<code>-v /var/lib/mysql</code>), see <a href="http://container-solutions.com/understanding-volumes-docker/" target="_blank" rel="external">http://container-solutions.com/understanding-volumes-docker/</a> for explaination.</p>
 <p>To maint:</p>
-<pre><code>SHX=&quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
+<pre><code>SHX=&quot;bash --rcfile &lt;(echo &#39;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&#39;; echo &#39;alias ll=\&quot;ls -ltra --color=auto\&quot;&#39;)&quot;
 docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
 </code></pre><p>Note: the <code>$SHX</code> here initializes the bash shell with <code>--rcfile</code> option (set the <code>PS1</code> shell variable and <code>ll</code> alias).</p>
 <p>Or build with Dockerfile:</p>
@@ -211,7 +212,7 @@ docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it st
 <pre><code>docker run --name cont-webserver -p 8000:80 --volumes-from cont-app-data --link cont-mariadb:mariadb -d fouding/richarvey-nginx-php
 </code></pre><p>To maint:</p>
 <pre><code>docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;$SHX&quot;
-docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
+docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &#39;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&#39;; echo &#39;alias ll=\&quot;ls -ltra --color=auto\&quot;&#39;)&quot;
 </code></pre><h3 id="5-test"><a href="#5-test" class="headerlink" title="5. test"></a>5. test</h3><p>Create a simple php file:</p>
 <pre><code>cat &gt;&gt; ~/app/php/index.php &lt;&lt; EOF
 &lt;?php
@@ -277,7 +278,7 @@ EOF
   
   
     <a href="/2015/08/build-dev-env-with-vagrant/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pomodoro 番茄工作法</div>
+      <div class="article-nav-title">搭建 Vagrant 开发环境</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -362,7 +363,7 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -374,7 +375,119 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -395,118 +508,6 @@ EOF
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

@@ -9,23 +9,26 @@
   <title>Troubleshooting: POST Data Cannot Be Read From HttpServletRequest | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="问题遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：
-123456@RequestMapping(value = &quot;goodsOrder&quot;, method = RequestMethod.POST)public String goodsOrder(HttpServletRequest request, @RequestParam(value=">
+    @RequestMapping(value = &amp;quot;goodsOrder&amp;quot;, method = RequestMethod.POST)
+    public String goodsOrder(HttpServletRequest request, @Reques">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Troubleshooting: POST Data Cannot Be Read From HttpServletRequest">
 <meta property="og:url" content="http://foudingzheng.info/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/index.html">
 <meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
 <meta property="og:description" content="问题遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：
-123456@RequestMapping(value = &quot;goodsOrder&quot;, method = RequestMethod.POST)public String goodsOrder(HttpServletRequest request, @RequestParam(value=">
+    @RequestMapping(value = &amp;quot;goodsOrder&amp;quot;, method = RequestMethod.POST)
+    public String goodsOrder(HttpServletRequest request, @Reques">
 <meta property="og:updated_time" content="2015-03-09T05:18:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Troubleshooting: POST Data Cannot Be Read From HttpServletRequest">
 <meta name="twitter:description" content="问题遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：
-123456@RequestMapping(value = &quot;goodsOrder&quot;, method = RequestMethod.POST)public String goodsOrder(HttpServletRequest request, @RequestParam(value=">
+    @RequestMapping(value = &amp;quot;goodsOrder&amp;quot;, method = RequestMethod.POST)
+    public String goodsOrder(HttpServletRequest request, @Reques">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -163,7 +166,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"goodsOrder"</span>, method = RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">goodsOrder</span><span class="params">(HttpServletRequest request, @RequestParam(value=<span class="string">"page"</span>, required=<span class="keyword">false</span>, defaultValue=<span class="string">"1"</span>)</span> <span class="keyword">int</span> page)</span></div><div class="line">	<span class="keyword">byte</span>[] postBytes = IOUtils.toByteArray(request.getInputStream());</div><div class="line">	</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">    @RequestMapping(value = &quot;goodsOrder&quot;, method = RequestMethod.POST)
+    public String goodsOrder(HttpServletRequest request, @RequestParam(value=&quot;page&quot;, required=false, defaultValue=&quot;1&quot;) int page)
+        byte[] postBytes = IOUtils.toByteArray(request.getInputStream());
+
+        // ...
+    }
+</code></pre>
 <p>此处，取到的 <code>postBytes</code> 总为空，而不是用户提交的数据。</p>
 <h2 id="原因及解决"><a href="#原因及解决" class="headerlink" title="原因及解决"></a>原因及解决</h2><p>使用 Spring <code>@RequestParam</code> 来注入参数时，Spring 会去读取 <code>HttpServletRequest request</code> 的值，而request.getInputStream() 只能读取一次，所以就造成第二次去读参数时，获取不到数据了。</p>
 <p>注意：<code>ServletRequest.getParameter()</code> 等方法也会隐式地读取请求数据，数据读取一次后得将其保存起来，因为不能再重新获取了。</p>
@@ -294,7 +303,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -306,7 +315,119 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -327,118 +448,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

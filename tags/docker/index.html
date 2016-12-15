@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -157,9 +157,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Setup-Docker-with-Vagrant"><a href="#Setup-Docker-with-Vagrant" class="headerlink" title="Setup Docker with Vagrant"></a>Setup Docker with <a href="https://www.vagrantup.com/" target="_blank" rel="external">Vagrant</a></h2><p>Get the vagrant-based docker env from <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root" target="_blank" rel="external">DockerRoot Vagrant Box</a>, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8.1). The direct download address is <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box</a>).</p>
-<p>P.S. Some mini linux disto: <a href="http://tinycorelinux.net/" target="_blank" rel="external">Tiny Core Linux</a>(on which boot2docker is based), <a href="http://www.yoctoproject.org/" target="_blank" rel="external">yoctoproject</a>, <a href="http://www.busybox.net/" target="_blank" rel="external">BusyBox</a>, <a href="http://buildroot.uclibc.org/" target="_blank" rel="external">Buildroot</a>.</p>
-<h2 id="Data-Only-Container-Container-as-Volumn-Pattern"><a href="#Data-Only-Container-Container-as-Volumn-Pattern" class="headerlink" title="Data-Only Container (Container-as-Volumn Pattern)"></a>Data-Only Container (Container-as-Volumn Pattern)</h2><p><a href="http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html" target="_blank" rel="external">Tiny Docker Pieces, Loosely Joined</a>:</p>
+        <h2 id="Setup-Docker-with-Vagrant"><a href="#Setup-Docker-with-Vagrant" class="headerlink" title="Setup Docker with Vagrant"></a>Setup Docker with <a href="https://www.vagrantup.com/">Vagrant</a></h2><p>Get the vagrant-based docker env from <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root">DockerRoot Vagrant Box</a>, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8.1). The direct download address is <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box">https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box</a>).</p>
+<p>P.S. Some mini linux disto: <a href="http://tinycorelinux.net/">Tiny Core Linux</a>(on which boot2docker is based), <a href="http://www.yoctoproject.org/">yoctoproject</a>, <a href="http://www.busybox.net/">BusyBox</a>, <a href="http://buildroot.uclibc.org/">Buildroot</a>.</p>
+<h2 id="Data-Only-Container-Container-as-Volumn-Pattern"><a href="#Data-Only-Container-Container-as-Volumn-Pattern" class="headerlink" title="Data-Only Container (Container-as-Volumn Pattern)"></a>Data-Only Container (Container-as-Volumn Pattern)</h2><p><a href="http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html">Tiny Docker Pieces, Loosely Joined</a>:</p>
 <blockquote>
 <p>Since I’ve spelled it out in such exhaustive detail, this may all seem like much ado about nothing…but, now that I finally grok the idea, I can see how data-only containers are so useful.</p>
 <ul>
@@ -168,77 +168,7 @@
 <li>Adding additional processes that operate on the data is equally easy. What if you wanted to push the HTML files to an Amazon S3, in addition to serving them locally? Just create a new s3sync Docker image.</li>
 </ul>
 </blockquote>
-<h2 id="Build-the-LAMP-Stack"><a href="#Build-the-LAMP-Stack" class="headerlink" title="Build the LAMP Stack"></a>Build the LAMP Stack</h2><h3 id="1-mysql-data-container"><a href="#1-mysql-data-container" class="headerlink" title="1. mysql data container"></a>1. mysql data container</h3><p>Build mysql-data image and run (as container):</p>
-<pre><code>docker run --name cont-db-data mariadb echo &quot;Data-only container for mariadb&quot;
-</code></pre><p>Note: not need to expose volume (<code>-v /var/lib/mysql</code>), see <a href="http://container-solutions.com/understanding-volumes-docker/" target="_blank" rel="external">http://container-solutions.com/understanding-volumes-docker/</a> for explaination.</p>
-<p>To maint:</p>
-<pre><code>SHX=&quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
-docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>Note: the <code>$SHX</code> here initializes the bash shell with <code>--rcfile</code> option (set the <code>PS1</code> shell variable and <code>ll</code> alias).</p>
-<p>Or build with Dockerfile:</p>
-<pre><code>cat &gt;&gt; $APPROOOT/dockerfiles/dbdata/Dockerfile &lt;&lt;EOF
-FROM stackbrew/busybox:latest
-MAINTAINER fouding zheng &lt;fouding.zheng@gmail.com&gt;
-
-VOLUME /var/lib/mysql
-CMD [&quot;true&quot;]
-EOF
-# KEY: volume is /var/lib/mysql, NOT arbitrary path!
-
-sudo docker build -t fouding/docker-mysql-data $APPROOOT/dockerfiles/dbdata
-sudo docker run --name cont-db-data fouding/docker-mysql-data true
-</code></pre><h3 id="2-cont-app-data-container"><a href="#2-cont-app-data-container" class="headerlink" title="2. cont-app-data container"></a>2. cont-app-data container</h3><pre><code>HTMLROOT=/usr/share/nginx/html
-docker run --name cont-app-data -v $HTMLROOT stackbrew/busybox:latest echo &quot;app data-only container&quot;
-</code></pre><p>To maint the cont-app-data:</p>
-<pre><code>docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it fouding/richarvey-nginx-php:addXdebug bash -c &quot;$SHX&quot;
-docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it stackbrew/busybox:latest /bin/sh
-</code></pre><p>Note: not <code>docker exec -it cont-app-data bash -c &quot;$SHX&quot;</code>, as the cont is not in running state.<br>Then:</p>
-<pre><code>cp -r /app/iWshop /usr/share/nginx/html/
-</code></pre><h3 id="3-db-mariadb-mysql-container"><a href="#3-db-mariadb-mysql-container" class="headerlink" title="3. db: mariadb(mysql) container"></a>3. db: mariadb(mysql) container</h3><pre><code>docker run --name cont-mariadb --volumes-from cont-db-data -e MYSQL_USER=iwshop -e MYSQL_PASSWORD=1wsh0p -e MYSQL_DATABASE=iwshop -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb
-</code></pre><p>To maint:</p>
-<pre><code>docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>OR</p>
-<pre><code>docker run --rm --link cont-mariadb -it mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>If “TERM environment variable not set” error: <a href="https://github.com/dockerfile/mariadb/issues/3" target="_blank" rel="external">https://github.com/dockerfile/mariadb/issues/3</a> :</p>
-<blockquote>
-<p><code>docker exec -it mariadb bash</code><br><code>mysql</code><br>produces the following error message: TERM environment variable not set.</p>
-<p>Unsure why since <code>echo $TERM</code> returns <code>dumb</code> and issuing <code>export TERM=dumb</code> resolves issue.</p>
-<p>If the environment variable is explicitly issued in the dockerfile, the error message never appears, i.e. adding <code>ENV TERM dumb</code></p>
-</blockquote>
-<h3 id="4-web"><a href="#4-web" class="headerlink" title="4. web"></a>4. web</h3><p>nginx-php-fpm container:</p>
-<pre><code>docker run --name cont-webserver -p 8000:80 --volumes-from cont-app-data --link cont-mariadb:mariadb -d fouding/richarvey-nginx-php
-</code></pre><p>To maint:</p>
-<pre><code>docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;$SHX&quot;
-docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
-</code></pre><h3 id="5-test"><a href="#5-test" class="headerlink" title="5. test"></a>5. test</h3><p>Create a simple php file:</p>
-<pre><code>cat &gt;&gt; ~/app/php/index.php &lt;&lt; EOF
-&lt;?php
-    echo test php;
-    phpinfo();
-?&gt;
-EOF
-</code></pre><p>Open in browser: <a href="http://localhost:8000/" target="_blank" rel="external">http://localhost:8000</a>, or use cmdline: <code>curl -i http://localhost:8000</code>.</p>
-<h3 id="6-access"><a href="#6-access" class="headerlink" title="6. access"></a>6. access</h3><pre><code>docker exec -it cont-webserver bash
-</code></pre><h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><ul>
-<li>consider using the small phusion/baseimage image instead of the huge “ubuntu:14:04” image.</li>
-</ul>
-<h2 id="Docker-Usage-Summary"><a href="#Docker-Usage-Summary" class="headerlink" title="Docker Usage Summary"></a>Docker Usage Summary</h2><h3 id="2-ways-to-communicate-b-w-2-containers"><a href="#2-ways-to-communicate-b-w-2-containers" class="headerlink" title="2 ways to communicate b/w 2 containers:"></a>2 ways to communicate b/w 2 containers:</h3><ul>
-<li>Via volumes: <code>cont-mariadb --volumes-from cont-db-data</code></li>
-</ul>
-<p>then the server can access the FILES in the dataCont => use as DATA STORAGE.</p>
-<ul>
-<li>Via container linking: <code>cont-webserver: --link cont-mariadb:mariadb</code></li>
-</ul>
-<p>then the server can ping/connect to the dataCont => use as mysql server.<br>KEY: dataCont: <code>-v guestVolume</code> to expose the vol, and server side: <code>--volume-from dataCont</code> [RI: not need to specify the volume here, which has been predefined by the <code>docker run -v /guestVolume dataCont</code>. The vol is: dataCont:guestVolume ]</p>
-<h3 id="2-types"><a href="#2-types" class="headerlink" title="2 types:"></a>2 types:</h3><ul>
-<li><code>docker run -d imgName</code></li>
-<li><code>docker run -ti imgName bash</code></li>
-</ul>
-<h3 id="2-ways-to-start-a-container"><a href="#2-ways-to-start-a-container" class="headerlink" title="2 ways to start a container:"></a>2 ways to start a container:</h3><ul>
-<li><code>docker run -i -t imgName cmd</code></li>
-<li><code>docker run -d imgName</code> [no cmd appended]</li>
-</ul>
-
+        <a class="article-more-a"  href="/2015/08/docker-getting-feet-wet/#more">more >></a>
       
 
       
@@ -255,7 +185,7 @@ EOF
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/docker-getting-feet-wet/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/08/docker-getting-feet-wet/">展开全文22 >></a>
         </p>
       
 
@@ -346,7 +276,7 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -358,7 +288,119 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -379,118 +421,6 @@ EOF
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

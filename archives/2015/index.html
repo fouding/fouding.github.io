@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -157,9 +157,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Setup-Docker-with-Vagrant"><a href="#Setup-Docker-with-Vagrant" class="headerlink" title="Setup Docker with Vagrant"></a>Setup Docker with <a href="https://www.vagrantup.com/" target="_blank" rel="external">Vagrant</a></h2><p>Get the vagrant-based docker env from <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root" target="_blank" rel="external">DockerRoot Vagrant Box</a>, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8.1). The direct download address is <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box</a>).</p>
-<p>P.S. Some mini linux disto: <a href="http://tinycorelinux.net/" target="_blank" rel="external">Tiny Core Linux</a>(on which boot2docker is based), <a href="http://www.yoctoproject.org/" target="_blank" rel="external">yoctoproject</a>, <a href="http://www.busybox.net/" target="_blank" rel="external">BusyBox</a>, <a href="http://buildroot.uclibc.org/" target="_blank" rel="external">Buildroot</a>.</p>
-<h2 id="Data-Only-Container-Container-as-Volumn-Pattern"><a href="#Data-Only-Container-Container-as-Volumn-Pattern" class="headerlink" title="Data-Only Container (Container-as-Volumn Pattern)"></a>Data-Only Container (Container-as-Volumn Pattern)</h2><p><a href="http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html" target="_blank" rel="external">Tiny Docker Pieces, Loosely Joined</a>:</p>
+        <h2 id="Setup-Docker-with-Vagrant"><a href="#Setup-Docker-with-Vagrant" class="headerlink" title="Setup Docker with Vagrant"></a>Setup Docker with <a href="https://www.vagrantup.com/">Vagrant</a></h2><p>Get the vagrant-based docker env from <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root">DockerRoot Vagrant Box</a>, which is tiny (only 12 MB) and contains the lastest version of docker (Linux kernel v4.1.6 and GLIBC, Docker v1.8.1). The direct download address is <a href="https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box">https://atlas.hashicorp.com/ailispaw/boxes/docker-root/versions/1.0.0/providers/virtualbox.box</a>).</p>
+<p>P.S. Some mini linux disto: <a href="http://tinycorelinux.net/">Tiny Core Linux</a>(on which boot2docker is based), <a href="http://www.yoctoproject.org/">yoctoproject</a>, <a href="http://www.busybox.net/">BusyBox</a>, <a href="http://buildroot.uclibc.org/">Buildroot</a>.</p>
+<h2 id="Data-Only-Container-Container-as-Volumn-Pattern"><a href="#Data-Only-Container-Container-as-Volumn-Pattern" class="headerlink" title="Data-Only Container (Container-as-Volumn Pattern)"></a>Data-Only Container (Container-as-Volumn Pattern)</h2><p><a href="http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html">Tiny Docker Pieces, Loosely Joined</a>:</p>
 <blockquote>
 <p>Since I’ve spelled it out in such exhaustive detail, this may all seem like much ado about nothing…but, now that I finally grok the idea, I can see how data-only containers are so useful.</p>
 <ul>
@@ -168,77 +168,7 @@
 <li>Adding additional processes that operate on the data is equally easy. What if you wanted to push the HTML files to an Amazon S3, in addition to serving them locally? Just create a new s3sync Docker image.</li>
 </ul>
 </blockquote>
-<h2 id="Build-the-LAMP-Stack"><a href="#Build-the-LAMP-Stack" class="headerlink" title="Build the LAMP Stack"></a>Build the LAMP Stack</h2><h3 id="1-mysql-data-container"><a href="#1-mysql-data-container" class="headerlink" title="1. mysql data container"></a>1. mysql data container</h3><p>Build mysql-data image and run (as container):</p>
-<pre><code>docker run --name cont-db-data mariadb echo &quot;Data-only container for mariadb&quot;
-</code></pre><p>Note: not need to expose volume (<code>-v /var/lib/mysql</code>), see <a href="http://container-solutions.com/understanding-volumes-docker/" target="_blank" rel="external">http://container-solutions.com/understanding-volumes-docker/</a> for explaination.</p>
-<p>To maint:</p>
-<pre><code>SHX=&quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
-docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>Note: the <code>$SHX</code> here initializes the bash shell with <code>--rcfile</code> option (set the <code>PS1</code> shell variable and <code>ll</code> alias).</p>
-<p>Or build with Dockerfile:</p>
-<pre><code>cat &gt;&gt; $APPROOOT/dockerfiles/dbdata/Dockerfile &lt;&lt;EOF
-FROM stackbrew/busybox:latest
-MAINTAINER fouding zheng &lt;fouding.zheng@gmail.com&gt;
-
-VOLUME /var/lib/mysql
-CMD [&quot;true&quot;]
-EOF
-# KEY: volume is /var/lib/mysql, NOT arbitrary path!
-
-sudo docker build -t fouding/docker-mysql-data $APPROOOT/dockerfiles/dbdata
-sudo docker run --name cont-db-data fouding/docker-mysql-data true
-</code></pre><h3 id="2-cont-app-data-container"><a href="#2-cont-app-data-container" class="headerlink" title="2. cont-app-data container"></a>2. cont-app-data container</h3><pre><code>HTMLROOT=/usr/share/nginx/html
-docker run --name cont-app-data -v $HTMLROOT stackbrew/busybox:latest echo &quot;app data-only container&quot;
-</code></pre><p>To maint the cont-app-data:</p>
-<pre><code>docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it fouding/richarvey-nginx-php:addXdebug bash -c &quot;$SHX&quot;
-docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it stackbrew/busybox:latest /bin/sh
-</code></pre><p>Note: not <code>docker exec -it cont-app-data bash -c &quot;$SHX&quot;</code>, as the cont is not in running state.<br>Then:</p>
-<pre><code>cp -r /app/iWshop /usr/share/nginx/html/
-</code></pre><h3 id="3-db-mariadb-mysql-container"><a href="#3-db-mariadb-mysql-container" class="headerlink" title="3. db: mariadb(mysql) container"></a>3. db: mariadb(mysql) container</h3><pre><code>docker run --name cont-mariadb --volumes-from cont-db-data -e MYSQL_USER=iwshop -e MYSQL_PASSWORD=1wsh0p -e MYSQL_DATABASE=iwshop -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb
-</code></pre><p>To maint:</p>
-<pre><code>docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>OR</p>
-<pre><code>docker run --rm --link cont-mariadb -it mariadb bash -c &quot;$SHX&quot;
-</code></pre><p>If “TERM environment variable not set” error: <a href="https://github.com/dockerfile/mariadb/issues/3" target="_blank" rel="external">https://github.com/dockerfile/mariadb/issues/3</a> :</p>
-<blockquote>
-<p><code>docker exec -it mariadb bash</code><br><code>mysql</code><br>produces the following error message: TERM environment variable not set.</p>
-<p>Unsure why since <code>echo $TERM</code> returns <code>dumb</code> and issuing <code>export TERM=dumb</code> resolves issue.</p>
-<p>If the environment variable is explicitly issued in the dockerfile, the error message never appears, i.e. adding <code>ENV TERM dumb</code></p>
-</blockquote>
-<h3 id="4-web"><a href="#4-web" class="headerlink" title="4. web"></a>4. web</h3><p>nginx-php-fpm container:</p>
-<pre><code>docker run --name cont-webserver -p 8000:80 --volumes-from cont-app-data --link cont-mariadb:mariadb -d fouding/richarvey-nginx-php
-</code></pre><p>To maint:</p>
-<pre><code>docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;$SHX&quot;
-docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
-</code></pre><h3 id="5-test"><a href="#5-test" class="headerlink" title="5. test"></a>5. test</h3><p>Create a simple php file:</p>
-<pre><code>cat &gt;&gt; ~/app/php/index.php &lt;&lt; EOF
-&lt;?php
-    echo test php;
-    phpinfo();
-?&gt;
-EOF
-</code></pre><p>Open in browser: <a href="http://localhost:8000/" target="_blank" rel="external">http://localhost:8000</a>, or use cmdline: <code>curl -i http://localhost:8000</code>.</p>
-<h3 id="6-access"><a href="#6-access" class="headerlink" title="6. access"></a>6. access</h3><pre><code>docker exec -it cont-webserver bash
-</code></pre><h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><ul>
-<li>consider using the small phusion/baseimage image instead of the huge “ubuntu:14:04” image.</li>
-</ul>
-<h2 id="Docker-Usage-Summary"><a href="#Docker-Usage-Summary" class="headerlink" title="Docker Usage Summary"></a>Docker Usage Summary</h2><h3 id="2-ways-to-communicate-b-w-2-containers"><a href="#2-ways-to-communicate-b-w-2-containers" class="headerlink" title="2 ways to communicate b/w 2 containers:"></a>2 ways to communicate b/w 2 containers:</h3><ul>
-<li>Via volumes: <code>cont-mariadb --volumes-from cont-db-data</code></li>
-</ul>
-<p>then the server can access the FILES in the dataCont => use as DATA STORAGE.</p>
-<ul>
-<li>Via container linking: <code>cont-webserver: --link cont-mariadb:mariadb</code></li>
-</ul>
-<p>then the server can ping/connect to the dataCont => use as mysql server.<br>KEY: dataCont: <code>-v guestVolume</code> to expose the vol, and server side: <code>--volume-from dataCont</code> [RI: not need to specify the volume here, which has been predefined by the <code>docker run -v /guestVolume dataCont</code>. The vol is: dataCont:guestVolume ]</p>
-<h3 id="2-types"><a href="#2-types" class="headerlink" title="2 types:"></a>2 types:</h3><ul>
-<li><code>docker run -d imgName</code></li>
-<li><code>docker run -ti imgName bash</code></li>
-</ul>
-<h3 id="2-ways-to-start-a-container"><a href="#2-ways-to-start-a-container" class="headerlink" title="2 ways to start a container:"></a>2 ways to start a container:</h3><ul>
-<li><code>docker run -i -t imgName cmd</code></li>
-<li><code>docker run -d imgName</code> [no cmd appended]</li>
-</ul>
-
+        <a class="article-more-a"  href="/2015/08/docker-getting-feet-wet/#more">more >></a>
       
 
       
@@ -255,7 +185,7 @@ EOF
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/docker-getting-feet-wet/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/08/docker-getting-feet-wet/">展开全文22 >></a>
         </p>
       
 
@@ -280,7 +210,7 @@ EOF
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/build-dev-env-with-vagrant/">pomodoro 番茄工作法</a>
+      <a class="article-title" href="/2015/08/build-dev-env-with-vagrant/">搭建 Vagrant 开发环境</a>
     </h1>
   
 
@@ -292,11 +222,11 @@ EOF
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
-<li>One of the most useful senario with Vagrant is to setup a network of serveral computing nodes to mimic a distributed system. Or even better, use <a href="https://www.docker.com/" target="_blank" rel="external">Docker</a>.</li>
+<li>One of the most useful senario with Vagrant is to setup a network of serveral computing nodes to mimic a distributed system. Or even better, use <a href="https://www.docker.com/">Docker</a>.</li>
 </ul>
-<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><h3 id="Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”"><a href="#Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”" class="headerlink" title="Download offline file for instable network, esp. in case u r behind the “greatwall”:"></a>Download offline file for instable network, esp. in case u r behind the “greatwall”:</h3><p>Search the box in <a href="https://atlas.hashicorp.com/" target="_blank" rel="external">https://atlas.hashicorp.com/</a> for box name, version, then follow the format</p>
+<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><h3 id="Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”"><a href="#Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”" class="headerlink" title="Download offline file for instable network, esp. in case u r behind the “greatwall”:"></a>Download offline file for instable network, esp. in case u r behind the “greatwall”:</h3><p>Search the box in <a href="https://atlas.hashicorp.com/">https://atlas.hashicorp.com/</a> for box name, version, then follow the format</p>
 <pre><code>https://atlas.hashicorp.com/puppetlabs/boxes/&lt;boxName&gt;/versions/&lt;version&gt;/providers/virtualbox.box
-</code></pre><p>to construct the downloading url. e.g. <a href="https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box</a></p>
+</code></pre><p>to construct the downloading url. e.g. <a href="https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box">https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box</a></p>
 <h3 id="Change-the-Storage-Location"><a href="#Change-the-Storage-Location" class="headerlink" title="Change the Storage Location"></a>Change the Storage Location</h3><ul>
 <li>Press <code>Win+R</code> and type <code>systempropertiesadvanced</code> to bring up the “System Properties” dialog, click “Environment Variables…” button, and in the “User vairalbes for $USER” section, add a variable named <code>VAGRANT_HOME</code>, whose value is <code>D:\your\vagrant\working\path</code>.</li>
 </ul>
@@ -305,25 +235,7 @@ EOF
 </code></pre><ul>
 <li>Change VirtualBox storage location: Open Virtalbox and navigate to <code>File &gt; Preference&gt; General: Default Machine Folder</code>: change to target location.</li>
 </ul>
-<h2 id="Setup-Vagrant-Virtual-Machine"><a href="#Setup-Vagrant-Virtual-Machine" class="headerlink" title="Setup Vagrant Virtual Machine"></a>Setup Vagrant Virtual Machine</h2><p>Execute below commands in <a href="http://cmder.net/" target="_blank" rel="external">cmder</a>/cmd.exe:</p>
-<pre><code>echo check vagrant_home: %vagrant_home%
-set BN=boot2docker-virtualbox
-set BOXPATH=D:\tools\vagrant-boxes\boot2docker-virtualbox.box
-cd /d D:\HashiCorp\Vagrant\myvagrantfile
-mkdir %BN%
-cd %BN%
-vagrant box add %BN% %BOXPATH%
-vagrant box list
-vagrant init %BN%
-</code></pre><p>And issue command <code>vagrant up &amp;&amp; vagrant ssh</code> to startup and connect to the vagrant vm and install the dev tools manually, then key in <code>vagrant package --output my-dev.box</code> to export the whole box as a file which can then be shared b/w team members to setup the same dev env quickly.<br>(If you are using <a href="http://cmder.net/" target="_blank" rel="external">cmder</a> full version, the <code>ssh</code> command is right in your hands, so simply type <code>vagrant ssh</code> to connect to the vagrant box; otherwise, use a ssh client, say Putty, MobaXterm.)</p>
-<p>Or edit the <code>Vagrantfile</code> file to setup the dev env in script.</p>
-<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><p>If both host-only network and shared folder are enabled in Vagrantfile:</p>
-<pre><code>config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.15&quot;
-config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
-</code></pre><p>The host-only network is accessible, but the synced_folder cannot be found! (I don’t know whether this bug is in Vagrant, or reproducible only in my machine)</p>
-<p>Solution: create the <code>/host_e</code> directionary, then mount the drive in <code>~/.bashrc</code> file manually:</p>
-<pre><code>echo &apos;sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) host_e /host_e&apos; &gt;&gt; ~/.bashrc
-</code></pre>
+        <a class="article-more-a"  href="/2015/08/build-dev-env-with-vagrant/#more">more >></a>
       
 
       
@@ -340,7 +252,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/build-dev-env-with-vagrant/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/08/build-dev-env-with-vagrant/">展开全文22 >></a>
         </p>
       
 
@@ -437,7 +349,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/pomodoro/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/08/pomodoro/">展开全文22 >></a>
         </p>
       
 
@@ -493,7 +405,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/07/new-family-member/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/07/new-family-member/">展开全文22 >></a>
         </p>
       
 
@@ -534,20 +446,50 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 <h2 id="Nginx-安装-modSecurity-模块"><a href="#Nginx-安装-modSecurity-模块" class="headerlink" title="Nginx 安装 modSecurity 模块"></a>Nginx 安装 modSecurity 模块</h2><ol>
 <li>安装依赖</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su</div><div class="line"></div><div class="line">yum install -y gcc make automake autoconf libtool</div><div class="line">yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel</div></pre></td></tr></table></figure>
+<pre><code class="bash">    su
+
+    yum install -y gcc make automake autoconf libtool
+    yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel
+</code></pre>
 <p>2. 编译 modSecurity</p>
 <p>首先到 modSecurity 官网上下载最新版并编译：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz</div><div class="line"></div><div class="line">tar -xvpzf modsecurity-2.9.0.tar.gz</div><div class="line"><span class="built_in">cd</span> modsecurity-2.9.0</div><div class="line"></div><div class="line">./autogen.sh</div><div class="line">./configure --enable-standalone-module</div><div class="line">make</div></pre></td></tr></table></figure>
+<pre><code class="bash">    wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz
+
+    tar -xvpzf modsecurity-2.9.0.tar.gz
+    cd modsecurity-2.9.0
+
+    ./autogen.sh
+    ./configure --enable-standalone-module
+    make
+</code></pre>
 <p>会花1分钟左右的时间去编译。</p>
 <p>3. 将 modSecurity 模块打包进 nginx</p>
 <p>要从源码层级将 modSecurity 模块编译进 nginx。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">wget http://nginx.org/download/nginx-1.7.8.tar.gz</div><div class="line">tar -xvpzf nginx-1.7.8.tar.gz</div><div class="line"><span class="built_in">cd</span> nginx-1.7.8</div><div class="line">./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin</div></pre></td></tr></table></figure>
+<pre><code class="bash">    cd ~
+    wget http://nginx.org/download/nginx-1.7.8.tar.gz
+    tar -xvpzf nginx-1.7.8.tar.gz
+    cd nginx-1.7.8
+    ./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/
+    make
+    make install
+
+    cd /usr/local/nginx/sbin
+</code></pre>
 <p>安装后，nginx 位于 <code>/usr/local/nginx/sbin/nginx</code>。</p>
 <p>4. 启用 modSecurity</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</div><div class="line">vi conf/nginx.conf</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location / &#123;</div><div class="line">	ModSecurityEnabled on;</div><div class="line">	ModSecurityConfig modsecurity.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create am empty modsecurity.conf</span></div><div class="line">touch conf/modsecurity.conf</div><div class="line"><span class="comment"># test the conf file</span></div><div class="line">sudo ./nginx -t</div></pre></td></tr></table></figure>
+<pre><code class="bash">    cd /usr/local/nginx
+    vi conf/nginx.conf
+</code></pre>
+<pre><code>location / {
+    ModSecurityEnabled on;
+    ModSecurityConfig modsecurity.conf;
+}
+</code></pre><p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
+<pre><code class="bash">    # create am empty modsecurity.conf
+    touch conf/modsecurity.conf
+    # test the conf file
+    sudo ./nginx -t
+</code></pre>
 <p>参考：</p>
 <ul>
 <li><a href="http://baike.baidu.com/link?url=lxg5knLVTwZ2vbth76MM5aXtFCv16VOW6dNekXyqKtwRzwUs1qcUM6MrtrvjSCmWlenY0W6t_8a1iDhqqR9aba" target="_blank" rel="external">百度百科</a></li>
@@ -575,7 +517,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/nginx-modsecurity-installation/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/03/nginx-modsecurity-installation/">展开全文22 >></a>
         </p>
       
 
@@ -611,10 +553,13 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Content-Type: application/json&quot; -d &apos;&#123;&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;&#125;&apos; http://foo.com/api/login</div></pre></td></tr></table></figure></p>
-<p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
-<p>For windows, single quotes around json did not work and I ended up escaping double quotes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123; \&quot;key1\&quot;: \&quot;value1\&quot; &#125;&quot; http://foo.com/api/method</div></pre></td></tr></table></figure></p>
-<h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
+        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:</p>
+<pre><code>    curl -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;}&#39; http://foo.com/api/login
+</code></pre><p>Post a file:</p>
+<pre><code>curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
+</code></pre><p>For windows, single quotes around json did not work and I ended up escaping double quotes:</p>
+<pre><code>    curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;{ \&quot;key1\&quot;: \&quot;value1\&quot; }&quot; http://foo.com/api/method
+</code></pre><h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
 
       
 
@@ -637,7 +582,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文22 >></a>
         </p>
       
 
@@ -674,7 +619,13 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>遇到一个奇怪的问题：明明客户端有 POST 数据到服务端，但服务端就是“获取不到”数据。相关的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"goodsOrder"</span>, method = RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">goodsOrder</span><span class="params">(HttpServletRequest request, @RequestParam(value=<span class="string">"page"</span>, required=<span class="keyword">false</span>, defaultValue=<span class="string">"1"</span>)</span> <span class="keyword">int</span> page)</span></div><div class="line">	<span class="keyword">byte</span>[] postBytes = IOUtils.toByteArray(request.getInputStream());</div><div class="line">	</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">    @RequestMapping(value = &quot;goodsOrder&quot;, method = RequestMethod.POST)
+    public String goodsOrder(HttpServletRequest request, @RequestParam(value=&quot;page&quot;, required=false, defaultValue=&quot;1&quot;) int page)
+        byte[] postBytes = IOUtils.toByteArray(request.getInputStream());
+
+        // ...
+    }
+</code></pre>
 <p>此处，取到的 <code>postBytes</code> 总为空，而不是用户提交的数据。</p>
 <h2 id="原因及解决"><a href="#原因及解决" class="headerlink" title="原因及解决"></a>原因及解决</h2><p>使用 Spring <code>@RequestParam</code> 来注入参数时，Spring 会去读取 <code>HttpServletRequest request</code> 的值，而request.getInputStream() 只能读取一次，所以就造成第二次去读参数时，获取不到数据了。</p>
 <p>注意：<code>ServletRequest.getParameter()</code> 等方法也会隐式地读取请求数据，数据读取一次后得将其保存起来，因为不能再重新获取了。</p>
@@ -700,7 +651,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/02/Troubleshooting-POST-data-cannot-be-read-from-HttpServletRequest/">展开全文22 >></a>
         </p>
       
 
@@ -736,22 +687,103 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Part-of-configurations-in-nginx-conf"><a href="#Part-of-configurations-in-nginx-conf" class="headerlink" title="Part of configurations in nginx.conf"></a>Part of configurations in nginx.conf</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">	# Enable GZip compression</div><div class="line">	gzip                on;</div><div class="line">	gzip_http_version   1.1;</div><div class="line">	gzip_min_length     1000;</div><div class="line">	gzip_buffers        16 8k;</div><div class="line">	gzip_disable        &quot;MSIE [1-6] \.&quot;;</div><div class="line">	gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain</div><div class="line">	gzip_vary           on;</div><div class="line"></div><div class="line">	# Set proxy cache path</div><div class="line">	proxy_cache_path /var/nginx/cache keys_zone=one:10m;</div><div class="line"></div><div class="line">	upstream tomcat_cluster &#123;</div><div class="line">		ip_hash;</div><div class="line">		server ws1:12130;</div><div class="line">		server ws2:12130;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	server &#123;</div><div class="line">		listen       80;</div><div class="line">		server_name  localhost;</div><div class="line">		</div><div class="line">		location /portal/static/ &#123;</div><div class="line">			root D:/anyfish_web/nginx/;</div><div class="line">			expires 30d;</div><div class="line">			proxy_cache_valid 200 1d;</div><div class="line">			proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		location /manager &#123;</div><div class="line">			allow 192.168.1.1/24;</div><div class="line">			allow 127.0.0.1;</div><div class="line">			deny all;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		location / &#123;</div><div class="line">			proxy_pass http://tomcat_cluster;</div><div class="line">			proxy_http_version 1.1;</div><div class="line">			proxy_set_header Upgrade $http_upgrade;</div><div class="line">			proxy_set_header Connection &quot;upgrade&quot;;</div><div class="line">			proxy_set_header Host $host:$server_port;</div><div class="line"></div><div class="line">			proxy_set_header  X-Real-IP  $remote_addr;</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="GZip-compression"><a href="#GZip-compression" class="headerlink" title="GZip compression"></a>GZip compression</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">gzip                on;</div><div class="line">gzip_http_version   1.1;</div><div class="line">gzip_min_length     1000;</div><div class="line">gzip_buffers        16 8k;</div><div class="line">gzip_disable        &quot;MSIE [1-6] \.&quot;;</div><div class="line">gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain</div><div class="line">gzip_vary           on;</div></pre></td></tr></table></figure>
-<h3 id="Session-persistence"><a href="#Session-persistence" class="headerlink" title="Session persistence"></a>Session persistence</h3><p>Set <code>ip_hash</code> for session persistence.</p>
-<h3 id="Serving-static-content"><a href="#Serving-static-content" class="headerlink" title="Serving static content"></a>Serving static content</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">location /portal/static/ &#123;</div><div class="line">	root D:/anyfish_web/nginx/;</div><div class="line">	expires 30d;</div><div class="line">	proxy_cache_valid 200 1d;</div><div class="line">	proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Change the <code>root</code> for URL starting with “/portal/static/“, letting it the serve the request with local static files.</p>
-<h3 id="Server-cluster-rack"><a href="#Server-cluster-rack" class="headerlink" title="Server cluster/rack"></a>Server cluster/rack</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">upstream tomcat_cluster &#123;</div><div class="line">	ip_hash;</div><div class="line">	server ws1:12130;</div><div class="line">	server ws2:12130;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">	location / &#123;</div><div class="line">		proxy_pass http://tomcat_cluster;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>upstream</code> is used for proxying requests to other servers.</p>
-<h3 id="Conf-for-websocket"><a href="#Conf-for-websocket" class="headerlink" title="Conf for websocket:"></a>Conf for websocket:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proxy_http_version 1.1;</div><div class="line">proxy_set_header Upgrade $http_upgrade;</div><div class="line">proxy_set_header Connection &quot;upgrade&quot;;</div></pre></td></tr></table></figure>
-<p>The first line tells Nginx to use HTTP/1.1 when communicating to the Node backend, which is required for WebSockets. The next two tell Nginx to respond to the Upgrade request which is initiated over HTTP by the browser when it wants to use a WebSocket.</p>
-<h3 id="If-the-listening-port-is-not-80"><a href="#If-the-listening-port-is-not-80" class="headerlink" title="If the listening port is not 80:"></a>If the listening port is not 80:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Host $host:$server_port;</div></pre></td></tr></table></figure>
-<p>Note the <code>$server_port</code> part shoud be present. Without it, the redirection will jump to $host:80, rather than the specified port!</p>
-<h3 id="Restrict-access-to-the-management-pages-by-IP"><a href="#Restrict-access-to-the-management-pages-by-IP" class="headerlink" title="Restrict access to the management pages by IP:"></a>Restrict access to the management pages by IP:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">location /manager &#123;</div><div class="line">	allow 192.168.1.1/24;</div><div class="line">	allow 127.0.0.1;</div><div class="line">	deny all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Virtual-Host"><a href="#Virtual-Host" class="headerlink" title="Virtual Host"></a>Virtual Host</h3><p>Each <code>server</code> block represent the one virtual host with its own <code>server_name</code>. Each server blocks looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">	listen       80;</div><div class="line">	server_name  blog.server1.com;</div><div class="line"></div><div class="line">	location / &#123;</div><div class="line">		proxy_pass http://127.0.0.1:8282;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>here each <code>server</code> blocks bind (listen) the port 80, and this server block is only resonds when the <code>server_name</code> value (here blog.server1.com) is matched the HTTP header <code>Host</code> field</p>
-<h3 id="location-syntax"><a href="#location-syntax" class="headerlink" title="location syntax"></a><code>location</code> syntax</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</div></pre></td></tr></table></figure>
-<p>Here,</p>
+        <h2 id="Part-of-configurations-in-nginx-conf"><a href="#Part-of-configurations-in-nginx-conf" class="headerlink" title="Part of configurations in nginx.conf"></a>Part of configurations in nginx.conf</h2><pre><code>http {
+    # Enable GZip compression
+    gzip                on;
+    gzip_http_version   1.1;
+    gzip_min_length     1000;
+    gzip_buffers        16 8k;
+    gzip_disable        &quot;MSIE [1-6] \.&quot;;
+    gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain
+    gzip_vary           on;
+
+    # Set proxy cache path
+    proxy_cache_path /var/nginx/cache keys_zone=one:10m;
+
+    upstream tomcat_cluster {
+        ip_hash;
+        server ws1:12130;
+        server ws2:12130;
+    }
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location /portal/static/ {
+            root D:/anyfish_web/nginx/;
+            expires 30d;
+            proxy_cache_valid 200 1d;
+            proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;
+        }
+
+        location /manager {
+            allow 192.168.1.1/24;
+            allow 127.0.0.1;
+            deny all;
+        }
+
+        location / {
+            proxy_pass http://tomcat_cluster;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection &quot;upgrade&quot;;
+            proxy_set_header Host $host:$server_port;
+
+            proxy_set_header  X-Real-IP  $remote_addr;
+        }
+    }
+}
+</code></pre><h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="GZip-compression"><a href="#GZip-compression" class="headerlink" title="GZip compression"></a>GZip compression</h3><pre><code>    gzip                on;
+    gzip_http_version   1.1;
+    gzip_min_length     1000;
+    gzip_buffers        16 8k;
+    gzip_disable        &quot;MSIE [1-6] \.&quot;;
+    gzip_types          text/html text/css text/xml application/x-javascript application/atom+xml text/plain
+    gzip_vary           on;
+</code></pre><h3 id="Session-persistence"><a href="#Session-persistence" class="headerlink" title="Session persistence"></a>Session persistence</h3><p>Set <code>ip_hash</code> for session persistence.</p>
+<h3 id="Serving-static-content"><a href="#Serving-static-content" class="headerlink" title="Serving static content"></a>Serving static content</h3><pre><code>        location /portal/static/ {
+            root D:/anyfish_web/nginx/;
+            expires 30d;
+            proxy_cache_valid 200 1d;
+            proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_504;
+        }
+</code></pre><p>Change the <code>root</code> for URL starting with “/portal/static/“, letting it the serve the request with local static files.</p>
+<h3 id="Server-cluster-rack"><a href="#Server-cluster-rack" class="headerlink" title="Server cluster/rack"></a>Server cluster/rack</h3><pre><code>    upstream tomcat_cluster {
+        ip_hash;
+        server ws1:12130;
+        server ws2:12130;
+    }
+
+    server {
+        location / {
+            proxy_pass http://tomcat_cluster;
+        }
+    }
+</code></pre><p><code>upstream</code> is used for proxying requests to other servers.</p>
+<h3 id="Conf-for-websocket"><a href="#Conf-for-websocket" class="headerlink" title="Conf for websocket:"></a>Conf for websocket:</h3><pre><code>            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection &quot;upgrade&quot;;
+</code></pre><p>The first line tells Nginx to use HTTP/1.1 when communicating to the Node backend, which is required for WebSockets. The next two tell Nginx to respond to the Upgrade request which is initiated over HTTP by the browser when it wants to use a WebSocket.</p>
+<h3 id="If-the-listening-port-is-not-80"><a href="#If-the-listening-port-is-not-80" class="headerlink" title="If the listening port is not 80:"></a>If the listening port is not 80:</h3><pre><code>proxy_set_header Host $host:$server_port;
+</code></pre><p>Note the <code>$server_port</code> part shoud be present. Without it, the redirection will jump to $host:80, rather than the specified port!</p>
+<h3 id="Restrict-access-to-the-management-pages-by-IP"><a href="#Restrict-access-to-the-management-pages-by-IP" class="headerlink" title="Restrict access to the management pages by IP:"></a>Restrict access to the management pages by IP:</h3><pre><code>        location /manager {
+            allow 192.168.1.1/24;
+            allow 127.0.0.1;
+            deny all;
+        }
+</code></pre><h3 id="Virtual-Host"><a href="#Virtual-Host" class="headerlink" title="Virtual Host"></a>Virtual Host</h3><p>Each <code>server</code> block represent the one virtual host with its own <code>server_name</code>. Each server blocks looks like:</p>
+<pre><code>    server {
+        listen       80;
+        server_name  blog.server1.com;
+
+        location / {
+            proxy_pass http://127.0.0.1:8282;
+        }
+    }
+</code></pre><p>here each <code>server</code> blocks bind (listen) the port 80, and this server block is only resonds when the <code>server_name</code> value (here blog.server1.com) is matched the HTTP header <code>Host</code> field</p>
+<h3 id="location-syntax"><a href="#location-syntax" class="headerlink" title="location syntax"></a><code>location</code> syntax</h3><pre><code>location [ = | ~ | ~* | ^~ ] uri { ... }
+</code></pre><p>Here,</p>
 <pre><code>&quot;~&quot; - case sensitive matching
 &quot;~*&quot; - case insensitive matching
 &quot;=&quot; - forces a literal match between the request URI and the location parameter.
@@ -778,7 +810,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/02/nginx-conf/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/02/nginx-conf/">展开全文22 >></a>
         </p>
       
 
@@ -873,7 +905,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -885,7 +917,119 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -906,118 +1050,6 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

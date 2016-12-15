@@ -6,14 +6,42 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://foudingzheng.info">
-  <title>Tag: code snippet | Fouding&#39;s Blog on Life, Career and Technologies</title>
+  <title>置顶-研发与技术管理小结 | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Fouding's Blog on Life, Career and Technologies">
-<meta property="og:url" content="http://foudingzheng.info/tags/code-snippet/index.html">
+  <meta name="description" content="管理小结
+研发与技术管理小结方法论，流程，工具
+
+技术文档接口设计
+接口设计规范
+
+安全
+CentOS 安全加固
+Web 服务器与系统安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="置顶-研发与技术管理小结">
+<meta property="og:url" content="http://foudingzheng.info/2017/01/pm-tech-sys-summary/index.html">
 <meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
+<meta property="og:description" content="管理小结
+研发与技术管理小结方法论，流程，工具
+
+技术文档接口设计
+接口设计规范
+
+安全
+CentOS 安全加固
+Web 服务器与系统安全">
+<meta property="og:updated_time" content="2016-12-15T03:29:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fouding's Blog on Life, Career and Technologies">
+<meta name="twitter:title" content="置顶-研发与技术管理小结">
+<meta name="twitter:description" content="管理小结
+研发与技术管理小结方法论，流程，工具
+
+技术文档接口设计
+接口设计规范
+
+安全
+CentOS 安全加固
+Web 服务器与系统安全">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
@@ -137,73 +165,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-java-code-snippets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-pm-tech-sys-summary" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/java-code-snippets/">Java Code Snippets</a>
+    <h1 class="article-title" itemprop="name">
+      置顶-研发与技术管理小结
     </h1>
   
 
-        <a href="/2014/11/java-code-snippets/" class="archive-article-date">
-  	<time datetime="2014-11-07T06:19:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-07</time>
+        <a href="/2017/01/pm-tech-sys-summary/" class="archive-article-date">
+  	<time datetime="2016-12-31T17:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-01</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><pre><code class="java">    public static String toHexString(byte[] array) {
-        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
-    }
-</code></pre>
-<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><pre><code class="java">    /**
-     * &lt;PRE&gt;
-     * insert code as you would anywhere else
-     * &lt;/PRE&gt;
-     */
-</code></pre>
-<p>An Example from a java.awt.Event method javadoc:</p>
-<pre><code class="java">    /**
-     * &lt;PRE&gt;
-     *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;
-     *    int offmask = CTRL_DOWN_MASK;
-     *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) {
-     *        ...
-     *    }
-     * &lt;/PRE&gt;
-     */
-</code></pre>
-<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><pre><code class="java">    public static &lt;T, K&gt; Map&lt;K, String&gt; getFieldDescriptions(Class&lt;T&gt; clazz) {
-        Map&lt;K, String&gt; map = new HashMap&lt;K,String&gt;();
-        for (Field f : clazz.getDeclaredFields()) {
-            int mod = f.getModifiers();
-            if (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) {
-                try {
-                    @SuppressWarnings(&quot;unchecked&quot;)
-                    K fld = (K) f.get(null);
+        <h2 id="管理小结"><a href="#管理小结" class="headerlink" title="管理小结"></a>管理小结</h2><ul>
+<li><a href="/2016/03/pm-summary/">研发与技术管理小结</a><br>方法论，流程，工具</li>
+</ul>
+<h2 id="技术文档"><a href="#技术文档" class="headerlink" title="技术文档"></a>技术文档</h2><h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><ul>
+<li><a href="/2016/04/interf-design/">接口设计规范</a></li>
+</ul>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><ul>
+<li><a href="/2016/04/security-centos-harden/">CentOS 安全加固</a></li>
+<li><a href="/2016/04/web-security/">Web 服务器与系统安全</a></li>
+</ul>
 
-                    Integer st = null;
-                    if (fld instanceof Integer) {
-                        st = (Integer) fld;
-                    } else if (fld instanceof Short) {
-                        st = (int) (short) (Short) fld;
-                    }
-                    map.put(fld, String.format(&quot;0x%04X, %s&quot;, st&amp;0xFFFFFFFF, f.getName()));
-                } catch (Exception ex) {
-                    /* ignore */
-                }
-            }
-        }
-
-        return map;
-    }
-</code></pre>
-        <a class="article-more-a"  href="/2014/11/java-code-snippets/#more">more >></a>
       
 
       
@@ -213,20 +203,16 @@
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-snippet/">code snippet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code-standard/">code standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mgmt/">mgmt</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
 	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/tech/">tech</a>
+	<a class="article-category-link" href="/categories/mgmt/">mgmt</a>
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/java-code-snippets/">展开全文22 >></a>
-        </p>
       
 
       
@@ -235,15 +221,24 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
+  
+<nav id="article-nav">
   
   
+    <a href="/2016/04/web-security/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Web 服务器与系统安全</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
 
           </div>
         </div>
@@ -265,9 +260,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

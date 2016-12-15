@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -252,235 +252,8 @@ DELETE https://~/services/$version/queued/jobs/:id             根据id删除任
 {  
     &quot;lang&quot;: &quot;zh-CN&quot;  
 }
-</code></pre><h2 id="请求数据"><a href="#请求数据" class="headerlink" title="请求数据"></a>请求数据</h2><p>使用 JSON 格式传输数据，在 http 请求头和响应头申明 <code>Content-Type</code>：</p>
-<pre><code>Request
-  Accept: application/json
-  Content-Type: application/json;charset=UTF-8
-{
-  &quot;name&quot;: &quot;user1&quot;,
-  &quot;location&quot;: &quot;Xiamen&quot;
-}
-</code></pre><h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><p>不使用 Envelope: 响应状态（成功/出错）包含在响应头中；返回的数据结构尽可能简单，不过于包装。</p>
-<h3 id="成功时格式"><a href="#成功时格式" class="headerlink" title="成功时格式"></a>成功时格式</h3><pre><code>Response
-  Content-Type: application/json;charset=UTF-8
-{
-  &quot;id&quot;: 101
-  &quot;name&quot; : &quot;user1&quot;,
-  &quot;location&quot; : &quot;Xiamen&quot;
-}
-</code></pre><h3 id="出错时处理"><a href="#出错时处理" class="headerlink" title="出错时处理"></a>出错时处理</h3><p>出错响应包括</p>
-<ol>
-<li>返回的错误信息</li>
-<li>状态码<br>两部分。</li>
-</ol>
-<h4 id="自定义异常和异常处理"><a href="#自定义异常和异常处理" class="headerlink" title="自定义异常和异常处理"></a>自定义异常和异常处理</h4><p>所有自定义异常继承 <code>RuntimeException</code>, 在业务层抛出, 在统一的 <code>ExceptionHandler</code> 中进行处理。</p>
-<h4 id="错误返回数据格式"><a href="#错误返回数据格式" class="headerlink" title="错误返回数据格式"></a>错误返回数据格式</h4><p>错误信息格式：</p>
-<pre><code>{
-    &quot;message&quot;: &quot;&lt;Prompt Title; required&gt;&quot;,
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;&lt;error code; required&gt;&quot;,
-            &quot;description&quot;: &quot;&lt;Prompt Message; required&gt;&quot;,
-            &quot;resource&quot;: &quot;&lt;optional&gt;&quot;,
-            &quot;field&quot;:&quot;&lt;optional&gt;&quot;,
-            &quot;document&quot;: &quot;&lt;optional&gt;&quot;
-        }
-    ]
-}
-</code></pre><p>其中：</p>
-<ol>
-<li>错误标题 <code>message</code>, 必填</li>
-<li>错误代码 <code>errors.code</code>, 必填</li>
-<li>错误展示信息 <code>errors.description</code>, 必填</li>
-<li>资源 <code>errors.resource</code>, 可选</li>
-<li>属性 <code>errors.field</code>, 可选</li>
-<li>文档地址 <code>errors.document</code>, 可选</li>
-</ol>
-<p>示例: 调用频率超过限制的 Response:</p>
-<pre><code>Headers:
-    Content-Type: application/json;charset=UTF-8
-    X-RateLimit-Limit: 3000
-    X-RateLimit-Reset: 1403162176516
-    X-RateLimit-Remaining: 0
-{
-    &quot;message&quot;: &quot;Something bad happened :-(&quot;,
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;rate_limit_exceeded&quot;,
-            &quot;description&quot;: &quot;Too Many Requests. API rate limit exceeded&quot;,
-            &quot;document&quot;: &quot;https://developer.github.com/v3/gists/&quot;
-        }
-    ]
-}
-</code></pre><h4 id="应用状态码"><a href="#应用状态码" class="headerlink" title="应用状态码"></a>应用状态码</h4><table>
-<thead>
-<tr>
-<th>Code</th>
-<th>HTTP Operation</th>
-<th>Body Contents</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td>GET,PUT</td>
-<td>资源</td>
-<td>操作成功</td>
-</tr>
-<tr>
-<td>201</td>
-<td>POST</td>
-<td>资源,元数据</td>
-<td>对象创建成功</td>
-</tr>
-<tr>
-<td>202</td>
-<td>POST,PUT,DELETE,PATCH</td>
-<td>N/A</td>
-<td>请求已经被接受</td>
-</tr>
-<tr>
-<td>204</td>
-<td>DELETE,PUT,PATCH</td>
-<td>N/A</td>
-<td>操作已经执行成功，但是没有返回数据</td>
-</tr>
-<tr>
-<td>301</td>
-<td>GET</td>
-<td>link</td>
-<td>资源已被移除</td>
-</tr>
-<tr>
-<td>303</td>
-<td>GET</td>
-<td>link</td>
-<td>重定向</td>
-</tr>
-<tr>
-<td>304</td>
-<td>GET</td>
-<td>N/A</td>
-<td>资源没有被修改</td>
-</tr>
-<tr>
-<td>400</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>参数列表错误(缺少，格式不匹配)</td>
-</tr>
-<tr>
-<td>401</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>未授权</td>
-</tr>
-<tr>
-<td>403</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>访问受限，授权过期</td>
-</tr>
-<tr>
-<td>404</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>资源，服务未找到</td>
-</tr>
-<tr>
-<td>405</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>不允许的http方法</td>
-</tr>
-<tr>
-<td>409</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>资源冲突，或者资源被锁定</td>
-</tr>
-<tr>
-<td>415</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>不支持的数据(媒体)类型</td>
-</tr>
-<tr>
-<td>429</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>请求过多被限制</td>
-</tr>
-<tr>
-<td>500</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>系统内部错误</td>
-</tr>
-<tr>
-<td>501</td>
-<td>GET,PSOT,PUT,DELETE,PATCH</td>
-<td>错误提示(消息)</td>
-<td>接口未实现</td>
-</tr>
-</tbody>
-</table>
-<h3 id="另一种常见形式是使用-Envelope："><a href="#另一种常见形式是使用-Envelope：" class="headerlink" title="另一种常见形式是使用 Envelope："></a>另一种常见形式是使用 Envelope：</h3><pre><code>{
-  &quot;status&quot;: { },
-  &quot;data&quot;: { }
-}
-</code></pre><p>出错时可仅有 <code>status</code> 而无 <code>data</code> 字段。</p>
-<p><em>本规范采用无 Envelope 的格式</em>。</p>
-<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>RESTful API是无状态的也就是说用户请求的鉴权和 cookie 以及 session 无关，每一次请求都应该包含鉴权证明。</p>
-<p>RESTful 服务使用 Oauth2 的方式进行调用授权，使用 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" title="HTTP Header" target="_blank" rel="external">http 请求头</a><code>Authorization</code>设置授权码; 必须使用<code>User-Agent</code>设置客户端信息, 无<code>User-Agent</code>请求头的请求应该被拒绝访问。</p>
-<pre><code>Request Header
-
-User-Agent: Data-Server-Client
-Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
-</code></pre><p>说明：</p>
-<ul>
-<li>授权码要放在 Http Header 中，可避免重定向传递时可能发生的授权码泄漏；</li>
-<li>采用 JWT token。</li>
-</ul>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h2 id="聚合-API"><a href="#聚合-API" class="headerlink" title="聚合 API"></a>聚合 API</h2><p>把当前用户需要在第一时间内容加载的多个接口聚合成一个请求发送到服务端，服务端根据请求内容，一次性把所有数据合并返回。相比于页面级 API，具备更高的灵活性，同时又能很容易的实现页面级 API 的功能。</p>
-<p>地址：/$version/aggApi</p>
-<p>传入参数：</p>
-<pre><code>data:[
-  {url:&apos;api1&apos;,type:&apos;get&apos;,data:{...}},
-  {url:&apos;api2&apos;,type:&apos;get&apos;,data:{...}},
-  {url:&apos;api3&apos;,type:&apos;get&apos;,data:{...}},
-  {url:&apos;api4&apos;,type:&apos;get&apos;,data:{...}}
-]
-</code></pre><p>返回数据：</p>
-<pre><code>{
-  status:0,
-  msg:&apos;&apos;,
-  data:[
-    {status:0,msg:&apos;&apos;,data:[]},
-    {status:-1,msg:&apos;&apos;,data:{}},
-    {status:1,msg:&apos;&apos;,data:{}},
-    {status:0,msg:&apos;&apos;,data:[]},
-  ]
-}
-</code></pre><h2 id="API-文档"><a href="#API-文档" class="headerlink" title="API 文档"></a>API 文档</h2><ul>
-<li><a href="https://github.com/thx/RAP" target="_blank" rel="external">阿里妈妈RAP</a></li>
-<li><a href="http://swagger.io" target="_blank" rel="external">Swagger</a></li>
-</ul>
-<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ul>
-<li>使用ISO-8601格式表达时间字段，例如: <code>2014-04-05T14:30Z</code></li>
-<li>响应：使用 HTTP Header 时，优先使用合适的标准头属性。用 <code>X-</code> 作为前缀自定义一个头属性，例如: <code>X-Result-Fields</code>。</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><a href="http://en.wikipedia.org/wiki/HATEOAS" target="_blank" rel="external">HATEOAS</a></li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank" rel="external">Best Practices for Designing a Pragmatic RESTful API | Vinay Sahni</a></li>
-<li><a href="http://arccode.net/2015/02/26/RESTful最佳实践/" target="_blank" rel="external">RESTful最佳实践 | Arccode’s blog</a></li>
-<li><a href="http://arccode.net/2015/04/18/前后端完全分离之API设计/" target="_blank" rel="external">前后端完全分离之API设计 | Arccode’s blog</a></li>
-<li><a href="https://developer.yahoo.com/social/rest_api_guide/http-response-codes.html" target="_blank" rel="external">HTTP Response Status Codes - YDN</a></li>
-</ul>
-
+</code></pre>
+        <a class="article-more-a"  href="/2016/04/interf-design/#more">more >></a>
       
 
       
@@ -502,7 +275,7 @@ Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/04/interf-design/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/04/interf-design/">展开全文22 >></a>
         </p>
       
 
@@ -593,7 +366,7 @@ Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,7 +378,119 @@ Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,118 +511,6 @@ Authorzation: Bearer 383w9JKJLJFw4ewpie2wefmjdlJLDJF
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

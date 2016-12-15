@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -146,7 +146,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/build-dev-env-with-vagrant/">pomodoro 番茄工作法</a>
+      <a class="article-title" href="/2015/08/build-dev-env-with-vagrant/">搭建 Vagrant 开发环境</a>
     </h1>
   
 
@@ -158,11 +158,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
-<li>One of the most useful senario with Vagrant is to setup a network of serveral computing nodes to mimic a distributed system. Or even better, use <a href="https://www.docker.com/" target="_blank" rel="external">Docker</a>.</li>
+<li>One of the most useful senario with Vagrant is to setup a network of serveral computing nodes to mimic a distributed system. Or even better, use <a href="https://www.docker.com/">Docker</a>.</li>
 </ul>
-<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><h3 id="Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”"><a href="#Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”" class="headerlink" title="Download offline file for instable network, esp. in case u r behind the “greatwall”:"></a>Download offline file for instable network, esp. in case u r behind the “greatwall”:</h3><p>Search the box in <a href="https://atlas.hashicorp.com/" target="_blank" rel="external">https://atlas.hashicorp.com/</a> for box name, version, then follow the format</p>
+<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><h3 id="Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”"><a href="#Download-offline-file-for-instable-network-esp-in-case-u-r-behind-the-“greatwall”" class="headerlink" title="Download offline file for instable network, esp. in case u r behind the “greatwall”:"></a>Download offline file for instable network, esp. in case u r behind the “greatwall”:</h3><p>Search the box in <a href="https://atlas.hashicorp.com/">https://atlas.hashicorp.com/</a> for box name, version, then follow the format</p>
 <pre><code>https://atlas.hashicorp.com/puppetlabs/boxes/&lt;boxName&gt;/versions/&lt;version&gt;/providers/virtualbox.box
-</code></pre><p>to construct the downloading url. e.g. <a href="https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box" target="_blank" rel="external">https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box</a></p>
+</code></pre><p>to construct the downloading url. e.g. <a href="https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box">https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box</a></p>
 <h3 id="Change-the-Storage-Location"><a href="#Change-the-Storage-Location" class="headerlink" title="Change the Storage Location"></a>Change the Storage Location</h3><ul>
 <li>Press <code>Win+R</code> and type <code>systempropertiesadvanced</code> to bring up the “System Properties” dialog, click “Environment Variables…” button, and in the “User vairalbes for $USER” section, add a variable named <code>VAGRANT_HOME</code>, whose value is <code>D:\your\vagrant\working\path</code>.</li>
 </ul>
@@ -171,25 +171,7 @@
 </code></pre><ul>
 <li>Change VirtualBox storage location: Open Virtalbox and navigate to <code>File &gt; Preference&gt; General: Default Machine Folder</code>: change to target location.</li>
 </ul>
-<h2 id="Setup-Vagrant-Virtual-Machine"><a href="#Setup-Vagrant-Virtual-Machine" class="headerlink" title="Setup Vagrant Virtual Machine"></a>Setup Vagrant Virtual Machine</h2><p>Execute below commands in <a href="http://cmder.net/" target="_blank" rel="external">cmder</a>/cmd.exe:</p>
-<pre><code>echo check vagrant_home: %vagrant_home%
-set BN=boot2docker-virtualbox
-set BOXPATH=D:\tools\vagrant-boxes\boot2docker-virtualbox.box
-cd /d D:\HashiCorp\Vagrant\myvagrantfile
-mkdir %BN%
-cd %BN%
-vagrant box add %BN% %BOXPATH%
-vagrant box list
-vagrant init %BN%
-</code></pre><p>And issue command <code>vagrant up &amp;&amp; vagrant ssh</code> to startup and connect to the vagrant vm and install the dev tools manually, then key in <code>vagrant package --output my-dev.box</code> to export the whole box as a file which can then be shared b/w team members to setup the same dev env quickly.<br>(If you are using <a href="http://cmder.net/" target="_blank" rel="external">cmder</a> full version, the <code>ssh</code> command is right in your hands, so simply type <code>vagrant ssh</code> to connect to the vagrant box; otherwise, use a ssh client, say Putty, MobaXterm.)</p>
-<p>Or edit the <code>Vagrantfile</code> file to setup the dev env in script.</p>
-<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><p>If both host-only network and shared folder are enabled in Vagrantfile:</p>
-<pre><code>config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.15&quot;
-config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
-</code></pre><p>The host-only network is accessible, but the synced_folder cannot be found! (I don’t know whether this bug is in Vagrant, or reproducible only in my machine)</p>
-<p>Solution: create the <code>/host_e</code> directionary, then mount the drive in <code>~/.bashrc</code> file manually:</p>
-<pre><code>echo &apos;sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) host_e /host_e&apos; &gt;&gt; ~/.bashrc
-</code></pre>
+        <a class="article-more-a"  href="/2015/08/build-dev-env-with-vagrant/#more">more >></a>
       
 
       
@@ -206,7 +188,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/build-dev-env-with-vagrant/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/08/build-dev-env-with-vagrant/">展开全文22 >></a>
         </p>
       
 
@@ -297,7 +279,7 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -309,7 +291,119 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -330,118 +424,6 @@ config.vm.synced_folder &quot;e:&quot;, &quot;/host_e&quot;
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

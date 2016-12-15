@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -162,20 +162,50 @@
 <h2 id="Nginx-安装-modSecurity-模块"><a href="#Nginx-安装-modSecurity-模块" class="headerlink" title="Nginx 安装 modSecurity 模块"></a>Nginx 安装 modSecurity 模块</h2><ol>
 <li>安装依赖</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su</div><div class="line"></div><div class="line">yum install -y gcc make automake autoconf libtool</div><div class="line">yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel</div></pre></td></tr></table></figure>
+<pre><code class="bash">    su
+
+    yum install -y gcc make automake autoconf libtool
+    yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel
+</code></pre>
 <p>2. 编译 modSecurity</p>
 <p>首先到 modSecurity 官网上下载最新版并编译：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz</div><div class="line"></div><div class="line">tar -xvpzf modsecurity-2.9.0.tar.gz</div><div class="line"><span class="built_in">cd</span> modsecurity-2.9.0</div><div class="line"></div><div class="line">./autogen.sh</div><div class="line">./configure --enable-standalone-module</div><div class="line">make</div></pre></td></tr></table></figure>
+<pre><code class="bash">    wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz
+
+    tar -xvpzf modsecurity-2.9.0.tar.gz
+    cd modsecurity-2.9.0
+
+    ./autogen.sh
+    ./configure --enable-standalone-module
+    make
+</code></pre>
 <p>会花1分钟左右的时间去编译。</p>
 <p>3. 将 modSecurity 模块打包进 nginx</p>
 <p>要从源码层级将 modSecurity 模块编译进 nginx。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">wget http://nginx.org/download/nginx-1.7.8.tar.gz</div><div class="line">tar -xvpzf nginx-1.7.8.tar.gz</div><div class="line"><span class="built_in">cd</span> nginx-1.7.8</div><div class="line">./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin</div></pre></td></tr></table></figure>
+<pre><code class="bash">    cd ~
+    wget http://nginx.org/download/nginx-1.7.8.tar.gz
+    tar -xvpzf nginx-1.7.8.tar.gz
+    cd nginx-1.7.8
+    ./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/
+    make
+    make install
+
+    cd /usr/local/nginx/sbin
+</code></pre>
 <p>安装后，nginx 位于 <code>/usr/local/nginx/sbin/nginx</code>。</p>
 <p>4. 启用 modSecurity</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</div><div class="line">vi conf/nginx.conf</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location / &#123;</div><div class="line">	ModSecurityEnabled on;</div><div class="line">	ModSecurityConfig modsecurity.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create am empty modsecurity.conf</span></div><div class="line">touch conf/modsecurity.conf</div><div class="line"><span class="comment"># test the conf file</span></div><div class="line">sudo ./nginx -t</div></pre></td></tr></table></figure>
+<pre><code class="bash">    cd /usr/local/nginx
+    vi conf/nginx.conf
+</code></pre>
+<pre><code>location / {
+    ModSecurityEnabled on;
+    ModSecurityConfig modsecurity.conf;
+}
+</code></pre><p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
+<pre><code class="bash">    # create am empty modsecurity.conf
+    touch conf/modsecurity.conf
+    # test the conf file
+    sudo ./nginx -t
+</code></pre>
 <p>参考：</p>
 <ul>
 <li><a href="http://baike.baidu.com/link?url=lxg5knLVTwZ2vbth76MM5aXtFCv16VOW6dNekXyqKtwRzwUs1qcUM6MrtrvjSCmWlenY0W6t_8a1iDhqqR9aba" target="_blank" rel="external">百度百科</a></li>
@@ -203,7 +233,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/nginx-modsecurity-installation/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/03/nginx-modsecurity-installation/">展开全文22 >></a>
         </p>
       
 
@@ -239,10 +269,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Content-Type: application/json&quot; -d &apos;&#123;&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;&#125;&apos; http://foo.com/api/login</div></pre></td></tr></table></figure></p>
-<p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
-<p>For windows, single quotes around json did not work and I ended up escaping double quotes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123; \&quot;key1\&quot;: \&quot;value1\&quot; &#125;&quot; http://foo.com/api/method</div></pre></td></tr></table></figure></p>
-<h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
+        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:</p>
+<pre><code>    curl -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;}&#39; http://foo.com/api/login
+</code></pre><p>Post a file:</p>
+<pre><code>curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
+</code></pre><p>For windows, single quotes around json did not work and I ended up escaping double quotes:</p>
+<pre><code>    curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;{ \&quot;key1\&quot;: \&quot;value1\&quot; }&quot; http://foo.com/api/method
+</code></pre><h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
 
       
 
@@ -265,7 +298,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文22 >></a>
         </p>
       
 
@@ -356,7 +389,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -368,7 +401,119 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -389,118 +534,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>

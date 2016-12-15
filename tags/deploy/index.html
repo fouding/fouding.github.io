@@ -18,7 +18,7 @@
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/main.css?v=4.0.0.css">
   
@@ -168,14 +168,47 @@
 <h2 id="实现并行部署"><a href="#实现并行部署" class="headerlink" title="实现并行部署"></a>实现并行部署</h2><ol>
 <li>pom.xml 中配置生成的 war 包加时间戳：</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;properties&gt;
+    &lt;maven.build.timestamp.format&gt;yyyyMMddHHmm&lt;/maven.build.timestamp.format&gt;
+&lt;/properties&gt;
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.4&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;
+                &lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
 <p>在项目根目录下执行命令</p>
 <pre><code>mvn package
 </code></pre><p>生成 war 包，如 portal##20140922.war。</p>
 <p>2. 部署</p>
 <p>将 war 包上传到/anyfish_web/war/warHub 下后，执行部署脚本 parallelDeploy.sh （脚本内容见下）</p>
 <h2 id="部署脚本"><a href="#部署脚本" class="headerlink" title="部署脚本"></a>部署脚本</h2><p>并行部署脚本 parallelDeploy.sh 的功能：搜寻指定目录下最新的 war 包，然后依 Tomcat 格式，在 $TOMCAT_HOME/conf/Catalina/localhost 创建配置文件（如 portal##20140922.xml），以使 Tomcat 感知并部署此 web 工程。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># conf</span></div><div class="line">ctx=portal</div><div class="line">warFolder=/anyfish_web/war/warHub</div><div class="line">deployFolder=/anyfish_web/war</div><div class="line">confFolder=/Tomcat/conf/Catalina/localhost</div><div class="line"></div><div class="line"><span class="comment"># ---</span></div><div class="line">latestWarFile=$(basename `ls -tr <span class="variable">$warFolder</span>/*.war | tail -n 1`)</div><div class="line"><span class="built_in">echo</span> --- latestWarFile: <span class="variable">$latestWarFile</span></div><div class="line">cp <span class="variable">$warFolder</span>/<span class="variable">$latestWarFile</span> <span class="variable">$deployFolder</span>/</div><div class="line">confFile=$(<span class="built_in">echo</span> <span class="variable">$latestWarFile</span> | sed <span class="string">'s/.*\#\#\(.*\)\.war/\1/'</span>)</div><div class="line">ctxXml=<span class="variable">$confFolder</span>/<span class="variable">$ctx</span><span class="comment">##$confFile.xml</span></div><div class="line"></div><div class="line"><span class="comment"># generate context conf file for tomcat to deploy</span></div><div class="line"><span class="built_in">echo</span> --- ctxXml: <span class="variable">$ctxXml</span></div><div class="line">ctxCont=<span class="string">'&lt;Context displayName="'</span><span class="variable">$ctx</span><span class="string">'" docBase="/anyfish_web/war/'</span><span class="variable">$latestWarFile</span><span class="string">'" reloadable="true" /&gt;'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$ctxCont</span> &gt; <span class="variable">$ctxXml</span></div></pre></td></tr></table></figure>
+<pre><code class="bash"># conf
+ctx=portal
+warFolder=/anyfish_web/war/warHub
+deployFolder=/anyfish_web/war
+confFolder=/Tomcat/conf/Catalina/localhost
+
+# ---
+latestWarFile=$(basename `ls -tr $warFolder/*.war | tail -n 1`)
+echo --- latestWarFile: $latestWarFile
+cp $warFolder/$latestWarFile $deployFolder/
+confFile=$(echo $latestWarFile | sed &#39;s/.*\#\#\(.*\)\.war/\1/&#39;)
+ctxXml=$confFolder/$ctx##$confFile.xml
+
+# generate context conf file for tomcat to deploy
+echo --- ctxXml: $ctxXml
+ctxCont=&#39;&lt;Context displayName=&quot;&#39;$ctx&#39;&quot; docBase=&quot;/anyfish_web/war/&#39;$latestWarFile&#39;&quot; reloadable=&quot;true&quot; /&gt;&#39;
+echo $ctxCont &gt; $ctxXml
+</code></pre>
 
       
 
@@ -198,7 +231,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/09/parallel-deploy-script/">展开全文 >></a>
+          <a class="article-more-a" href="/2014/09/parallel-deploy-script/">展开全文22 >></a>
         </p>
       
 
@@ -289,7 +322,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -301,7 +334,119 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">interface design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">family</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">utility</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">waf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">modSecurity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mgmt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">dev phases</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolset</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">toolchain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">architecture</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">foss</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">encryption</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -322,118 +467,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">interface design</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code standard</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">family</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">waf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mgmt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">dev phases</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolset</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">toolchain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">encryption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
               </li>
             
             <div class="clearfix"></div>
