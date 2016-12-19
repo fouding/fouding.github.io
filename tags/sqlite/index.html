@@ -157,200 +157,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>写的一个 Python 的练手的小工具。<br>已有一个单词的数据表，其中有单词、音标、意思、发音，发音的音频文件放在一个目录下，文件名为[word].mp3。现要将这些音频文件导入表中；使用 Tkinter 做 GUI 界面。</p>
-<pre><code class="python">#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-import sqlite3 as lite
-import sys
-import pdb
-import tkMessageBox
-
-import Tkinter as tk
-import ttk
-import tkFileDialog
-from Tkinter import Tk, Text, Entry, OptionMenu, BOTH, W, N, E, S, StringVar
-from ttk import Frame, Button, Label, Style
-
-print &#39;sqlite version: %s&#39; % lite.version
-
-
-def readFile(filePath):
-    try:
-        fin = open(filePath, &quot;rb&quot;)
-        return fin.read()
-
-    except IOError, e:
-        print &quot;Error %d: %s&quot; % (e.args[0], e.args[1])
-        sys.exit(1)
-
-    finally:
-        if fin:
-            fin.close()
-
-
-class SqliteUtil:
-
-    def __init__(self, sqliteFile):
-        self.conn = lite.connect(sqliteFile)
-        self.cur = self.conn.cursor()
-
-    def fetchall(self, sqlStmt):
-        self.cur.execute(sqlStmt)
-        return self.cur.fetchall()
-
-    def fetchone(self, sqlStmt):
-        self.cur.execute(sqlStmt)
-        return self.cur.fetchone()
-
-    def setBinData(self, tableName, binColumnName, filePath, whereClause):
-        try:
-            data = readFile(filePath)
-            binData = lite.Binary(data)
-            sql = &#39;UPDATE %s SET %s=? WHERE %s&#39; % (tableName, binColumnName, whereClause)
-            print sql
-            self.cur.execute(sql, (binData,) )
-            print &#39;Affected rows using sqlite.Binary(): %d&#39; % self.cur.rowcount
-            self.cur.execute(sql, [buffer(data)])
-            print &#39;Affected rows using buffer(): %d&#39; % self.cur.rowcount
-            self.conn.commit()
-
-        except lite.Error, e:
-            if self.conn:
-                self.conn.rollback()
-
-            print &quot;Error %s:&quot; % e.args[0]
-            sys.exit(1)
-
-        #finally:
-            #if conn:
-                #conn.close()
-
-class WordFrame(Frame):
-
-    def __init__(self, parent):
-        Frame.__init__(self, parent)
-        self.parent = parent
-        self.initUI()
-        self.sqliteUtil = None
-
-    @staticmethod
-    def refreshOptionMenu(om, oldVarChoice, newChoices):
-        # Reset var and delete all old options
-        oldVarChoice.set(&#39;&#39;)
-        #oldVarChoice.set(newChoices[0])
-        om[&#39;menu&#39;].delete(0, &#39;end&#39;)
-
-        # Insert list of new options (tk._setit hooks them up to var)
-        for choice in newChoices:
-            om[&#39;menu&#39;].add_command(label=choice, command=tk._setit(oldVarChoice, choice))
-
-    def browseSqlite(self):
-        ftypes = [(&#39;Sqlite files&#39;, &#39;*.sqlite&#39;), (&#39;All files&#39;, &#39;*&#39;)]
-        dlg = tkFileDialog.Open(self, filetypes=ftypes)
-        sqliteFile = dlg.show()
-
-        if sqliteFile != &#39;&#39;:
-            self.varFilename.set(sqliteFile)
-
-            self.sqliteUtil = SqliteUtil(sqliteFile)
-            tables = self.sqliteUtil.fetchall(&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;)
-            #self.varTable.set(tuple(map(lambda x: x[0], tables)))
-            self.refreshOptionMenu(self.omTables, self.varTable, map(lambda x: x[0], tables))
-
-            # fetch the cols
-            cols = self.sqliteUtil.fetchall(&#39;PRAGMA table_info(%s)&#39; % (tables[0]))
-            self.refreshOptionMenu(self.omCols, self.varCol, map(lambda x: x[1], cols))
-
-            # pdb.set_trace()
-
-    def initUI(self):
-        self.parent.title(&quot;导入音频数据&quot;)
-        self.style = ttk.Style()
-        self.style.theme_use(&quot;default&quot;)
-        self.pack(fill=BOTH, expand=1)
-        self.centerWindow()
-
-        # self.columnconfigure(1, weight=1)
-
-        # row 0: file selection
-        panelFileSelection = Frame(self)
-        Label(panelFileSelection, text=&quot;sqlite文件:&quot;).pack(side=&quot;left&quot;, fill=None, expand=False)
-        self.varFilename=StringVar()
-        self.txtFileName = Entry(panelFileSelection, textvariable=self.varFilename, width=60)
-        self.txtFileName.pack(side=&quot;left&quot;, fill=None, expand=True)
-
-        btnBrowse = Button(panelFileSelection, text=&quot;...&quot;, command=self.browseSqlite)
-        #btnBrowser.grid(row=0, column=4, pady=4)
-        btnBrowse.pack(side=&quot;right&quot;, fill=None, expand=False)
-
-        panelFileSelection.grid(row=0, column=0, columnspan=4, sticky=&quot;we&quot;)
-
-        # Row 1: word table/audio column name
-        self.varTable = StringVar(self)
-        Label(self, text=&quot;表名:&quot;).grid(row=1, sticky=W, padx=5, pady=4)
-        self.omTables = OptionMenu(self, self.varTable, &#39;&#39;)
-        self.omTables.grid(row=1, column=1, sticky=E+W)
-        self.omTables[&#39;menu&#39;].bind(&quot;&lt;Unmap&gt;&quot;, self.onSelectTable)
-
-        self.varCol = StringVar(self)
-        Label(self, text=&quot;列名:&quot;).grid(row=1, column=2, sticky=E, padx=5, pady=4)
-        self.omCols = OptionMenu(self, self.varCol, &#39;&#39;)
-        self.omCols.grid(row=1, column=3, sticky=E+W)
-
-        # Row 3: close/import buttons
-        btnImport = Button(self, text=&quot;导入&quot;, command=self.importAudios)
-        btnImport.grid(row=2, column=2, padx=5, pady=5)
-
-        btnClose = Button(self, text=&quot;关闭&quot;, command=self.quit)
-        btnClose.grid(row=2, column=1, padx=5, pady=5)
-
-    def quit(self):
-        print &#39;in quit()&#39;
-        print self.sqliteUtil
-        if not (self.sqliteUtil is None) and not (self.sqliteUtil.conn is None):
-            print &#39;to close conn&#39;
-            self.sqliteUtil.conn.close()
-        print &#39;to exit()&#39;
-        sys.exit(0)
-
-    def importAudios(self):
-        # tkMessageBox.showinfo(&quot;col: &quot;, self.varCol.get())
-
-    # use loop here
-        audioFile = &#39;C:/Users/fouding/Desktop/fetion_received_files/a bas.mp3&#39;
-        self.sqliteUtil.setBinData(self.varTable.get(), self.varCol.get(), audioFile, &quot;word=&#39;think&#39;&quot;)
-
-
-    def onSelectTable(self, val):
-        print &#39;onSelectTable&#39;
-        sender = val.widget
-        tblName = sender.get(sender.curselection())
-
-        # fetch the cols
-        cols = self.sqliteUtil.fetchall(&#39;PRAGMA table_info(%s)&#39; % (tblName))
-        self.refreshOptionMenu(self.omCols, self.varCol, map(lambda x: x[1], cols))
-
-    def centerWindow(self):
-        w = 500
-        h = 200
-
-        sw = self.parent.winfo_screenwidth()
-        sh = self.parent.winfo_screenheight()
-
-        x = (sw - w) / 2
-        y = (sh - h) / 2
-
-        self.parent.geometry(&#39;%dx%d+%d+%d&#39; % (w, h, x, y))
-
-def main():
-    root = tk.Tk()
-    app = WordFrame(root)
-    root.mainloop()
-
-if __name__ == &#39;__main__&#39;:
-    main()
-</code></pre>
+        <p>写的一个 Python 的练手的小工具。<br>已有一个单词的数据表，其中有单词、音标、意思、发音，发音的音频文件放在一个目录下，文件名为[word].mp3。现要将这些音频文件导入表中；使用 Tkinter 做 GUI 界面。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sqlite3 <span class="keyword">as</span> lite</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> pdb</div><div class="line"><span class="keyword">import</span> tkMessageBox</div><div class="line"></div><div class="line"><span class="keyword">import</span> Tkinter <span class="keyword">as</span> tk</div><div class="line"><span class="keyword">import</span> ttk</div><div class="line"><span class="keyword">import</span> tkFileDialog</div><div class="line"><span class="keyword">from</span> Tkinter <span class="keyword">import</span> Tk, Text, Entry, OptionMenu, BOTH, W, N, E, S, StringVar</div><div class="line"><span class="keyword">from</span> ttk <span class="keyword">import</span> Frame, Button, Label, Style</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'sqlite version: %s'</span> % lite.version</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readFile</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        fin = open(filePath, <span class="string">"rb"</span>)</div><div class="line">        <span class="keyword">return</span> fin.read()</div><div class="line"></div><div class="line">    <span class="keyword">except</span> IOError, e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Error %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</div><div class="line">        sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        <span class="keyword">if</span> fin:</div><div class="line">            fin.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqliteUtil</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sqliteFile)</span>:</span></div><div class="line">        self.conn = lite.connect(sqliteFile)</div><div class="line">        self.cur = self.conn.cursor()</div><div class="line">                </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fetchall</span><span class="params">(self, sqlStmt)</span>:</span></div><div class="line">        self.cur.execute(sqlStmt)</div><div class="line">        <span class="keyword">return</span> self.cur.fetchall()</div><div class="line">                </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fetchone</span><span class="params">(self, sqlStmt)</span>:</span></div><div class="line">        self.cur.execute(sqlStmt)</div><div class="line">        <span class="keyword">return</span> self.cur.fetchone()</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setBinData</span><span class="params">(self, tableName, binColumnName, filePath, whereClause)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            data = readFile(filePath)</div><div class="line">            binData = lite.Binary(data)</div><div class="line">            sql = <span class="string">'UPDATE %s SET %s=? WHERE %s'</span> % (tableName, binColumnName, whereClause)</div><div class="line">            <span class="keyword">print</span> sql</div><div class="line">            self.cur.execute(sql, (binData,) )</div><div class="line">            <span class="keyword">print</span> <span class="string">'Affected rows using sqlite.Binary(): %d'</span> % self.cur.rowcount</div><div class="line">            self.cur.execute(sql, [buffer(data)])</div><div class="line">            <span class="keyword">print</span> <span class="string">'Affected rows using buffer(): %d'</span> % self.cur.rowcount</div><div class="line">            self.conn.commit()</div><div class="line"></div><div class="line">        <span class="keyword">except</span> lite.Error, e:</div><div class="line">            <span class="keyword">if</span> self.conn:</div><div class="line">                self.conn.rollback()</div><div class="line"></div><div class="line">            <span class="keyword">print</span> <span class="string">"Error %s:"</span> % e.args[<span class="number">0</span>]</div><div class="line">            sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">        <span class="comment">#finally:</span></div><div class="line">            <span class="comment">#if conn:</span></div><div class="line">                <span class="comment">#conn.close()</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordFrame</span><span class="params">(Frame)</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent)</span>:</span></div><div class="line">        Frame.__init__(self, parent)</div><div class="line">        self.parent = parent</div><div class="line">        self.initUI()</div><div class="line">        self.sqliteUtil = <span class="keyword">None</span></div><div class="line">        </div><div class="line"><span class="meta">    @staticmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">refreshOptionMenu</span><span class="params">(om, oldVarChoice, newChoices)</span>:</span></div><div class="line">        <span class="comment"># Reset var and delete all old options</span></div><div class="line">        oldVarChoice.set(<span class="string">''</span>)</div><div class="line">        <span class="comment">#oldVarChoice.set(newChoices[0])</span></div><div class="line">        om[<span class="string">'menu'</span>].delete(<span class="number">0</span>, <span class="string">'end'</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Insert list of new options (tk._setit hooks them up to var)</span></div><div class="line">        <span class="keyword">for</span> choice <span class="keyword">in</span> newChoices:</div><div class="line">            om[<span class="string">'menu'</span>].add_command(label=choice, command=tk._setit(oldVarChoice, choice))</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">browseSqlite</span><span class="params">(self)</span>:</span></div><div class="line">        ftypes = [(<span class="string">'Sqlite files'</span>, <span class="string">'*.sqlite'</span>), (<span class="string">'All files'</span>, <span class="string">'*'</span>)]</div><div class="line">        dlg = tkFileDialog.Open(self, filetypes=ftypes)</div><div class="line">        sqliteFile = dlg.show()</div><div class="line"></div><div class="line">        <span class="keyword">if</span> sqliteFile != <span class="string">''</span>:</div><div class="line">            self.varFilename.set(sqliteFile)</div><div class="line">            </div><div class="line">            self.sqliteUtil = SqliteUtil(sqliteFile)</div><div class="line">            tables = self.sqliteUtil.fetchall(<span class="string">"SELECT name FROM sqlite_master WHERE type='table'"</span>)</div><div class="line">            <span class="comment">#self.varTable.set(tuple(map(lambda x: x[0], tables)))</span></div><div class="line">            self.refreshOptionMenu(self.omTables, self.varTable, map(<span class="keyword">lambda</span> x: x[<span class="number">0</span>], tables))</div><div class="line">            </div><div class="line">            <span class="comment"># fetch the cols</span></div><div class="line">            cols = self.sqliteUtil.fetchall(<span class="string">'PRAGMA table_info(%s)'</span> % (tables[<span class="number">0</span>]))</div><div class="line">            self.refreshOptionMenu(self.omCols, self.varCol, map(<span class="keyword">lambda</span> x: x[<span class="number">1</span>], cols))</div><div class="line"></div><div class="line">            <span class="comment"># pdb.set_trace()</span></div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></div><div class="line">        self.parent.title(<span class="string">"导入音频数据"</span>)</div><div class="line">        self.style = ttk.Style()</div><div class="line">        self.style.theme_use(<span class="string">"default"</span>)</div><div class="line">        self.pack(fill=BOTH, expand=<span class="number">1</span>)</div><div class="line">        self.centerWindow()</div><div class="line"></div><div class="line">        <span class="comment"># self.columnconfigure(1, weight=1)</span></div><div class="line"></div><div class="line">        <span class="comment"># row 0: file selection</span></div><div class="line">        panelFileSelection = Frame(self)</div><div class="line">        Label(panelFileSelection, text=<span class="string">"sqlite文件:"</span>).pack(side=<span class="string">"left"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">False</span>)</div><div class="line">        self.varFilename=StringVar()</div><div class="line">        self.txtFileName = Entry(panelFileSelection, textvariable=self.varFilename, width=<span class="number">60</span>)</div><div class="line">        self.txtFileName.pack(side=<span class="string">"left"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">        btnBrowse = Button(panelFileSelection, text=<span class="string">"..."</span>, command=self.browseSqlite)</div><div class="line">        <span class="comment">#btnBrowser.grid(row=0, column=4, pady=4)</span></div><div class="line">        btnBrowse.pack(side=<span class="string">"right"</span>, fill=<span class="keyword">None</span>, expand=<span class="keyword">False</span>)</div><div class="line">        </div><div class="line">        panelFileSelection.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, columnspan=<span class="number">4</span>, sticky=<span class="string">"we"</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Row 1: word table/audio column name</span></div><div class="line">        self.varTable = StringVar(self)</div><div class="line">        Label(self, text=<span class="string">"表名:"</span>).grid(row=<span class="number">1</span>, sticky=W, padx=<span class="number">5</span>, pady=<span class="number">4</span>)</div><div class="line">        self.omTables = OptionMenu(self, self.varTable, <span class="string">''</span>)</div><div class="line">        self.omTables.grid(row=<span class="number">1</span>, column=<span class="number">1</span>, sticky=E+W)</div><div class="line">        self.omTables[<span class="string">'menu'</span>].bind(<span class="string">"&lt;Unmap&gt;"</span>, self.onSelectTable)</div><div class="line">        </div><div class="line">        self.varCol = StringVar(self)</div><div class="line">        Label(self, text=<span class="string">"列名:"</span>).grid(row=<span class="number">1</span>, column=<span class="number">2</span>, sticky=E, padx=<span class="number">5</span>, pady=<span class="number">4</span>)</div><div class="line">        self.omCols = OptionMenu(self, self.varCol, <span class="string">''</span>)</div><div class="line">        self.omCols.grid(row=<span class="number">1</span>, column=<span class="number">3</span>, sticky=E+W)</div><div class="line"></div><div class="line">        <span class="comment"># Row 3: close/import buttons</span></div><div class="line">        btnImport = Button(self, text=<span class="string">"导入"</span>, command=self.importAudios)</div><div class="line">        btnImport.grid(row=<span class="number">2</span>, column=<span class="number">2</span>, padx=<span class="number">5</span>, pady=<span class="number">5</span>)</div><div class="line">        </div><div class="line">        btnClose = Button(self, text=<span class="string">"关闭"</span>, command=self.quit)</div><div class="line">        btnClose.grid(row=<span class="number">2</span>, column=<span class="number">1</span>, padx=<span class="number">5</span>, pady=<span class="number">5</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">quit</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'in quit()'</span></div><div class="line">        <span class="keyword">print</span> self.sqliteUtil</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (self.sqliteUtil <span class="keyword">is</span> <span class="keyword">None</span>) <span class="keyword">and</span> <span class="keyword">not</span> (self.sqliteUtil.conn <span class="keyword">is</span> <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">print</span> <span class="string">'to close conn'</span></div><div class="line">            self.sqliteUtil.conn.close()</div><div class="line">        <span class="keyword">print</span> <span class="string">'to exit()'</span></div><div class="line">        sys.exit(<span class="number">0</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">importAudios</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># tkMessageBox.showinfo("col: ", self.varCol.get())</span></div><div class="line">        </div><div class="line">	<span class="comment"># use loop here</span></div><div class="line">        audioFile = <span class="string">'C:/Users/fouding/Desktop/fetion_received_files/a bas.mp3'</span></div><div class="line">        self.sqliteUtil.setBinData(self.varTable.get(), self.varCol.get(), audioFile, <span class="string">"word='think'"</span>)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">onSelectTable</span><span class="params">(self, val)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'onSelectTable'</span></div><div class="line">        sender = val.widget</div><div class="line">        tblName = sender.get(sender.curselection())</div><div class="line">        </div><div class="line">        <span class="comment"># fetch the cols</span></div><div class="line">        cols = self.sqliteUtil.fetchall(<span class="string">'PRAGMA table_info(%s)'</span> % (tblName))</div><div class="line">        self.refreshOptionMenu(self.omCols, self.varCol, map(<span class="keyword">lambda</span> x: x[<span class="number">1</span>], cols))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">centerWindow</span><span class="params">(self)</span>:</span></div><div class="line">        w = <span class="number">500</span></div><div class="line">        h = <span class="number">200</span></div><div class="line">        </div><div class="line">        sw = self.parent.winfo_screenwidth()</div><div class="line">        sh = self.parent.winfo_screenheight()</div><div class="line"></div><div class="line">        x = (sw - w) / <span class="number">2</span></div><div class="line">        y = (sh - h) / <span class="number">2</span></div><div class="line"></div><div class="line">        self.parent.geometry(<span class="string">'%dx%d+%d+%d'</span> % (w, h, x, y))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    root = tk.Tk()</div><div class="line">    app = WordFrame(root)</div><div class="line">    root.mainloop()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure></p>
 
       
 
@@ -373,7 +180,7 @@ if __name__ == &#39;__main__&#39;:
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/05/import-file-to-sqlite-script/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/05/import-file-to-sqlite-script/">查看全文 >></a>
         </p>
       
 
@@ -456,6 +263,18 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -464,15 +283,35 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,11 +327,7 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,27 +339,7 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,18 +352,6 @@ if __name__ == &#39;__main__&#39;:
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,19 +371,31 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,23 +407,15 @@ if __name__ == &#39;__main__&#39;:
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,28 +8,25 @@
   <link rel="dns-prefetch" href="http://foudingzheng.info">
   <title>Verifying Which Ports Are Listening | Fouding&#39;s Blog on Life, Career and Technologies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nmap -sT -O localhost
-netstat -tuplen
+  <meta name="description" content="12nmap -sT -O localhostnetstat -tuplen
 
 Troubleshooting:
-This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834.">
+This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Verifying Which Ports Are Listening">
 <meta property="og:url" content="http://foudingzheng.info/2014/07/Verifying-Which-Ports-Are-Listening/index.html">
 <meta property="og:site_name" content="Fouding's Blog on Life, Career and Technologies">
-<meta property="og:description" content="nmap -sT -O localhost
-netstat -tuplen
+<meta property="og:description" content="12nmap -sT -O localhostnetstat -tuplen
 
 Troubleshooting:
-This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834.">
+This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834">
 <meta property="og:updated_time" content="2015-03-05T06:24:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Verifying Which Ports Are Listening">
-<meta name="twitter:description" content="nmap -sT -O localhost
-netstat -tuplen
+<meta name="twitter:description" content="12nmap -sT -O localhostnetstat -tuplen
 
 Troubleshooting:
-This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834.">
+This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834">
   
     <link rel="alternative" href="/atom.xml" title="Fouding&#39;s Blog on Life, Career and Technologies" type="application/atom+xml">
   
@@ -171,19 +168,18 @@ This output shows the system is running portmap due to the presence of the sunrp
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>nmap -sT -O localhost
-netstat -tuplen
-</code></pre><hr>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nmap -sT -O localhost</div><div class="line">netstat -tuplen</div></pre></td></tr></table></figure>
+<hr>
 <p>Troubleshooting:</p>
 <p>This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834. To check if the port is associated with the official list of known services, type:</p>
-<pre><code>cat /etc/services | grep 834
-</code></pre><p>===&gt;</p>
-<pre><code>netstat -anp | grep 834
-</code></pre><p>The command returns the following output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/services | grep 834</div></pre></td></tr></table></figure>
+<p>===&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -anp | grep 834</div></pre></td></tr></table></figure>
+<p>The command returns the following output:</p>
 <pre><code>tcp   0    0 0.0.0.0:834    0.0.0.0:*   LISTEN   653/ypbind
 </code></pre><p>===&gt;</p>
-<pre><code>lsof -i | grep 834
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i | grep 834</div></pre></td></tr></table></figure>
+
       
 
       
@@ -302,6 +298,18 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -310,15 +318,35 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -334,11 +362,7 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -350,27 +374,7 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -383,18 +387,6 @@ netstat -tuplen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -414,19 +406,31 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -438,23 +442,15 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

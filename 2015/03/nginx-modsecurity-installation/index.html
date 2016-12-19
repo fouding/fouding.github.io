@@ -164,50 +164,20 @@
 <h2 id="Nginx-安装-modSecurity-模块"><a href="#Nginx-安装-modSecurity-模块" class="headerlink" title="Nginx 安装 modSecurity 模块"></a>Nginx 安装 modSecurity 模块</h2><ol>
 <li>安装依赖</li>
 </ol>
-<pre><code class="bash">    su
-
-    yum install -y gcc make automake autoconf libtool
-    yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su</div><div class="line"></div><div class="line">yum install -y gcc make automake autoconf libtool</div><div class="line">yum install -y pcre pcre-devel libxml2 libxml2-devel curl curl-devel httpd-devel</div></pre></td></tr></table></figure>
 <p>2. 编译 modSecurity</p>
 <p>首先到 modSecurity 官网上下载最新版并编译：</p>
-<pre><code class="bash">    wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz
-
-    tar -xvpzf modsecurity-2.9.0.tar.gz
-    cd modsecurity-2.9.0
-
-    ./autogen.sh
-    ./configure --enable-standalone-module
-    make
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz</div><div class="line"></div><div class="line">tar -xvpzf modsecurity-2.9.0.tar.gz</div><div class="line"><span class="built_in">cd</span> modsecurity-2.9.0</div><div class="line"></div><div class="line">./autogen.sh</div><div class="line">./configure --enable-standalone-module</div><div class="line">make</div></pre></td></tr></table></figure>
 <p>会花1分钟左右的时间去编译。</p>
 <p>3. 将 modSecurity 模块打包进 nginx</p>
 <p>要从源码层级将 modSecurity 模块编译进 nginx。</p>
-<pre><code class="bash">    cd ~
-    wget http://nginx.org/download/nginx-1.7.8.tar.gz
-    tar -xvpzf nginx-1.7.8.tar.gz
-    cd nginx-1.7.8
-    ./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/
-    make
-    make install
-
-    cd /usr/local/nginx/sbin
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">wget http://nginx.org/download/nginx-1.7.8.tar.gz</div><div class="line">tar -xvpzf nginx-1.7.8.tar.gz</div><div class="line"><span class="built_in">cd</span> nginx-1.7.8</div><div class="line">./configure --add-module=../modsecurity-2.9.0/nginx/modsecurity/</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin</div></pre></td></tr></table></figure>
 <p>安装后，nginx 位于 <code>/usr/local/nginx/sbin/nginx</code>。</p>
 <p>4. 启用 modSecurity</p>
-<pre><code class="bash">    cd /usr/local/nginx
-    vi conf/nginx.conf
-</code></pre>
-<pre><code>location / {
-    ModSecurityEnabled on;
-    ModSecurityConfig modsecurity.conf;
-}
-</code></pre><p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
-<pre><code class="bash">    # create am empty modsecurity.conf
-    touch conf/modsecurity.conf
-    # test the conf file
-    sudo ./nginx -t
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx</div><div class="line">vi conf/nginx.conf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location / &#123;</div><div class="line">	ModSecurityEnabled on;</div><div class="line">	ModSecurityConfig modsecurity.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面指定了modSecurity 的配置文件为 modsecurity.conf，下面来创建它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create am empty modsecurity.conf</span></div><div class="line">touch conf/modsecurity.conf</div><div class="line"><span class="comment"># test the conf file</span></div><div class="line">sudo ./nginx -t</div></pre></td></tr></table></figure>
 <p>参考：</p>
 <ul>
 <li><a href="http://baike.baidu.com/link?url=lxg5knLVTwZ2vbth76MM5aXtFCv16VOW6dNekXyqKtwRzwUs1qcUM6MrtrvjSCmWlenY0W6t_8a1iDhqqR9aba" target="_blank" rel="external">百度百科</a></li>
@@ -332,6 +302,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -340,15 +322,35 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -364,11 +366,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -380,27 +378,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -413,18 +391,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,19 +410,31 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,23 +446,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

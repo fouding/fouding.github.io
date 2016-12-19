@@ -158,26 +158,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>平时在 Windows 上使用 gVim 来编辑文本。将一些常用的技巧记录下来。</p>
-<h2 id="VIM-tips"><a href="#VIM-tips" class="headerlink" title="VIM tips"></a>VIM tips</h2><h3 id="常用指令-快捷键"><a href="#常用指令-快捷键" class="headerlink" title="常用指令/快捷键"></a>常用指令/快捷键</h3><pre><code># 光标移动
-gg, G, H, M, L, 8j, fc
-Ctrl+F, Ctrl+B, Ctrl+D, Ctrl+U
-Ctrl+O
-
-# 
-
-# tab 标签栏的移动: 跳到下一个tab, 上一个tab, 第三个tab:
-gt, gT, 3gt
-
-# 查看打开的所有 buffer:
-:ls
-# 跳到前一个，后一个，第3个buffer:
-:bp, :bn, ：b3
-</code></pre><h3 id="删除文件中的-M-字符"><a href="#删除文件中的-M-字符" class="headerlink" title="删除文件中的 ^M 字符"></a>删除文件中的 ^M 字符</h3><pre><code>:%s/^M$//g
-</code></pre><p>注：^M的输入：兼容模式下，要用 Ctrl+Q Ctrl+M / 标准模式下，则为 Ctrl+V Ctrl+M</p>
-<h3 id="删除偶数行"><a href="#删除偶数行" class="headerlink" title="删除偶数行"></a>删除偶数行</h3><pre><code>    :g/^/+1 d
-</code></pre><h3 id="删除纯数字行"><a href="#删除纯数字行" class="headerlink" title="删除纯数字行"></a>删除纯数字行</h3><p>当从网页上拷页代码时，若其代码插件不完善，将行号也拷贝下来了，一个行号一行。此时，可进入命令模式，用 <code>Shift+v</code> 及 <code>&lt;num&gt;j</code>, <code>ctrl+d</code> 选中该代码段，再按<code>:</code>，则最下方的状态栏出现 <code>:&#39;&lt;,&#39;&gt;</code>，输入指令：<code>g/^\d*$/d</code>，即执行：</p>
-<pre><code>    :&#39;&lt;,&#39;&gt;g/^\d*$/d
-</code></pre><p>则会将只有行号的行删除。</p>
+<h2 id="VIM-tips"><a href="#VIM-tips" class="headerlink" title="VIM tips"></a>VIM tips</h2><h3 id="常用指令-快捷键"><a href="#常用指令-快捷键" class="headerlink" title="常用指令/快捷键"></a>常用指令/快捷键</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 光标移动</div><div class="line">gg, G, H, M, L, 8j, fc</div><div class="line">Ctrl+F, Ctrl+B, Ctrl+D, Ctrl+U</div><div class="line">Ctrl+O</div><div class="line"></div><div class="line"># </div><div class="line"></div><div class="line"># tab 标签栏的移动: 跳到下一个tab, 上一个tab, 第三个tab:</div><div class="line">gt, gT, 3gt</div><div class="line"></div><div class="line"># 查看打开的所有 buffer:</div><div class="line">:ls</div><div class="line"># 跳到前一个，后一个，第3个buffer:</div><div class="line">:bp, :bn, ：b3</div></pre></td></tr></table></figure>
+<h3 id="删除文件中的-M-字符"><a href="#删除文件中的-M-字符" class="headerlink" title="删除文件中的 ^M 字符"></a>删除文件中的 ^M 字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/^M$//g</div></pre></td></tr></table></figure>
+<p>注：^M的输入：兼容模式下，要用 Ctrl+Q Ctrl+M / 标准模式下，则为 Ctrl+V Ctrl+M</p>
+<h3 id="删除偶数行"><a href="#删除偶数行" class="headerlink" title="删除偶数行"></a>删除偶数行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:g/^/+1 d</div></pre></td></tr></table></figure>
+<h3 id="删除纯数字行"><a href="#删除纯数字行" class="headerlink" title="删除纯数字行"></a>删除纯数字行</h3><p>当从网页上拷页代码时，若其代码插件不完善，将行号也拷贝下来了，一个行号一行。此时，可进入命令模式，用 <code>Shift+v</code> 及 <code>&lt;num&gt;j</code>, <code>ctrl+d</code> 选中该代码段，再按<code>:</code>，则最下方的状态栏出现 <code>:&#39;&lt;,&#39;&gt;</code>，输入指令：<code>g/^\d*$/d</code>，即执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:&apos;&lt;,&apos;&gt;g/^\d*$/d</div></pre></td></tr></table></figure>
+<p>则会将只有行号的行删除。</p>
 
       
 
@@ -200,7 +187,7 @@ gt, gT, 3gt
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/01/vim-tips/">展开全文22 >></a>
+          <a class="article-more-a" href="/2015/01/vim-tips/">查看全文 >></a>
         </p>
       
 
@@ -236,13 +223,9 @@ gt, gT, 3gt
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p>The webapp hang at: </p>
-<pre><code class="java">INFO: Initializing Spring root WebApplicationContext
-</code></pre>
+        <h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p>The webapp hang at:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO: Initializing Spring root WebApplicationContext</div></pre></td></tr></table></figure></p>
 <p>when startup.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Enable logging for Spring in logback.xml to check the startup process: </p>
-<pre><code class="xml">&lt;logger name=&quot;org.springframework&quot; level=&quot;DEBUG&quot; /&gt;
-</code></pre>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Enable logging for Spring in logback.xml to check the startup process:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
 
       
 
@@ -265,7 +248,7 @@ gt, gT, 3gt
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">展开全文22 >></a>
+          <a class="article-more-a" href="/2015/01/Troubleshooting-SpringMVC-hang-on-startup/">查看全文 >></a>
         </p>
       
 
@@ -301,52 +284,11 @@ gt, gT, 3gt
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><pre><code class="java">    public static String toHexString(byte[] array) {
-        return javax.xml.bind.DatatypeConverter.printHexBinary(array);
-    }
-</code></pre>
-<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><pre><code class="java">    /**
-     * &lt;PRE&gt;
-     * insert code as you would anywhere else
-     * &lt;/PRE&gt;
-     */
-</code></pre>
+        <h3 id="Byte-array-to-hex-string"><a href="#Byte-array-to-hex-string" class="headerlink" title="Byte array to hex string"></a>Byte array to hex string</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toHexString</span><span class="params">(<span class="keyword">byte</span>[] array)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> javax.xml.bind.DatatypeConverter.printHexBinary(array);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Code-in-comments"><a href="#Code-in-comments" class="headerlink" title="Code in comments"></a>Code in comments</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> * &lt;PRE&gt;</div><div class="line"> * insert code as you would anywhere else</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</span></div></pre></td></tr></table></figure>
 <p>An Example from a java.awt.Event method javadoc:</p>
-<pre><code class="java">    /**
-     * &lt;PRE&gt;
-     *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;
-     *    int offmask = CTRL_DOWN_MASK;
-     *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) {
-     *        ...
-     *    }
-     * &lt;/PRE&gt;
-     */
-</code></pre>
-<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><pre><code class="java">    public static &lt;T, K&gt; Map&lt;K, String&gt; getFieldDescriptions(Class&lt;T&gt; clazz) {
-        Map&lt;K, String&gt; map = new HashMap&lt;K,String&gt;();
-        for (Field f : clazz.getDeclaredFields()) {
-            int mod = f.getModifiers();
-            if (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) {
-                try {
-                    @SuppressWarnings(&quot;unchecked&quot;)
-                    K fld = (K) f.get(null);
-
-                    Integer st = null;
-                    if (fld instanceof Integer) {
-                        st = (Integer) fld;
-                    } else if (fld instanceof Short) {
-                        st = (int) (short) (Short) fld;
-                    }
-                    map.put(fld, String.format(&quot;0x%04X, %s&quot;, st&amp;0xFFFFFFFF, f.getName()));
-                } catch (Exception ex) {
-                    /* ignore */
-                }
-            }
-        }
-
-        return map;
-    }
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> * &lt;PRE&gt;</div><div class="line"> *    int onmask = SHIFT_DOWN_MASK | BUTTON1_DOWN_MASK;</div><div class="line"> *    int offmask = CTRL_DOWN_MASK;</div><div class="line"> *    if ((event.getModifiersEx() &amp; (onmask | offmask)) == onmask) &#123;</div><div class="line"> *        ...</div><div class="line"> *    &#125;</div><div class="line"> * &lt;/PRE&gt;</div><div class="line"> */</span></div></pre></td></tr></table></figure>
+<h3 id="Get-field-descriptions-names"><a href="#Get-field-descriptions-names" class="headerlink" title="Get field descriptions (names)"></a>Get field descriptions (names)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, K&gt; <span class="function">Map&lt;K, String&gt; <span class="title">getFieldDescriptions</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">	Map&lt;K, String&gt; map = <span class="keyword">new</span> HashMap&lt;K,String&gt;();</div><div class="line">	<span class="keyword">for</span> (Field f : clazz.getDeclaredFields()) &#123;</div><div class="line">		<span class="keyword">int</span> mod = f.getModifiers();</div><div class="line">		<span class="keyword">if</span> (Modifier.isPublic(mod) &amp;&amp; Modifier.isFinal(mod) &amp;&amp; Modifier.isStatic(mod)) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">				K fld = (K) f.get(<span class="keyword">null</span>);</div><div class="line">				</div><div class="line">				Integer st = <span class="keyword">null</span>;</div><div class="line">				<span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Integer) &#123;</div><div class="line">					st = (Integer) fld;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fld <span class="keyword">instanceof</span> Short) &#123;</div><div class="line">					st = (<span class="keyword">int</span>) (<span class="keyword">short</span>) (Short) fld;</div><div class="line">				&#125;</div><div class="line">				map.put(fld, String.format(<span class="string">"0x%04X, %s"</span>, st&amp;<span class="number">0xFFFFFFFF</span>, f.getName()));</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">				<span class="comment">/* ignore */</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> map;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
         <a class="article-more-a"  href="/2014/11/java-code-snippets/#more">more >></a>
       
 
@@ -369,7 +311,7 @@ gt, gT, 3gt
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/java-code-snippets/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/11/java-code-snippets/">查看全文 >></a>
         </p>
       
 
@@ -409,30 +351,12 @@ gt, gT, 3gt
 <h2 id="Move-the-constant-lib-as-external-libs"><a href="#Move-the-constant-lib-as-external-libs" class="headerlink" title="Move the constant lib as external libs:"></a>Move the constant lib as external libs:</h2><ul>
 <li>Step 1: Copy the lib to somewhere else, e.g. <code>${catalina.home}/anyfish-lib</code></li>
 <li>Step 2: Eclipse: Properties for app &gt; Deployment Assembly &gt; Remove ‘Maven Dependencies’</li>
-<li>Step 3: Add following config in <tomcathome>/conf/context.xml: <pre><code class="xml">  &lt;Loader className=&quot;org.apache.catalina.loader.VirtualWebappLoader&quot; virtualClasspath=&quot;${catalina.home}/anyfish-lib/*.jar&quot; /&gt;
-</code></pre>
+<li>Step 3: Add following config in <tomcathome>/conf/context.xml: <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Loader</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.loader.VirtualWebappLoader"</span> <span class="attr">virtualClasspath</span>=<span class="string">"$&#123;catalina.home&#125;/anyfish-lib/*.jar"</span> /&gt;</span></div></pre></td></tr></table></figure>
 </tomcathome></li>
 </ul>
 <p>So the final packaged .war file size is reduced dramatically!</p>
 <p>To achive Step 2 in maven, edit the pom.xml file:</p>
-<pre><code class="xml">    &lt;properties&gt;
-        &lt;maven.build.timestamp.format&gt;yyyyMMddHHmm&lt;/maven.build.timestamp.format&gt;
-    &lt;/properties&gt;
-
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-                &lt;version&gt;2.4&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;
-                    &lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>Note the <code>&lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;</code> config above (Don’t package the common spring, logging libaries etc into .war file; keep only mylib.jar).</p>
 <h2 id="Deploy-new-version-w-o-shutting-down-tomcat"><a href="#Deploy-new-version-w-o-shutting-down-tomcat" class="headerlink" title="Deploy new version w/o shutting down tomcat"></a>Deploy new version w/o shutting down tomcat</h2><p>To deploy a new version of webapp without shutting down tomcat, use parallel deployment in tomcat7, refer to <a href="/2014/09/parallel-deploy-script/">tomcat parallel deploy</a>.</p>
 <p>Note the <code>&lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;</code> config above.</p>
@@ -458,7 +382,7 @@ gt, gT, 3gt
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/tomcat-tips/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/11/tomcat-tips/">查看全文 >></a>
         </p>
       
 
@@ -496,62 +420,8 @@ gt, gT, 3gt
       
         <h2 id="使用国内的镜像地址"><a href="#使用国内的镜像地址" class="headerlink" title="使用国内的镜像地址"></a>使用国内的镜像地址</h2><p>mavn 中央库默认的下载地址在国外，下载速度不稳定。<a href="http://www.oschina.net/" target="_blank" rel="external">开源中国</a>做了国内镜像，参考<a href="http://maven.oschina.net/static/help.html" target="_blank" rel="external">其帮助文档</a>配置其为中央库：</p>
 <p>备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：</p>
-<pre><code class="xml">&lt;mirrors&gt;
-    &lt;!-- http://maven.oschina.net/static/help.html --&gt;
-    &lt;mirror&gt;
-        &lt;id&gt;nexus-osc&lt;/id&gt;
-        &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
-        &lt;name&gt;Nexus OSC&lt;/name&gt;
-        &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;
-    &lt;/mirror&gt;
-&lt;/mirrors&gt;
-
-&lt;profiles&gt;
-    &lt;!-- http://maven.oschina.net/static/help.html --&gt;
-    &lt;profile&gt;
-        &lt;id&gt;jdk-1.4&lt;/id&gt;
-        &lt;activation&gt;&lt;jdk&gt;1.4&lt;/jdk&gt;&lt;/activation&gt;
-
-        &lt;repositories&gt;
-            &lt;repository&gt;
-                &lt;id&gt;nexus&lt;/id&gt;
-                &lt;name&gt; local private nexus&lt;/name&gt;
-                &lt;url&gt;http://maven.oschina.net/content/groups/public&lt;/url&gt;
-                &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
-                &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
-            &lt;/repository&gt;
-        &lt;/repositories&gt;
-
-        &lt;pluginRepositories&gt;
-            &lt;pluginRepository&gt;
-                &lt;id&gt;nexus&lt;/id&gt;
-                &lt;name&gt;local private enxus&lt;/name&gt;
-                &lt;url&gt;http://maven.oschina.net/content/groups/public&lt;/url&gt;
-                &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
-                &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
-            &lt;/pluginRepository&gt;
-        &lt;/pluginRepositories&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;
-</code></pre>
-<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><pre><code class="xml">    &lt;properties&gt;
-        &lt;maven.build.timestamp.format&gt;yyyyMMddHHmm&lt;/maven.build.timestamp.format&gt;
-    &lt;/properties&gt;
-
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-                &lt;version&gt;2.4&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;
-                    &lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-osc<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus OSC<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.4<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span><span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span><span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span> local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>local private enxus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>以上配置，</p>
 <ul>
 <li>在生成的 war 包名字的后面加上打包时间；</li>
@@ -579,7 +449,7 @@ gt, gT, 3gt
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/10/maven-tips/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/10/maven-tips/">查看全文 >></a>
         </p>
       
 
@@ -626,47 +496,14 @@ gt, gT, 3gt
 <h2 id="实现并行部署"><a href="#实现并行部署" class="headerlink" title="实现并行部署"></a>实现并行部署</h2><ol>
 <li>pom.xml 中配置生成的 war 包加时间戳：</li>
 </ol>
-<pre><code class="xml">&lt;properties&gt;
-    &lt;maven.build.timestamp.format&gt;yyyyMMddHHmm&lt;/maven.build.timestamp.format&gt;
-&lt;/properties&gt;
-&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-            &lt;version&gt;2.4&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;
-                &lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>在项目根目录下执行命令</p>
 <pre><code>mvn package
 </code></pre><p>生成 war 包，如 portal##20140922.war。</p>
 <p>2. 部署</p>
 <p>将 war 包上传到/anyfish_web/war/warHub 下后，执行部署脚本 parallelDeploy.sh （脚本内容见下）</p>
 <h2 id="部署脚本"><a href="#部署脚本" class="headerlink" title="部署脚本"></a>部署脚本</h2><p>并行部署脚本 parallelDeploy.sh 的功能：搜寻指定目录下最新的 war 包，然后依 Tomcat 格式，在 $TOMCAT_HOME/conf/Catalina/localhost 创建配置文件（如 portal##20140922.xml），以使 Tomcat 感知并部署此 web 工程。</p>
-<pre><code class="bash"># conf
-ctx=portal
-warFolder=/anyfish_web/war/warHub
-deployFolder=/anyfish_web/war
-confFolder=/Tomcat/conf/Catalina/localhost
-
-# ---
-latestWarFile=$(basename `ls -tr $warFolder/*.war | tail -n 1`)
-echo --- latestWarFile: $latestWarFile
-cp $warFolder/$latestWarFile $deployFolder/
-confFile=$(echo $latestWarFile | sed &#39;s/.*\#\#\(.*\)\.war/\1/&#39;)
-ctxXml=$confFolder/$ctx##$confFile.xml
-
-# generate context conf file for tomcat to deploy
-echo --- ctxXml: $ctxXml
-ctxCont=&#39;&lt;Context displayName=&quot;&#39;$ctx&#39;&quot; docBase=&quot;/anyfish_web/war/&#39;$latestWarFile&#39;&quot; reloadable=&quot;true&quot; /&gt;&#39;
-echo $ctxCont &gt; $ctxXml
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># conf</span></div><div class="line">ctx=portal</div><div class="line">warFolder=/anyfish_web/war/warHub</div><div class="line">deployFolder=/anyfish_web/war</div><div class="line">confFolder=/Tomcat/conf/Catalina/localhost</div><div class="line"></div><div class="line"><span class="comment"># ---</span></div><div class="line">latestWarFile=$(basename `ls -tr <span class="variable">$warFolder</span>/*.war | tail -n 1`)</div><div class="line"><span class="built_in">echo</span> --- latestWarFile: <span class="variable">$latestWarFile</span></div><div class="line">cp <span class="variable">$warFolder</span>/<span class="variable">$latestWarFile</span> <span class="variable">$deployFolder</span>/</div><div class="line">confFile=$(<span class="built_in">echo</span> <span class="variable">$latestWarFile</span> | sed <span class="string">'s/.*\#\#\(.*\)\.war/\1/'</span>)</div><div class="line">ctxXml=<span class="variable">$confFolder</span>/<span class="variable">$ctx</span><span class="comment">##$confFile.xml</span></div><div class="line"></div><div class="line"><span class="comment"># generate context conf file for tomcat to deploy</span></div><div class="line"><span class="built_in">echo</span> --- ctxXml: <span class="variable">$ctxXml</span></div><div class="line">ctxCont=<span class="string">'&lt;Context displayName="'</span><span class="variable">$ctx</span><span class="string">'" docBase="/anyfish_web/war/'</span><span class="variable">$latestWarFile</span><span class="string">'" reloadable="true" /&gt;'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$ctxCont</span> &gt; <span class="variable">$ctxXml</span></div></pre></td></tr></table></figure>
 
       
 
@@ -689,7 +526,7 @@ echo $ctxCont &gt; $ctxXml
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/09/parallel-deploy-script/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/09/parallel-deploy-script/">查看全文 >></a>
         </p>
       
 
@@ -726,11 +563,9 @@ echo $ctxCont &gt; $ctxXml
     <div class="article-entry" itemprop="articleBody">
       
         <p>Normal user: vi ~/.bashrc</p>
-<pre><code class="bash">    export PS1=&quot;\n\e[0;33m[\t \u@\h \W]\$ \e[m&quot;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;33m[\t \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
 <p>Root user (set as red #):</p>
-<pre><code class="bash">    export PS1=&quot;\n\e[0;31m[\t  \u@\h \W]\$ \e[m&quot;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;31m[\t  \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
 <p>References:</p>
 <ul>
 <li><a href="http://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/" target="_blank" rel="external">Change The Color of My Shell Prompt Under Linux or UNIX</a></li>
@@ -758,7 +593,7 @@ echo $ctxCont &gt; $ctxXml
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/09/change-shell-prompt-color/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/09/change-shell-prompt-color/">查看全文 >></a>
         </p>
       
 
@@ -795,14 +630,8 @@ echo $ctxCont &gt; $ctxXml
     <div class="article-entry" itemprop="articleBody">
       
         <p>You need to implement the <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpSessionListener.html" target="_blank" rel="external"><code>HttpSessionListener</code></a> interface. It receives notification events when session is created, or destroyed. In particular, its method <code>sessionDestroyed(HttpSessionEvent se)</code> gets called when the session is destroyed, which happens after timeout period has finished / session was invalidated. You can get the information stored in the session via <code>HttpSessionEvent#getSession()</code> call, and later do any arrangements that are necessary with the session. Also, be sure to register your session listener in <code>web.xml</code>:</p>
-<pre><code class="xml">    &lt;listener&gt;
-        &lt;listener-class&gt;FQN of your sessin listener implementation&lt;/listener-class&gt;
-    &lt;/listener&gt;
-</code></pre>
-<p>If you ultimately want to distinguish between invalidation and session timeout you could use the following line in your listener:</p>
-<pre><code class="java">    long now = new java.util.Date().getTime();
-    boolean timeout = (now - session.getLastAccessedTime()) &gt;= ((long)session.getMaxInactiveInterval() * 1000L);
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>FQN of your sessin listener implementation<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>If you ultimately want to distinguish between invalidation and session timeout you could use the following line in your listener:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> now = <span class="keyword">new</span> java.util.Date().getTime();</div><div class="line"><span class="keyword">boolean</span> timeout = (now - session.getLastAccessedTime()) &gt;= ((<span class="keyword">long</span>)session.getMaxInactiveInterval() * <span class="number">1000L</span>);</div></pre></td></tr></table></figure></p>
 <p>Reference:</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/15223841/recognizing-session-timeout" target="_blank" rel="external">stackoverflow</a></li>
@@ -829,7 +658,7 @@ echo $ctxCont &gt; $ctxXml
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/09/recognizing-session-timeout/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/09/recognizing-session-timeout/">查看全文 >></a>
         </p>
       
 
@@ -917,6 +746,18 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -925,15 +766,35 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,11 +810,7 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -965,27 +822,7 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -998,18 +835,6 @@ echo $ctxCont &gt; $ctxXml
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1029,19 +854,31 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1053,23 +890,15 @@ echo $ctxCont &gt; $ctxXml
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

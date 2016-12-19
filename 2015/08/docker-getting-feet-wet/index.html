@@ -175,7 +175,7 @@
 <pre><code>docker run --name cont-db-data mariadb echo &quot;Data-only container for mariadb&quot;
 </code></pre><p>Note: not need to expose volume (<code>-v /var/lib/mysql</code>), see <a href="http://container-solutions.com/understanding-volumes-docker/" target="_blank" rel="external">http://container-solutions.com/understanding-volumes-docker/</a> for explaination.</p>
 <p>To maint:</p>
-<pre><code>SHX=&quot;bash --rcfile &lt;(echo &#39;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&#39;; echo &#39;alias ll=\&quot;ls -ltra --color=auto\&quot;&#39;)&quot;
+<pre><code>SHX=&quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@\h \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
 docker exec -it cont-mariadb bash -c &quot;$SHX&quot;
 </code></pre><p>Note: the <code>$SHX</code> here initializes the bash shell with <code>--rcfile</code> option (set the <code>PS1</code> shell variable and <code>ll</code> alias).</p>
 <p>Or build with Dockerfile:</p>
@@ -212,7 +212,7 @@ docker run --rm --volumes-from cont-app-data -v /vagrant-dockerroot/:/app -it st
 <pre><code>docker run --name cont-webserver -p 8000:80 --volumes-from cont-app-data --link cont-mariadb:mariadb -d fouding/richarvey-nginx-php
 </code></pre><p>To maint:</p>
 <pre><code>docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;$SHX&quot;
-docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &#39;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&#39;; echo &#39;alias ll=\&quot;ls -ltra --color=auto\&quot;&#39;)&quot;
+docker run -it --rm fouding/richarvey-nginx-php bash -c &quot;bash --rcfile &lt;(echo &apos;PS1=\&quot;\n\e[1;34m[\t \u@ws \W]\e[m\n\$ \&quot;&apos;; echo &apos;alias ll=\&quot;ls -ltra --color=auto\&quot;&apos;)&quot;
 </code></pre><h3 id="5-test"><a href="#5-test" class="headerlink" title="5. test"></a>5. test</h3><p>Create a simple php file:</p>
 <pre><code>cat &gt;&gt; ~/app/php/index.php &lt;&lt; EOF
 &lt;?php
@@ -355,6 +355,18 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -363,15 +375,35 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -387,11 +419,7 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -403,27 +431,7 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -436,18 +444,6 @@ EOF
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,19 +463,31 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,23 +499,15 @@ EOF
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

@@ -159,62 +159,8 @@
       
         <h2 id="使用国内的镜像地址"><a href="#使用国内的镜像地址" class="headerlink" title="使用国内的镜像地址"></a>使用国内的镜像地址</h2><p>mavn 中央库默认的下载地址在国外，下载速度不稳定。<a href="http://www.oschina.net/" target="_blank" rel="external">开源中国</a>做了国内镜像，参考<a href="http://maven.oschina.net/static/help.html" target="_blank" rel="external">其帮助文档</a>配置其为中央库：</p>
 <p>备份 Maven 的安装目录下的 conf/settings.xml 文件，再编辑它：</p>
-<pre><code class="xml">&lt;mirrors&gt;
-    &lt;!-- http://maven.oschina.net/static/help.html --&gt;
-    &lt;mirror&gt;
-        &lt;id&gt;nexus-osc&lt;/id&gt;
-        &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
-        &lt;name&gt;Nexus OSC&lt;/name&gt;
-        &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;
-    &lt;/mirror&gt;
-&lt;/mirrors&gt;
-
-&lt;profiles&gt;
-    &lt;!-- http://maven.oschina.net/static/help.html --&gt;
-    &lt;profile&gt;
-        &lt;id&gt;jdk-1.4&lt;/id&gt;
-        &lt;activation&gt;&lt;jdk&gt;1.4&lt;/jdk&gt;&lt;/activation&gt;
-
-        &lt;repositories&gt;
-            &lt;repository&gt;
-                &lt;id&gt;nexus&lt;/id&gt;
-                &lt;name&gt; local private nexus&lt;/name&gt;
-                &lt;url&gt;http://maven.oschina.net/content/groups/public&lt;/url&gt;
-                &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
-                &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
-            &lt;/repository&gt;
-        &lt;/repositories&gt;
-
-        &lt;pluginRepositories&gt;
-            &lt;pluginRepository&gt;
-                &lt;id&gt;nexus&lt;/id&gt;
-                &lt;name&gt;local private enxus&lt;/name&gt;
-                &lt;url&gt;http://maven.oschina.net/content/groups/public&lt;/url&gt;
-                &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
-                &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
-            &lt;/pluginRepository&gt;
-        &lt;/pluginRepositories&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;
-</code></pre>
-<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><pre><code class="xml">    &lt;properties&gt;
-        &lt;maven.build.timestamp.format&gt;yyyyMMddHHmm&lt;/maven.build.timestamp.format&gt;
-    &lt;/properties&gt;
-
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-                &lt;version&gt;2.4&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;warName&gt;${project.artifactId}##${maven.build.timestamp}&lt;/warName&gt;
-                    &lt;packagingExcludes&gt;%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]&lt;/packagingExcludes&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-osc<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus OSC<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- http://maven.oschina.net/static/help.html --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.4<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span><span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span><span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span> local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>local private enxus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.oschina.net/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="自定义生成-war-包的内容和文件名"><a href="#自定义生成-war-包的内容和文件名" class="headerlink" title="自定义生成 war 包的内容和文件名"></a>自定义生成 war 包的内容和文件名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmm<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">warName</span>&gt;</span>$&#123;project.artifactId&#125;##$&#123;maven.build.timestamp&#125;<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span>%regex[WEB-INF/lib/(?!mylib-1.0.0-SNAPSHOT).*.jar]<span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>以上配置，</p>
 <ul>
 <li>在生成的 war 包名字的后面加上打包时间；</li>
@@ -242,7 +188,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/10/maven-tips/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/10/maven-tips/">查看全文 >></a>
         </p>
       
 
@@ -325,6 +271,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -333,15 +291,35 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -357,11 +335,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -373,27 +347,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -406,18 +360,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -437,19 +379,31 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -461,23 +415,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>

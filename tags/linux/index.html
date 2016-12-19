@@ -157,13 +157,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:</p>
-<pre><code>    curl -H &quot;Content-Type: application/json&quot; -d &#39;{&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;}&#39; http://foo.com/api/login
-</code></pre><p>Post a file:</p>
-<pre><code>curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post
-</code></pre><p>For windows, single quotes around json did not work and I ended up escaping double quotes:</p>
-<pre><code>    curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;{ \&quot;key1\&quot;: \&quot;value1\&quot; }&quot; http://foo.com/api/method
-</code></pre><h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
+        <h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>POST json data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Content-Type: application/json&quot; -d &apos;&#123;&quot;username&quot;:&quot;xyz&quot;,&quot;password&quot;:&quot;xyz&quot;&#125;&apos; http://foo.com/api/login</div></pre></td></tr></table></figure></p>
+<p>Post a file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -D - -F key1=value1 -F uploadedFile=@E:\abc.txt http://foo.com/post</div></pre></td></tr></table></figure></p>
+<p>For windows, single quotes around json did not work and I ended up escaping double quotes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123; \&quot;key1\&quot;: \&quot;value1\&quot; &#125;&quot; http://foo.com/api/method</div></pre></td></tr></table></figure></p>
+<h2 id="text-browsers"><a href="#text-browsers" class="headerlink" title="text browsers"></a>text browsers</h2><p><a href="http://elinks.or.cz/" target="_blank" rel="external">elinks</a>, <a href="http://lynx.isc.org/" target="_blank" rel="external">lynx</a>, etc.</p>
 
       
 
@@ -186,7 +183,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/linux-utilities/">展开全文22 >></a>
+          <a class="article-more-a" href="/2015/03/linux-utilities/">查看全文 >></a>
         </p>
       
 
@@ -223,11 +220,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Normal user: vi ~/.bashrc</p>
-<pre><code class="bash">    export PS1=&quot;\n\e[0;33m[\t \u@\h \W]\$ \e[m&quot;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;33m[\t \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
 <p>Root user (set as red #):</p>
-<pre><code class="bash">    export PS1=&quot;\n\e[0;31m[\t  \u@\h \W]\$ \e[m&quot;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PS1=<span class="string">"\n\e[0;31m[\t  \u@\h \W]\$ \e[m"</span></div></pre></td></tr></table></figure>
 <p>References:</p>
 <ul>
 <li><a href="http://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/" target="_blank" rel="external">Change The Color of My Shell Prompt Under Linux or UNIX</a></li>
@@ -255,7 +250,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/09/change-shell-prompt-color/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/09/change-shell-prompt-color/">查看全文 >></a>
         </p>
       
 
@@ -291,19 +286,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>nmap -sT -O localhost
-netstat -tuplen
-</code></pre><hr>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nmap -sT -O localhost</div><div class="line">netstat -tuplen</div></pre></td></tr></table></figure>
+<hr>
 <p>Troubleshooting:</p>
 <p>This output shows the system is running portmap due to the presence of the sunrpc service. However, there is also a mystery service on port 834. To check if the port is associated with the official list of known services, type:</p>
-<pre><code>cat /etc/services | grep 834
-</code></pre><p>===&gt;</p>
-<pre><code>netstat -anp | grep 834
-</code></pre><p>The command returns the following output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/services | grep 834</div></pre></td></tr></table></figure>
+<p>===&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -anp | grep 834</div></pre></td></tr></table></figure>
+<p>The command returns the following output:</p>
 <pre><code>tcp   0    0 0.0.0.0:834    0.0.0.0:*   LISTEN   653/ypbind
 </code></pre><p>===&gt;</p>
-<pre><code>lsof -i | grep 834
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i | grep 834</div></pre></td></tr></table></figure>
+
       
 
       
@@ -325,7 +319,7 @@ netstat -tuplen
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/07/Verifying-Which-Ports-Are-Listening/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/07/Verifying-Which-Ports-Are-Listening/">查看全文 >></a>
         </p>
       
 
@@ -362,8 +356,7 @@ netstat -tuplen
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Senarino"><a href="#Senarino" class="headerlink" title="Senarino"></a>Senarino</h2><p>To leave a process running during the night, and continue the work next morning.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h3><pre><code class="bash">nohup blah &amp;
-</code></pre>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup blah &amp;</div></pre></td></tr></table></figure>
 <p>Substitute your process name for <em>blah</em>.</p>
 <h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><code>screen</code> is a powerful utility, which allows you to disconnect from the server while all of your processes continue to run.</p>
 <p>%% js: Detach from a running screen session leaving it running in the background:</p>
@@ -406,7 +399,7 @@ netstat -tuplen
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/04/keep-a-process-running-after-terminal-disconnected/">展开全文22 >></a>
+          <a class="article-more-a" href="/2014/04/keep-a-process-running-after-terminal-disconnected/">查看全文 >></a>
         </p>
       
 
@@ -489,6 +482,18 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">port</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vagrant</a>
               </li>
              
@@ -497,15 +502,35 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">code snippet</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">best practice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">lamp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">code snippet</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,11 +546,7 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">port</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">utility</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,27 +558,7 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">utility</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">logging</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">deploy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">gtd</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,18 +571,6 @@ netstat -tuplen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">modSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">cmd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,19 +590,31 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">deploy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">gtd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">cmd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">architecture</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">foss</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,23 +626,15 @@ netstat -tuplen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">docker</a>
+                <a href="javascript:void(0)">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">best practice</a>
+                <a href="javascript:void(0)">architecture</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">lamp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">sqlite</a>
+                <a href="javascript:void(0)">foss</a>
               </li>
             
             <div class="clearfix"></div>
